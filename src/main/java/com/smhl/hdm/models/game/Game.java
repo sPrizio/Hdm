@@ -1,25 +1,27 @@
 package com.smhl.hdm.models.game;
 
 import com.smhl.hdm.models.HdmEntity;
-import com.smhl.hdm.models.details.GameDetails;
 import com.smhl.hdm.models.participant.impl.Team;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
- * Class representation of a game, a match between 2 teams
+ * Class representation of a match between participants, 2 teams
  *
- * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
+ * @author Stephen Prizio <a href="http://www.saprizio.com">www.saprizio.com</a>
+ * @version 1.0
  */
 @Entity
 @NoArgsConstructor
-@RequiredArgsConstructor
-public class Game implements HdmEntity, Comparable<Game> {
+public class Game implements HdmEntity {
 
-    @Getter
     @Id
+    @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -38,41 +40,22 @@ public class Game implements HdmEntity, Comparable<Game> {
     @Getter
     @Setter
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "home_team_id", referencedColumnName = "id")
+    @JoinTable(
+            name = "home_team_game_relation",
+            joinColumns = {@JoinColumn(name = "game_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "team_id", referencedColumnName = "id")}
+    )
     @NonNull
     private Team homeTeam;
 
     @Getter
     @Setter
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "away_team_id", referencedColumnName = "id")
+    @JoinTable(
+            name = "away_team_game_relation",
+            joinColumns = {@JoinColumn(name = "game_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "team_id", referencedColumnName = "id")}
+    )
     @NonNull
     private Team awayTeam;
-
-    @Getter
-    @Setter
-    @Column
-    @NonNull
-    private int homeTeamScore;
-
-    @Getter
-    @Setter
-    @Column
-    @NonNull
-    private int awayTeamScore;
-
-    @Getter
-    @Setter
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "game_details_id", referencedColumnName = "id")
-    @NonNull
-    private GameDetails gameDetails;
-
-
-    //  METHODS
-
-    @Override
-    public int compareTo(Game o) {
-        return this.gameTime.compareTo(o.getGameTime());
-    }
 }

@@ -18,8 +18,8 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class TeamSeason implements Season, Comparable<TeamSeason> {
 
-    @Getter
     @Id
+    @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
