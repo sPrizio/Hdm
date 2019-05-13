@@ -69,6 +69,49 @@ public class SkaterSeason implements Season, Comparable<SkaterSeason> {
 
     //  METHODS
 
+    /**
+     * Increments games player by 1
+     */
+    public void incrementGamesPlayed() {
+        this.gamesPlayed += 1;
+    }
+
+    /**
+     * Increments goals by specified increment amount
+     *
+     * @param increment amount to increment goals by
+     */
+    public void incrementGoals(int increment) {
+        this.goals += increment;
+    }
+
+    /**
+     * Increments assists by specified increment amount
+     *
+     * @param increment amount to increment assists by
+     */
+    public void incrementAssists(int increment) {
+        this.assists += increment;
+    }
+
+    /**
+     * Increments shots by specified increment amount
+     *
+     * @param increment amount to increment shots by
+     */
+    public void incrementShots(int increment) {
+        this.shots += increment;
+    }
+
+    /**
+     * Increments blocked shots by specified increment amount
+     *
+     * @param increment amount to increment blocked shots by
+     */
+    public void incrementBlockedShots(int increment) {
+        this.blockedShots += increment;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)

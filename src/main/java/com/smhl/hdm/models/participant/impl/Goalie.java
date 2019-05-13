@@ -22,7 +22,7 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class Goalie implements Participant<Goalie, GoalieSeason> {
+public class Goalie implements Participant<GoalieSeason> {
 
     @Id
     @Getter

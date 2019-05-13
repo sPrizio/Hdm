@@ -11,7 +11,7 @@ import java.util.Set;
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
  */
-public interface Participant<P extends Participant, S extends Season> extends HdmEntity {
+public interface Participant<S extends Season> extends HdmEntity {
 
     S getCurrentSeason();
 

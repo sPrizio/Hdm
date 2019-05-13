@@ -21,7 +21,7 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class Skater implements Participant<Skater, SkaterSeason> {
+public class Skater implements Participant<SkaterSeason> {
 
     @Id
     @Getter

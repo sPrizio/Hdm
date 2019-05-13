@@ -1,11 +1,9 @@
 package com.smhl.hdm.models.game;
 
 import com.smhl.hdm.models.HdmEntity;
+import com.smhl.hdm.models.details.game.GameDetails;
 import com.smhl.hdm.models.participant.impl.Team;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -18,6 +16,7 @@ import java.time.LocalDateTime;
  */
 @Entity
 @NoArgsConstructor
+@RequiredArgsConstructor
 public class Game implements HdmEntity {
 
     @Id
@@ -58,4 +57,14 @@ public class Game implements HdmEntity {
     )
     @NonNull
     private Team awayTeam;
+
+    @Getter
+    @Setter
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "game_details_relation",
+            joinColumns = {@JoinColumn(name = "game_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "game_details_id", referencedColumnName = "id")}
+    )
+    private GameDetails gameDetails;
 }
