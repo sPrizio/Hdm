@@ -4,6 +4,7 @@ import com.smhl.hdm.models.details.Details;
 import com.smhl.hdm.models.details.participant.GoalieGameDetails;
 import com.smhl.hdm.models.details.participant.SkaterGameDetails;
 import com.smhl.hdm.models.details.participant.TeamGameDetails;
+import com.smhl.hdm.models.game.ScoringPlay;
 import lombok.*;
 
 import javax.persistence.*;
@@ -54,4 +55,10 @@ public class GameDetails implements Details {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "game_details_id")
     private Set<TeamGameDetails> teamGameDetails;
+
+    @Getter
+    @Setter
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "game_details_id")
+    private Set<ScoringPlay> scoringPlays;
 }
