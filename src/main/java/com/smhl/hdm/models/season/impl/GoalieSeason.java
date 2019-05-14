@@ -93,6 +93,75 @@ public class GoalieSeason implements Season, Comparable<GoalieSeason> {
 
     //  METHODS
 
+    /**
+     * Increments games played by 1
+     */
+    public void incrementGamesPlayed() {
+        this.gamesPlayed += 1;
+    }
+
+    /**
+     * Increments games started by 1
+     */
+    public void incrementGamesStarted() {
+        this.gamesStarted += 1;
+    }
+
+    /**
+     * Increments wins by 1
+     */
+    public void incrementWins() {
+        this.wins += 1;
+    }
+
+    /**
+     * Increments losses by 1
+     */
+    public void incrementLosses() {
+        this.losses += 1;
+    }
+
+    /**
+     * Increments ties by 1
+     */
+    public void incrementTies() {
+        this.ties += 1;
+    }
+
+    /**
+     * Increments saves by the specified amount
+     *
+     * @param increment amount to increment by
+     */
+    public void incrementSaves(int increment) {
+        this.saves += increment;
+    }
+
+    /**
+     * Increments shots against by the specified amount
+     *
+     * @param increment amount to increment by
+     */
+    public void incrementShotsAgainst(int increment) {
+        this.shotsAgainst += increment;
+    }
+
+    /**
+     * Increments goals against by the specified amount
+     *
+     * @param increment amount to increment by
+     */
+    public void incrementGoalsAgainst(int increment) {
+        this.goalsAgainst += increment;
+    }
+
+    /**
+     * Increments shutouts by 1
+     */
+    public void incrementShutouts() {
+        this.shutouts += 1;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)

@@ -1,6 +1,7 @@
 package com.smhl.hdm.models.details.participant;
 
 import com.smhl.hdm.models.details.Details;
+import com.smhl.hdm.models.participant.impl.Goalie;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,6 +21,17 @@ public class GoalieGameDetails implements Details {
     @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Getter
+    @Setter
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "goalie_game_details_goalie_relation",
+            joinColumns = {@JoinColumn(name = "goalie_game_details_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "goalie_id", referencedColumnName = "id")}
+    )
+    @NonNull
+    private Goalie goalie;
 
     @Getter
     @Setter
@@ -50,4 +62,35 @@ public class GoalieGameDetails implements Details {
     @Column
     @NonNull
     private int goalsAgainst;
+
+
+    //  METHODS
+
+    /**
+     * Marks the goalie as the starter for the game
+     */
+    public void markAsStarter() {
+        this.isStarter = true;
+    }
+
+    /**
+     * Increments shots against by 1
+     */
+    public void incrementShotsAgainst() {
+        this.shotsAgainst += 1;
+    }
+
+    /**
+     * Increments saves by 1
+     */
+    public void incrementSaves() {
+        this.saves += 1;
+    }
+
+    /**
+     * Increments goals against by 1
+     */
+    public void incrementGoalsAgainst() {
+        this.goalsAgainst += 1;
+    }
 }

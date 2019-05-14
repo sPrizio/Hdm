@@ -1,6 +1,7 @@
 package com.smhl.hdm.models.details.participant;
 
 import com.smhl.hdm.models.details.Details;
+import com.smhl.hdm.models.participant.impl.Team;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,6 +24,16 @@ public class TeamGameDetails implements Details {
 
     @Getter
     @Setter
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "team_game_details_team_relation",
+            joinColumns = {@JoinColumn(name = "team_game_details_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "team_id", referencedColumnName = "id")}
+    )
+    private Team team;
+
+    @Getter
+    @Setter
     @Column
     @NonNull
     private String gameStatus;
@@ -38,4 +49,21 @@ public class TeamGameDetails implements Details {
     @Column
     @NonNull
     private int goalsAgainst;
+
+
+    //  METHODS
+
+    /**
+     * Increments goals for by 1
+     */
+    public void incrementGoalsFor() {
+        this.goalsFor += 1;
+    }
+
+    /**
+     * Increments goals against by 1
+     */
+    public void incrementGoalsAgainst() {
+        this.goalsAgainst += 1;
+    }
 }

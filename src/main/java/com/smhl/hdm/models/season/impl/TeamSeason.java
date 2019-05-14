@@ -75,6 +75,52 @@ public class TeamSeason implements Season, Comparable<TeamSeason> {
 
     //  METHODS
 
+    /**
+     * Increments games played by 1
+     */
+    public void incrementGamesPlayed() {
+        this.gamesPlayed += 1;
+    }
+
+    /**
+     * Increments wins by 1
+     */
+    public void incrementWins() {
+        this.wins += 1;
+    }
+
+    /**
+     * Increments losses by 1
+     */
+    public void incrementLosses() {
+        this.losses += 1;
+    }
+
+    /**
+     * Increments ties by 1
+     */
+    public void incrementTies() {
+        this.ties += 1;
+    }
+
+    /**
+     * Increments goals for by a specified amount
+     *
+     * @param increment amount to increment by
+     */
+    public void incrementGoalsFor(int increment) {
+        this.goalsFor += increment;
+    }
+
+    /**
+     * Increments goals against by a specified amount
+     *
+     * @param increment amount to increment by
+     */
+    public void incrementGoalsAgainst(int increment) {
+        this.goalsAgainst += increment;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
