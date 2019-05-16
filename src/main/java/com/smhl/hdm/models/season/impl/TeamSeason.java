@@ -131,14 +131,14 @@ public class TeamSeason implements Season, Comparable<TeamSeason> {
         TeamSeason that = (TeamSeason) o;
         return
                 gamesPlayed == that.gamesPlayed &&
-                wins == that.wins &&
-                losses == that.losses &&
-                ties == that.ties &&
-                goalsFor == that.goalsFor &&
-                goalsAgainst == that.goalsAgainst &&
-                id.equals(that.id) &&
-                seasonString.equals(that.seasonString) &&
-                team.getId().equals(that.team.getId());
+                        wins == that.wins &&
+                        losses == that.losses &&
+                        ties == that.ties &&
+                        goalsFor == that.goalsFor &&
+                        goalsAgainst == that.goalsAgainst &&
+                        id.equals(that.id) &&
+                        seasonString.equals(that.seasonString) &&
+                        team.getId().equals(that.team.getId());
     }
 
     @Override

@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Order(1)
 public class ParticipantDataLoader implements CommandLineRunner {
-    
+
     private static final String SEASON1 = HdmUtils.getCurrentSeasonString(-2);
     private static final String SEASON2 = HdmUtils.getCurrentSeasonString(-1);
     private static final String SEASON3 = HdmUtils.getCurrentSeasonString();
@@ -67,35 +67,35 @@ public class ParticipantDataLoader implements CommandLineRunner {
         SkaterSeason skaterSeason11 = new SkaterSeason(SEASON1, 82, 20, 52, 223, 24, skater1);
         SkaterSeason skaterSeason12 = new SkaterSeason(SEASON2, 78, 30, 36, 250, 44, skater1);
         SkaterSeason skaterSeason13 = new SkaterSeason(SEASON3, 82, 45, 53, 234, 81, skater1);
-        
+
         SkaterSeason skaterSeason21 = new SkaterSeason(SEASON1, 79, 35, 65, 220, 13, skater2);
         SkaterSeason skaterSeason22 = new SkaterSeason(SEASON2, 77, 28, 54, 303, 42, skater2);
         SkaterSeason skaterSeason23 = new SkaterSeason(SEASON3, 78, 34, 48, 211, 61, skater2);
-        
+
         SkaterSeason skaterSeason31 = new SkaterSeason(SEASON1, 78, 20, 37, 145, 22, skater3);
         SkaterSeason skaterSeason32 = new SkaterSeason(SEASON2, 81, 27, 51, 182, 158, skater3);
         SkaterSeason skaterSeason33 = new SkaterSeason(SEASON3, 81, 22, 38, 156, 128, skater3);
-        
+
         SkaterSeason skaterSeason41 = new SkaterSeason(SEASON1, 74, 28, 33, 229, 133, skater4);
         SkaterSeason skaterSeason42 = new SkaterSeason(SEASON2, 81, 20, 53, 139, 38, skater4);
         SkaterSeason skaterSeason43 = new SkaterSeason(SEASON3, 82, 41, 87, 246, 121, skater4);
-        
+
         SkaterSeason skaterSeason51 = new SkaterSeason(SEASON1, 81, 51, 38, 338, 147, skater5);
         SkaterSeason skaterSeason52 = new SkaterSeason(SEASON2, 82, 50, 55, 231, 67, skater5);
         SkaterSeason skaterSeason53 = new SkaterSeason(SEASON3, 82, 36, 63, 245, 44, skater5);
-        
+
         SkaterSeason skaterSeason61 = new SkaterSeason(SEASON1, 82, 24, 32, 169, 49, skater6);
         SkaterSeason skaterSeason62 = new SkaterSeason(SEASON2, 82, 35, 61, 206, 41, skater6);
         SkaterSeason skaterSeason63 = new SkaterSeason(SEASON3, 80, 13, 57, 185, 36, skater6);
-        
+
         SkaterSeason skaterSeason71 = new SkaterSeason(SEASON1, 80, 14, 50, 136, 40, skater7);
         SkaterSeason skaterSeason72 = new SkaterSeason(SEASON2, 81, 44, 66, 341, 93, skater7);
         SkaterSeason skaterSeason73 = new SkaterSeason(SEASON3, 82, 25, 34, 278, 40, skater7);
-        
+
         SkaterSeason skaterSeason81 = new SkaterSeason(SEASON1, 82, 40, 36, 227, 40, skater8);
         SkaterSeason skaterSeason82 = new SkaterSeason(SEASON2, 79, 28, 59, 191, 43, skater8);
         SkaterSeason skaterSeason83 = new SkaterSeason(SEASON3, 70, 12, 42, 182, 38, skater8);
-        
+
         SkaterSeason skaterSeason91 = new SkaterSeason(SEASON1, 81, 12, 41, 132, 78, skater9);
         SkaterSeason skaterSeason92 = new SkaterSeason(SEASON2, 82, 47, 41, 286, 36, skater9);
         SkaterSeason skaterSeason93 = new SkaterSeason(SEASON3, 81, 27, 43, 204, 52, skater9);
@@ -204,7 +204,7 @@ public class ParticipantDataLoader implements CommandLineRunner {
 
         TeamSeason teamSeason11 = new TeamSeason(SEASON1, 82, 62, 16, 4, 325, 222, team1);
         TeamSeason teamSeason12 = new TeamSeason(SEASON2, 82, 33, 39, 10, 226, 271, team1);
-        TeamSeason teamSeason13 = new TeamSeason(SEASON3, 82, 43, 32, 7 , 210, 202, team1);
+        TeamSeason teamSeason13 = new TeamSeason(SEASON3, 82, 43, 32, 7, 210, 202, team1);
 
         TeamSeason teamSeason21 = new TeamSeason(SEASON1, 82, 32, 40, 10, 227, 277, team2);
         TeamSeason teamSeason22 = new TeamSeason(SEASON2, 82, 37, 37, 8, 244, 281, team2);

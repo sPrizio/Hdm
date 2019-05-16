@@ -172,17 +172,17 @@ public class GoalieSeason implements Season, Comparable<GoalieSeason> {
         GoalieSeason that = (GoalieSeason) o;
         return
                 gamesPlayed == that.gamesPlayed &&
-                gamesStarted == that.gamesStarted &&
-                wins == that.wins &&
-                losses == that.losses &&
-                ties == that.ties &&
-                saves == that.saves &&
-                shotsAgainst == that.shotsAgainst &&
-                goalsAgainst == that.goalsAgainst &&
-                shutouts == that.shutouts &&
-                id.equals(that.id) &&
-                seasonString.equals(that.seasonString) &&
-                goalie.getId().equals(that.goalie.getId());
+                        gamesStarted == that.gamesStarted &&
+                        wins == that.wins &&
+                        losses == that.losses &&
+                        ties == that.ties &&
+                        saves == that.saves &&
+                        shotsAgainst == that.shotsAgainst &&
+                        goalsAgainst == that.goalsAgainst &&
+                        shutouts == that.shutouts &&
+                        id.equals(that.id) &&
+                        seasonString.equals(that.seasonString) &&
+                        goalie.getId().equals(that.goalie.getId());
     }
 
     @Override

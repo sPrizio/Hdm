@@ -41,7 +41,7 @@ public class TeamService implements ParticipantService<Team, TeamGameDetails> {
 
             season.incrementGamesPlayed();
 
-            switch (GameResult.valueOf(details.getGameStatus())) {
+            switch (GameResult.valueOf(details.getGameResult())) {
                 case WIN:
                     season.incrementWins();
                     break;

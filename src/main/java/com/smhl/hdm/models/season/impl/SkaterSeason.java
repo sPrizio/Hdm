@@ -123,13 +123,13 @@ public class SkaterSeason implements Season, Comparable<SkaterSeason> {
         SkaterSeason that = (SkaterSeason) o;
         return
                 gamesPlayed == that.gamesPlayed &&
-                goals == that.goals &&
-                assists == that.assists &&
-                shots == that.shots &&
-                blockedShots == that.blockedShots &&
-                id.equals(that.id) &&
-                seasonString.equals(that.seasonString) &&
-                skater.getId().equals(that.getSkater().getId());
+                        goals == that.goals &&
+                        assists == that.assists &&
+                        shots == that.shots &&
+                        blockedShots == that.blockedShots &&
+                        id.equals(that.id) &&
+                        seasonString.equals(that.seasonString) &&
+                        skater.getId().equals(that.getSkater().getId());
     }
 
     @Override

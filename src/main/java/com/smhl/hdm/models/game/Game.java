@@ -26,7 +26,7 @@ public class Game implements HdmEntity {
 
     @Getter
     @Setter
-    @Column
+    @Column(unique = true)
     @NonNull
     private LocalDateTime gameTime;
 
@@ -38,33 +38,21 @@ public class Game implements HdmEntity {
 
     @Getter
     @Setter
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "home_team_game_relation",
-            joinColumns = {@JoinColumn(name = "game_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "team_id", referencedColumnName = "id")}
-    )
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "home_team_id")
     @NonNull
     private Team homeTeam;
 
     @Getter
     @Setter
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "away_team_game_relation",
-            joinColumns = {@JoinColumn(name = "game_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "team_id", referencedColumnName = "id")}
-    )
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "away_team_id")
     @NonNull
     private Team awayTeam;
 
     @Getter
     @Setter
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "game_details_relation",
-            joinColumns = {@JoinColumn(name = "game_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "game_details_id", referencedColumnName = "id")}
-    )
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "game_details_id")
     private GameDetails gameDetails;
 }

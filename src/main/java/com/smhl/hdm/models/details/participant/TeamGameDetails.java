@@ -24,19 +24,16 @@ public class TeamGameDetails implements Details {
 
     @Getter
     @Setter
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "team_game_details_team_relation",
-            joinColumns = {@JoinColumn(name = "team_game_details_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "team_id", referencedColumnName = "id")}
-    )
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
+    @NonNull
     private Team team;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private String gameStatus;
+    private String gameResult;
 
     @Getter
     @Setter

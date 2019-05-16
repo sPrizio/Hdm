@@ -42,23 +42,27 @@ public class GameDetails implements Details {
     @Setter
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "game_details_id")
+    @NonNull
     private Set<SkaterGameDetails> skaterGameDetails;
 
     @Getter
     @Setter
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "game_details_id")
+    @NonNull
     private Set<GoalieGameDetails> goalieGameDetails;
 
     @Getter
     @Setter
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "game_details_id")
+    @NonNull
     private Set<TeamGameDetails> teamGameDetails;
 
     @Getter
     @Setter
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "game_details_id")
+    @NonNull
     private Set<ScoringPlay> scoringPlays;
 }

@@ -2,6 +2,7 @@ package com.smhl.hdm.models.details.participant;
 
 import com.smhl.hdm.models.details.Details;
 import com.smhl.hdm.models.participant.impl.Skater;
+import com.smhl.hdm.models.participant.impl.Team;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,14 +25,17 @@ public class SkaterGameDetails implements Details {
 
     @Getter
     @Setter
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "skater_game_details_skater_relation",
-            joinColumns = {@JoinColumn(name = "skater_game_details_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "skater_id", referencedColumnName = "id")}
-    )
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "skater_id")
     @NonNull
     private Skater skater;
+
+    @Getter
+    @Setter
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
+    @NonNull
+    private Team team;
 
     @Getter
     @Setter
