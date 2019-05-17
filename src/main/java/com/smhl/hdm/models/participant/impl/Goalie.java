@@ -48,7 +48,13 @@ public class Goalie implements Participant<GoalieSeason> {
 
     @Getter
     @Setter
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "goalie")
+    @Column
+    @NonNull
+    private boolean isActive;
+
+    @Getter
+    @Setter
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<GoalieSeason> seasons;
 
 

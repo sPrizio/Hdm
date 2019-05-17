@@ -4,6 +4,8 @@ import com.smhl.hdm.models.details.Details;
 import com.smhl.hdm.models.participant.Participant;
 import com.smhl.hdm.service.HdmService;
 
+import java.util.List;
+
 /**
  * Parent-level interface for all participant service classes
  *
@@ -13,4 +15,6 @@ import com.smhl.hdm.service.HdmService;
 public interface ParticipantService<P extends Participant, D extends Details> extends HdmService<P> {
 
     void updateStats(D details);
+
+    List<P> getAllActiveParticipants();
 }

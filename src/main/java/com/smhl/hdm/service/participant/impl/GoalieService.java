@@ -70,6 +70,11 @@ public class GoalieService implements ParticipantService<Goalie, GoalieGameDetai
     }
 
     @Override
+    public List<Goalie> getAllActiveParticipants() {
+        return this.goalieRepository.getAllByActive(true);
+    }
+
+    @Override
     public void refresh(Goalie entity) {
         this.goalieRepository.refresh(entity);
     }

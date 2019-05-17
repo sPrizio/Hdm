@@ -4,6 +4,8 @@ import com.smhl.hdm.models.participant.impl.Team;
 import com.smhl.hdm.repositories.HdmRepository;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
+
 /**
  * DAO access-layer for teams
  *
@@ -11,4 +13,6 @@ import org.springframework.data.repository.CrudRepository;
  * @version 1.0
  */
 public interface TeamRepository extends HdmRepository, CrudRepository<Team, Long> {
+
+    List<Team> getAllByActive(boolean isActive);
 }

@@ -1,6 +1,5 @@
 package com.smhl.hdm.models.season.impl;
 
-import com.smhl.hdm.models.participant.impl.Team;
 import com.smhl.hdm.models.season.Season;
 import lombok.*;
 
@@ -64,13 +63,6 @@ public class TeamSeason implements Season, Comparable<TeamSeason> {
     @Column
     @NonNull
     private int goalsAgainst;
-
-    @Getter
-    @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team_id", nullable = false)
-    @NonNull
-    private Team team;
 
 
     //  METHODS
@@ -137,8 +129,7 @@ public class TeamSeason implements Season, Comparable<TeamSeason> {
                         goalsFor == that.goalsFor &&
                         goalsAgainst == that.goalsAgainst &&
                         id.equals(that.id) &&
-                        seasonString.equals(that.seasonString) &&
-                        team.getId().equals(that.team.getId());
+                        seasonString.equals(that.seasonString);
     }
 
     @Override

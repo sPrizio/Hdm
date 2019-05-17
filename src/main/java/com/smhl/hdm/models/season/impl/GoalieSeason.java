@@ -83,13 +83,6 @@ public class GoalieSeason implements Season, Comparable<GoalieSeason> {
     @NonNull
     private int shutouts;
 
-    @Getter
-    @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "goalie_id", nullable = false)
-    @NonNull
-    private Goalie goalie;
-
 
     //  METHODS
 
@@ -181,8 +174,7 @@ public class GoalieSeason implements Season, Comparable<GoalieSeason> {
                         goalsAgainst == that.goalsAgainst &&
                         shutouts == that.shutouts &&
                         id.equals(that.id) &&
-                        seasonString.equals(that.seasonString) &&
-                        goalie.getId().equals(that.goalie.getId());
+                        seasonString.equals(that.seasonString);
     }
 
     @Override

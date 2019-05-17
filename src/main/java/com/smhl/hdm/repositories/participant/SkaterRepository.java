@@ -4,6 +4,8 @@ import com.smhl.hdm.models.participant.impl.Skater;
 import com.smhl.hdm.repositories.HdmRepository;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
+
 /**
  * DAO access-layer for Skaters
  *
@@ -11,4 +13,6 @@ import org.springframework.data.repository.CrudRepository;
  * @version 1.0
  */
 public interface SkaterRepository extends HdmRepository, CrudRepository<Skater, Long> {
+
+    List<Skater> getAllByActive(boolean isActive);
 }

@@ -36,7 +36,13 @@ public class Team implements Participant<TeamSeason> {
 
     @Getter
     @Setter
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "team")
+    @Column
+    @NonNull
+    private boolean isActive;
+
+    @Getter
+    @Setter
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<TeamSeason> seasons;
 
 

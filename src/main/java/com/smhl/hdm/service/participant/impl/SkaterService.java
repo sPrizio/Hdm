@@ -48,6 +48,11 @@ public class SkaterService implements ParticipantService<Skater, SkaterGameDetai
     }
 
     @Override
+    public List<Skater> getAllActiveParticipants() {
+        return this.skaterRepository.getAllByActive(true);
+    }
+
+    @Override
     public void refresh(Skater entity) {
         this.skaterRepository.refresh(entity);
     }

@@ -61,6 +61,11 @@ public class TeamService implements ParticipantService<Team, TeamGameDetails> {
     }
 
     @Override
+    public List<Team> getAllActiveParticipants() {
+        return this.teamRepository.getAllByActive(true);
+    }
+
+    @Override
     public void refresh(Team entity) {
         this.teamRepository.refresh(entity);
     }
