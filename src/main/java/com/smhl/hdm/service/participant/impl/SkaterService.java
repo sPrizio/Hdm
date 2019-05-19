@@ -7,6 +7,7 @@ import com.smhl.hdm.models.season.impl.SkaterSeason;
 import com.smhl.hdm.repositories.participant.SkaterRepository;
 import com.smhl.hdm.service.participant.ParticipantService;
 import com.smhl.hdm.service.season.impl.SkaterSeasonService;
+import com.smhl.hdm.utils.HdmUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,11 +50,7 @@ public class SkaterService implements ParticipantService<Skater, SkaterGameDetai
 
     @Override
     public List<Skater> getAllActiveParticipants(String field, String order) {
-
-        //  we need to determine which sorting to used based on the passed field
-
-
-        return this.skaterRepository.getAllByActive(true);
+        return this.skaterRepository.findByActiveSorted(true, HdmUtils.getCurrentSeasonString(), field, order);
     }
 
     @Override
