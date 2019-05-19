@@ -62,6 +62,28 @@ public class SkaterSeason implements Season, Comparable<SkaterSeason> {
     //  METHODS
 
     /**
+     * Returns a skater's points for the season
+     *
+      * @return goals summed with assists
+     */
+    public int getPoints() {
+        return this.goals + this.assists;
+    }
+
+    /**
+     * Returns the average number of points per game achieved for this season
+     *
+     * @return points divided by games played
+     */
+    public double getPointsPerGame() {
+        if (this.gamesPlayed > 0) {
+            return Math.round(((double) getPoints() / (double) this.gamesPlayed) * 100.0) / 100.0;
+        }
+
+        return 0.0;
+    }
+
+    /**
      * Increments games player by 1
      */
     public void incrementGamesPlayed() {
