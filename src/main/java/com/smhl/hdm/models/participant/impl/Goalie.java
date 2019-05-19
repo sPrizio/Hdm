@@ -50,7 +50,7 @@ public class Goalie implements Participant<GoalieSeason> {
     @Setter
     @Column
     @NonNull
-    private boolean isActive;
+    private Boolean active;
 
     @Getter
     @Setter

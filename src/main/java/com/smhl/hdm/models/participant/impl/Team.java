@@ -38,7 +38,7 @@ public class Team implements Participant<TeamSeason> {
     @Setter
     @Column
     @NonNull
-    private boolean isActive;
+    private Boolean active;
 
     @Getter
     @Setter

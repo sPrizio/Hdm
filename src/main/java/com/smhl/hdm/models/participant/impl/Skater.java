@@ -50,7 +50,7 @@ public class Skater implements Participant<SkaterSeason> {
     @Setter
     @Column
     @NonNull
-    private boolean isActive;
+    private Boolean active;
 
     @Getter
     @Setter
