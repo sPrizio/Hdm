@@ -16,5 +16,5 @@ public interface ParticipantService<P extends Participant, D extends Details> ex
 
     void updateStats(D details);
 
-    List<P> getAllActiveParticipants();
+    List<P> getAllActiveParticipants(String field, String order);
 }

@@ -48,7 +48,11 @@ public class SkaterService implements ParticipantService<Skater, SkaterGameDetai
     }
 
     @Override
-    public List<Skater> getAllActiveParticipants() {
+    public List<Skater> getAllActiveParticipants(String field, String order) {
+
+        //  we need to determine which sorting to used based on the passed field
+
+
         return this.skaterRepository.getAllByActive(true);
     }
 

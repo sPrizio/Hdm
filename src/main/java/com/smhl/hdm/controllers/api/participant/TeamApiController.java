@@ -8,10 +8,7 @@ import com.smhl.hdm.service.participant.impl.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Controller that exposes various endpoints for information about teams
@@ -60,7 +57,7 @@ public class TeamApiController extends AbstractHdmController<Team> {
      * @return list of teams  that are marked as active
      */
     @GetMapping("/all-active")
-    public ResponseEntity<HdmApiResponse> getAllActiveSkaters() {
-        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.teamService.getAllActiveParticipants()), HttpStatus.OK);
+    public ResponseEntity<HdmApiResponse> getAllActiveSkaters(final @RequestParam String field, final @RequestParam String order) {
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.teamService.getAllActiveParticipants(field, order)), HttpStatus.OK);
     }
 }

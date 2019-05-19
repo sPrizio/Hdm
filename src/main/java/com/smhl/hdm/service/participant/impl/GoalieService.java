@@ -70,7 +70,7 @@ public class GoalieService implements ParticipantService<Goalie, GoalieGameDetai
     }
 
     @Override
-    public List<Goalie> getAllActiveParticipants() {
+    public List<Goalie> getAllActiveParticipants(String field, String order) {
         return this.goalieRepository.getAllByActive(true);
     }
 

@@ -61,7 +61,7 @@ public class TeamService implements ParticipantService<Team, TeamGameDetails> {
     }
 
     @Override
-    public List<Team> getAllActiveParticipants() {
+    public List<Team> getAllActiveParticipants(String field, String order) {
         return this.teamRepository.getAllByActive(true);
     }
 

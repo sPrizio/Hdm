@@ -8,10 +8,7 @@ import com.smhl.hdm.service.participant.impl.GoalieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Controller that exposes various endpoints for information about goalies
@@ -60,7 +57,7 @@ public class GoalieApiController extends AbstractHdmController<Goalie> {
      * @return list of goalies that are marked as active
      */
     @GetMapping("/all-active")
-    public ResponseEntity<HdmApiResponse> getAllActiveGoalies() {
-        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.goalieService.getAllActiveParticipants()), HttpStatus.OK);
+    public ResponseEntity<HdmApiResponse> getAllActiveGoalies(final @RequestParam String field, final @RequestParam String order) {
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.goalieService.getAllActiveParticipants(field, order)), HttpStatus.OK);
     }
 }
