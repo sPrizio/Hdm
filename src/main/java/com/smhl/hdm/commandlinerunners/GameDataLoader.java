@@ -34,7 +34,7 @@ import java.util.List;
  * @version 1.0
  */
 @Component
-@Order(2)
+@Order(3)
 public class GameDataLoader implements CommandLineRunner {
 
     private LocalDateTime dateTime = LocalDateTime.of(CoreConstants.NOW_AS_LOCALDATE.getYear(), 1, 1, 13, 0, 0);

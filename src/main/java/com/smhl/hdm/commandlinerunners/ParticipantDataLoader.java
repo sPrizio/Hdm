@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
  * @version 1.0
  */
 @Component
-@Order(1)
+@Order(2)
 public class ParticipantDataLoader implements CommandLineRunner {
 
     private static final String SEASON1 = HdmUtils.getCurrentSeasonString(-2);
