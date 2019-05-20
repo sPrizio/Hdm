@@ -1,6 +1,5 @@
 package com.smhl.hdm.facades.participant.impl;
 
-import com.google.common.collect.Sets;
 import com.smhl.hdm.converters.participant.impl.SkaterConverter;
 import com.smhl.hdm.facades.participant.ParticipantFacade;
 import com.smhl.hdm.models.participant.impl.Skater;
@@ -32,7 +31,7 @@ public class SkaterFacade implements ParticipantFacade<SkaterResource> {
 
     @Override
     public List<SkaterResource> findAllParticipantsForSeason(String seasonString, String field, String order) {
-        return this.skaterConverter.convertAllForSeason(seasonString, Sets.newHashSet(this.skaterService.getAllParticipantsForSeason(seasonString, field, order)));
+        return this.skaterConverter.convertAllForSeason(seasonString, this.skaterService.getAllParticipantsForSeason(seasonString, field, order));
     }
 
     @Override
@@ -49,6 +48,6 @@ public class SkaterFacade implements ParticipantFacade<SkaterResource> {
 
     @Override
     public List<SkaterResource> findAll() {
-        return this.skaterConverter.convertAll(Sets.newHashSet(this.skaterService.findAll()));
+        return this.skaterConverter.convertAll(this.skaterService.findAll());
     }
 }

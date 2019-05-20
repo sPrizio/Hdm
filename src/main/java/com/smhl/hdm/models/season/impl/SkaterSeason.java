@@ -64,7 +64,7 @@ public class SkaterSeason implements Season, Comparable<SkaterSeason> {
     /**
      * Returns a skater's points for the season
      *
-      * @return goals summed with assists
+     * @return goals summed with assists
      */
     public int getPoints() {
         return this.goals + this.assists;

@@ -5,7 +5,6 @@ import com.smhl.hdm.models.participant.Participant;
 import com.smhl.hdm.resources.HdmResource;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Converter with specific methods for participants
@@ -17,5 +16,5 @@ public interface ParticipantConverter<E extends Participant, R extends HdmResour
 
     R convertForSeason(String season, E entity);
 
-    List<R> convertAllForSeason(String season, Set<E> entity);
+    List<R> convertAllForSeason(String season, List<E> entity);
 }

@@ -1,5 +1,6 @@
 package com.smhl.hdm.converters.participant.impl;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.smhl.hdm.converters.participant.ParticipantConverter;
 import com.smhl.hdm.converters.season.SkaterSeasonConverter;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Converter for skater entities
@@ -38,7 +38,7 @@ public class SkaterConverter implements ParticipantConverter<Skater, SkaterResou
     }
 
     @Override
-    public List<SkaterResource> convertAll(Set<Skater> entity) {
+    public List<SkaterResource> convertAll(List<Skater> entity) {
 
         List<SkaterResource> resources = new ArrayList<>();
 
@@ -57,7 +57,7 @@ public class SkaterConverter implements ParticipantConverter<Skater, SkaterResou
     }
 
     @Override
-    public List<SkaterResource> convertAllForSeason(String season, Set<Skater> entity) {
+    public List<SkaterResource> convertAllForSeason(String season, List<Skater> entity) {
         List<SkaterResource> resources = new ArrayList<>();
 
         entity.forEach(skater -> resources.add(convertForSeason(season, skater)));
@@ -80,7 +80,7 @@ public class SkaterConverter implements ParticipantConverter<Skater, SkaterResou
 
         resource.setName(entity.getName());
         resource.setPosition(entity.getPosition());
-        resource.setSeasons(Sets.newHashSet(this.skaterSeasonConverter.convertAll(entity.getSeasons())));
+        resource.setSeasons(Sets.newHashSet(this.skaterSeasonConverter.convertAll(Lists.newArrayList(entity.getSeasons()))));
 
         return resource;
     }

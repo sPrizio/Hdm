@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * Converter for goalie season resources
@@ -41,7 +40,7 @@ public class GoalieSeasonConverter implements HdmConverter<GoalieSeason, GoalieS
     }
 
     @Override
-    public List<GoalieSeasonResource> convertAll(Set<GoalieSeason> entity) {
+    public List<GoalieSeasonResource> convertAll(List<GoalieSeason> entity) {
 
         List<GoalieSeasonResource> resources = new ArrayList<>();
 

@@ -1,6 +1,5 @@
 package com.smhl.hdm.facades.participant.impl;
 
-import com.google.common.collect.Sets;
 import com.smhl.hdm.converters.participant.impl.TeamConverter;
 import com.smhl.hdm.facades.participant.ParticipantFacade;
 import com.smhl.hdm.models.participant.impl.Team;
@@ -33,7 +32,7 @@ public class TeamFacade implements ParticipantFacade<TeamResource> {
 
     @Override
     public List<TeamResource> findAllParticipantsForSeason(String seasonString, String field, String order) {
-        return this.teamConverter.convertAllForSeason(seasonString, Sets.newHashSet(this.teamService.getAllParticipantsForSeason(seasonString, field, order)));
+        return this.teamConverter.convertAllForSeason(seasonString, this.teamService.getAllParticipantsForSeason(seasonString, field, order));
     }
 
     @Override
@@ -50,6 +49,6 @@ public class TeamFacade implements ParticipantFacade<TeamResource> {
 
     @Override
     public List<TeamResource> findAll() {
-        return this.teamConverter.convertAll(Sets.newHashSet(this.teamService.findAll()));
+        return this.teamConverter.convertAll(this.teamService.findAll());
     }
 }

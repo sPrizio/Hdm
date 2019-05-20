@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * Converter for skater season resources
@@ -39,7 +38,7 @@ public class SkaterSeasonConverter implements HdmConverter<SkaterSeason, SkaterS
     }
 
     @Override
-    public List<SkaterSeasonResource> convertAll(Set<SkaterSeason> entity) {
+    public List<SkaterSeasonResource> convertAll(List<SkaterSeason> entity) {
 
         List<SkaterSeasonResource> resources = new ArrayList<>();
 

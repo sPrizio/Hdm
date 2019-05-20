@@ -1,6 +1,5 @@
 package com.smhl.hdm.facades.participant.impl;
 
-import com.google.common.collect.Sets;
 import com.smhl.hdm.converters.participant.impl.GoalieConverter;
 import com.smhl.hdm.facades.participant.ParticipantFacade;
 import com.smhl.hdm.models.participant.impl.Goalie;
@@ -32,7 +31,7 @@ public class GoalieFacade implements ParticipantFacade<GoalieResource> {
 
     @Override
     public List<GoalieResource> findAllParticipantsForSeason(String seasonString, String field, String order) {
-        return this.goalieConverter.convertAllForSeason(seasonString, Sets.newHashSet(this.goalieService.getAllParticipantsForSeason(seasonString, field, order)));
+        return this.goalieConverter.convertAllForSeason(seasonString, this.goalieService.getAllParticipantsForSeason(seasonString, field, order));
     }
 
     @Override
@@ -49,6 +48,6 @@ public class GoalieFacade implements ParticipantFacade<GoalieResource> {
 
     @Override
     public List<GoalieResource> findAll() {
-        return this.goalieConverter.convertAll(Sets.newHashSet(this.goalieService.findAll()));
+        return this.goalieConverter.convertAll(this.goalieService.findAll());
     }
 }

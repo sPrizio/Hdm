@@ -1,5 +1,6 @@
 package com.smhl.hdm.converters.participant.impl;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.smhl.hdm.converters.participant.ParticipantConverter;
 import com.smhl.hdm.converters.season.GoalieSeasonConverter;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Converter for goalie entities
@@ -39,7 +39,7 @@ public class GoalieConverter implements ParticipantConverter<Goalie, GoalieResou
     }
 
     @Override
-    public List<GoalieResource> convertAll(Set<Goalie> entity) {
+    public List<GoalieResource> convertAll(List<Goalie> entity) {
 
         List<GoalieResource> resources = new ArrayList<>();
 
@@ -58,7 +58,7 @@ public class GoalieConverter implements ParticipantConverter<Goalie, GoalieResou
     }
 
     @Override
-    public List<GoalieResource> convertAllForSeason(String season, Set<Goalie> entity) {
+    public List<GoalieResource> convertAllForSeason(String season, List<Goalie> entity) {
         List<GoalieResource> resources = new ArrayList<>();
 
         entity.forEach(goalie -> resources.add(convertForSeason(season, goalie)));
@@ -81,7 +81,7 @@ public class GoalieConverter implements ParticipantConverter<Goalie, GoalieResou
 
         resource.setName(entity.getName());
         resource.setPosition(resource.getPosition());
-        resource.setSeasons(Sets.newHashSet(this.goalieSeasonConverter.convertAll(entity.getSeasons())));
+        resource.setSeasons(Sets.newHashSet(this.goalieSeasonConverter.convertAll(Lists.newArrayList(entity.getSeasons()))));
 
         return resource;
     }

@@ -22,7 +22,7 @@ public abstract class AbstractHdmController<P extends ParticipantResource> {
     /**
      * A generic find method that will determine whether the participant could be found
      *
-     * @param id id of participant
+     * @param id                  id of participant
      * @param participantResource participant as a result of calling find()
      * @return response based on whether the participant was found
      */
