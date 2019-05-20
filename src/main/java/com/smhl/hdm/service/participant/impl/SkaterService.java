@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.smhl.hdm.models.details.participant.SkaterGameDetails;
 import com.smhl.hdm.models.participant.impl.Skater;
 import com.smhl.hdm.models.season.impl.SkaterSeason;
-import com.smhl.hdm.repositories.participant.SkaterRepository;
+import com.smhl.hdm.repositories.participant.skater.SkaterRepository;
 import com.smhl.hdm.service.participant.ParticipantService;
 import com.smhl.hdm.service.season.impl.SkaterSeasonService;
 import com.smhl.hdm.utils.HdmUtils;
@@ -49,8 +49,8 @@ public class SkaterService implements ParticipantService<Skater, SkaterGameDetai
     }
 
     @Override
-    public List<Skater> getAllActiveParticipants(String field, String order) {
-        return this.skaterRepository.findByActiveSorted(true, HdmUtils.getCurrentSeasonString(), field, order);
+    public List<Skater> getAllParticipantsForSeason(String seasonString, String field, String order) {
+        return this.skaterRepository.findBySeasonStringSorted(HdmUtils.getCurrentSeasonString(), field, order);
     }
 
     @Override

@@ -3,8 +3,8 @@ package com.smhl.hdm.controllers.api.participant;
 import com.smhl.hdm.controllers.AbstractHdmController;
 import com.smhl.hdm.controllers.response.HdmApiResponse;
 import com.smhl.hdm.enums.HdmApiResponseResult;
-import com.smhl.hdm.models.participant.impl.Team;
-import com.smhl.hdm.service.participant.impl.TeamService;
+import com.smhl.hdm.facades.participant.impl.TeamFacade;
+import com.smhl.hdm.resources.participant.impl.TeamResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/api/teams")
-public class TeamApiController extends AbstractHdmController<Team> {
+public class TeamApiController extends AbstractHdmController<TeamResource> {
 
-    private TeamService teamService;
+    private TeamFacade teamFacade;
 
     @Autowired
-    public TeamApiController(TeamService teamService) {
-        this.teamService = teamService;
+    public TeamApiController(TeamFacade teamFacade) {
+        this.teamFacade = teamFacade;
     }
 
 
@@ -38,7 +38,7 @@ public class TeamApiController extends AbstractHdmController<Team> {
      */
     @GetMapping("/{id}")
     public ResponseEntity<HdmApiResponse> getSkater(final @PathVariable("id") Long id) {
-        return findParticipant(id, this.teamService.find(id));
+        return findParticipant(id, this.teamFacade.find(id));
     }
 
     /**
@@ -48,7 +48,7 @@ public class TeamApiController extends AbstractHdmController<Team> {
      */
     @GetMapping("/all")
     public ResponseEntity<HdmApiResponse> getAllSkaters() {
-        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.teamService.findAll()), HttpStatus.OK);
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.teamFacade.findAll()), HttpStatus.OK);
     }
 
     /**
@@ -57,7 +57,7 @@ public class TeamApiController extends AbstractHdmController<Team> {
      * @return list of teams  that are marked as active
      */
     @GetMapping("/all-active")
-    public ResponseEntity<HdmApiResponse> getAllActiveSkaters(final @RequestParam String field, final @RequestParam String order) {
-        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.teamService.getAllActiveParticipants(field, order)), HttpStatus.OK);
+    public ResponseEntity<HdmApiResponse> getAllActiveSkaters(final @RequestParam String seasonString, final @RequestParam String field, final @RequestParam String order) {
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.teamFacade.findAllParticipantsForSeason(seasonString, field, order)), HttpStatus.OK);
     }
 }

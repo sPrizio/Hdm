@@ -3,8 +3,8 @@ package com.smhl.hdm.controllers.api.participant;
 import com.smhl.hdm.controllers.AbstractHdmController;
 import com.smhl.hdm.controllers.response.HdmApiResponse;
 import com.smhl.hdm.enums.HdmApiResponseResult;
-import com.smhl.hdm.models.participant.impl.Goalie;
-import com.smhl.hdm.service.participant.impl.GoalieService;
+import com.smhl.hdm.facades.participant.impl.GoalieFacade;
+import com.smhl.hdm.resources.participant.impl.GoalieResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/api/goalie")
-public class GoalieApiController extends AbstractHdmController<Goalie> {
+public class GoalieApiController extends AbstractHdmController<GoalieResource> {
 
-    private GoalieService goalieService;
+    private GoalieFacade goalieFacade;
 
     @Autowired
-    public GoalieApiController(GoalieService goalieService) {
-        this.goalieService = goalieService;
+    public GoalieApiController(GoalieFacade goalieFacade) {
+        this.goalieFacade = goalieFacade;
     }
 
 
@@ -38,7 +38,7 @@ public class GoalieApiController extends AbstractHdmController<Goalie> {
      */
     @GetMapping("/{id}")
     public ResponseEntity<HdmApiResponse> getGoalie(final @PathVariable("id") Long id) {
-        return findParticipant(id, this.goalieService.find(id));
+        return findParticipant(id, this.goalieFacade.find(id));
     }
 
     /**
@@ -48,7 +48,7 @@ public class GoalieApiController extends AbstractHdmController<Goalie> {
      */
     @GetMapping("/all")
     public ResponseEntity<HdmApiResponse> getAllGoalies() {
-        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.goalieService.findAll()), HttpStatus.OK);
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.goalieFacade.findAll()), HttpStatus.OK);
     }
 
     /**
@@ -57,7 +57,7 @@ public class GoalieApiController extends AbstractHdmController<Goalie> {
      * @return list of goalies that are marked as active
      */
     @GetMapping("/all-active")
-    public ResponseEntity<HdmApiResponse> getAllActiveGoalies(final @RequestParam String field, final @RequestParam String order) {
-        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.goalieService.getAllActiveParticipants(field, order)), HttpStatus.OK);
+    public ResponseEntity<HdmApiResponse> getAllActiveGoalies(final @RequestParam String seasonString, final @RequestParam String field, final @RequestParam String order) {
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.goalieFacade.findAllParticipantsForSeason(seasonString, field, order)), HttpStatus.OK);
     }
 }

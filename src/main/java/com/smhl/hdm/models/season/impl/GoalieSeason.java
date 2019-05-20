@@ -1,6 +1,5 @@
 package com.smhl.hdm.models.season.impl;
 
-import com.smhl.hdm.models.participant.impl.Goalie;
 import com.smhl.hdm.models.season.Season;
 import lombok.*;
 

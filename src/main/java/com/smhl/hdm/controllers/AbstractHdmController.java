@@ -3,13 +3,11 @@ package com.smhl.hdm.controllers;
 import com.smhl.hdm.controllers.response.HdmApiResponse;
 import com.smhl.hdm.enums.HdmApiResponseResult;
 import com.smhl.hdm.exceptions.HdmEntityNotFoundException;
-import com.smhl.hdm.models.participant.Participant;
+import com.smhl.hdm.resources.participant.ParticipantResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import java.util.Optional;
 
 /**
  * A parent class that holds common variables and methods for API controllers
@@ -17,8 +15,7 @@ import java.util.Optional;
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
  */
-@SuppressWarnings({"optional", "OptionalUsedAsFieldOrParameterType"})
-public abstract class AbstractHdmController<P extends Participant> {
+public abstract class AbstractHdmController<P extends ParticipantResource> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractHdmController.class);
 
@@ -26,13 +23,13 @@ public abstract class AbstractHdmController<P extends Participant> {
      * A generic find method that will determine whether the participant could be found
      *
      * @param id id of participant
-     * @param participant participant as a result of calling find()
+     * @param participantResource participant as a result of calling find()
      * @return response based on whether the participant was found
      */
-    protected ResponseEntity<HdmApiResponse> findParticipant(Long id, Optional<P> participant) {
+    protected ResponseEntity<HdmApiResponse> findParticipant(Long id, P participantResource) {
         try {
-            if (participant.isPresent()) {
-                return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, participant.get()), HttpStatus.OK);
+            if (participantResource.isPresent()) {
+                return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, participantResource), HttpStatus.OK);
             } else {
                 throw new HdmEntityNotFoundException("The selected participant could not be found.");
             }

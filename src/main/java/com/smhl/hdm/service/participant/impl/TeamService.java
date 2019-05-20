@@ -5,7 +5,7 @@ import com.smhl.hdm.enums.GameResult;
 import com.smhl.hdm.models.details.participant.TeamGameDetails;
 import com.smhl.hdm.models.participant.impl.Team;
 import com.smhl.hdm.models.season.impl.TeamSeason;
-import com.smhl.hdm.repositories.participant.TeamRepository;
+import com.smhl.hdm.repositories.participant.team.TeamRepository;
 import com.smhl.hdm.service.participant.ParticipantService;
 import com.smhl.hdm.service.season.impl.TeamSeasonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,8 +61,8 @@ public class TeamService implements ParticipantService<Team, TeamGameDetails> {
     }
 
     @Override
-    public List<Team> getAllActiveParticipants(String field, String order) {
-        return this.teamRepository.getAllByActive(true);
+    public List<Team> getAllParticipantsForSeason(String seasonString, String field, String order) {
+        return null;
     }
 
     @Override

@@ -5,7 +5,7 @@ import com.smhl.hdm.enums.GameResult;
 import com.smhl.hdm.models.details.participant.GoalieGameDetails;
 import com.smhl.hdm.models.participant.impl.Goalie;
 import com.smhl.hdm.models.season.impl.GoalieSeason;
-import com.smhl.hdm.repositories.participant.GoalieRepository;
+import com.smhl.hdm.repositories.participant.goalie.GoalieRepository;
 import com.smhl.hdm.service.participant.ParticipantService;
 import com.smhl.hdm.service.season.impl.GoalieSeasonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,8 +70,8 @@ public class GoalieService implements ParticipantService<Goalie, GoalieGameDetai
     }
 
     @Override
-    public List<Goalie> getAllActiveParticipants(String field, String order) {
-        return this.goalieRepository.getAllByActive(true);
+    public List<Goalie> getAllParticipantsForSeason(String seasonString, String field, String order) {
+        return null;
     }
 
     @Override

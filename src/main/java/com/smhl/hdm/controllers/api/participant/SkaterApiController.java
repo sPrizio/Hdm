@@ -3,15 +3,12 @@ package com.smhl.hdm.controllers.api.participant;
 import com.smhl.hdm.controllers.AbstractHdmController;
 import com.smhl.hdm.controllers.response.HdmApiResponse;
 import com.smhl.hdm.enums.HdmApiResponseResult;
-import com.smhl.hdm.models.participant.impl.Skater;
-import com.smhl.hdm.service.participant.impl.SkaterService;
-import lombok.Getter;
+import com.smhl.hdm.facades.participant.impl.SkaterFacade;
+import com.smhl.hdm.resources.participant.impl.SkaterResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * Controller that exposes various endpoints for information about Skaters
@@ -21,13 +18,13 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/skater")
-public class SkaterApiController extends AbstractHdmController<Skater> {
+public class SkaterApiController extends AbstractHdmController<SkaterResource> {
 
-    private SkaterService skaterService;
+    private SkaterFacade skaterFacade;
 
     @Autowired
-    public SkaterApiController(SkaterService skaterService) {
-        this.skaterService = skaterService;
+    public SkaterApiController(SkaterFacade skaterFacade) {
+        this.skaterFacade = skaterFacade;
     }
 
 
@@ -41,7 +38,7 @@ public class SkaterApiController extends AbstractHdmController<Skater> {
      */
     @GetMapping("/{id}")
     public ResponseEntity<HdmApiResponse> getSkater(final @PathVariable("id") Long id) {
-        return findParticipant(id, this.skaterService.find(id));
+        return findParticipant(id, this.skaterFacade.find(id));
     }
 
     /**
@@ -51,7 +48,7 @@ public class SkaterApiController extends AbstractHdmController<Skater> {
      */
     @GetMapping("/all")
     public ResponseEntity<HdmApiResponse> getAllSkaters() {
-        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.skaterService.findAll()), HttpStatus.OK);
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.skaterFacade.findAll()), HttpStatus.OK);
     }
 
     /**
@@ -60,7 +57,7 @@ public class SkaterApiController extends AbstractHdmController<Skater> {
      * @return list of skaters that are marked as active
      */
     @GetMapping("/all-active")
-    public ResponseEntity<HdmApiResponse> getAllActiveSkaters(final @RequestParam String field, final @RequestParam String order) {
-        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.skaterService.getAllActiveParticipants(field, order)), HttpStatus.OK);
+    public ResponseEntity<HdmApiResponse> getAllActiveSkaters(final @RequestParam String seasonString, final @RequestParam String field, final @RequestParam String order) {
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.skaterFacade.findAllParticipantsForSeason(seasonString, field, order)), HttpStatus.OK);
     }
 }

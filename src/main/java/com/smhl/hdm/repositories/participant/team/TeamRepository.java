@@ -1,4 +1,4 @@
-package com.smhl.hdm.repositories.participant;
+package com.smhl.hdm.repositories.participant.team;
 
 import com.smhl.hdm.models.participant.impl.Team;
 import com.smhl.hdm.repositories.HdmRepository;

@@ -12,5 +12,7 @@ import java.util.List;
  */
 public interface SkaterRepositoryCustom {
 
-    List<Skater> findByActiveSorted(boolean isActive, String seasonString, String field, String order);
+    List<Skater> findBySeasonString(String seasonString);
+
+    List<Skater> findBySeasonStringSorted(String seasonString, String field, String order);
 }
