@@ -63,6 +63,7 @@ public class ParticipantDataLoader implements CommandLineRunner {
         Skater skater8 = new Skater("Pete", "Austin", ParticipantPosition.DEFENSE.toString(), true);
         Skater skater9 = new Skater("Derek", "Payne", ParticipantPosition.CENTER.toString(), true);
         Skater skater10 = new Skater("Alex", "Hall", ParticipantPosition.LEFT_WING.toString(), true);
+        Skater skater11 = new Skater("Blank", "Skater", ParticipantPosition.CENTER.toString(), true);
 
         SkaterSeason skaterSeason11 = new SkaterSeason(SEASON1, 82, 20, 52, 223, 24);
         SkaterSeason skaterSeason12 = new SkaterSeason(SEASON2, 78, 30, 36, 250, 44);
@@ -104,6 +105,8 @@ public class ParticipantDataLoader implements CommandLineRunner {
         SkaterSeason skaterSeason102 = new SkaterSeason(SEASON2, 69, 26, 30, 209, 52);
         SkaterSeason skaterSeason103 = new SkaterSeason(SEASON3, 82, 28, 41, 208, 46);
 
+        SkaterSeason skaterSeason111 = new SkaterSeason(SEASON3, 0, 0, 0, 0, 0);
+
         skater1.setSeasons(Sets.newHashSet(skaterSeason11, skaterSeason12, skaterSeason13));
         skater2.setSeasons(Sets.newHashSet(skaterSeason21, skaterSeason22, skaterSeason23));
         skater3.setSeasons(Sets.newHashSet(skaterSeason31, skaterSeason32, skaterSeason33));
@@ -114,6 +117,7 @@ public class ParticipantDataLoader implements CommandLineRunner {
         skater8.setSeasons(Sets.newHashSet(skaterSeason81, skaterSeason82, skaterSeason83));
         skater9.setSeasons(Sets.newHashSet(skaterSeason91, skaterSeason92, skaterSeason93));
         skater10.setSeasons(Sets.newHashSet(skaterSeason101, skaterSeason102, skaterSeason103));
+        skater11.setSeasons(Sets.newHashSet(skaterSeason111));
 
         this.skaterRepository.save(skater1);
         this.skaterRepository.save(skater2);
@@ -125,6 +129,7 @@ public class ParticipantDataLoader implements CommandLineRunner {
         this.skaterRepository.save(skater8);
         this.skaterRepository.save(skater9);
         this.skaterRepository.save(skater10);
+        this.skaterRepository.save(skater11);
     }
 
     /**

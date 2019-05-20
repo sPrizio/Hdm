@@ -19,6 +19,7 @@ import java.util.Map;
  * @author Stephen Prizio <a href="http://www.saprizio.com">www.saprizio.com</a>
  * @version 1.0
  */
+@SuppressWarnings({"unchecked", "SpringJavaAutowiredMembersInspection"})
 public class SkaterRepositoryImpl implements SkaterRepositoryCustom {
 
     @PersistenceContext
@@ -39,7 +40,7 @@ public class SkaterRepositoryImpl implements SkaterRepositoryCustom {
 
         //  build query
         queryBuilder
-                .append("SELECT s.id ")
+                .append("SELECT s.id, (goals + assists) as points, ((goals + assists) / NULLIF(games_played, 0)) as points_per_game ")
                 .append("FROM skater as s, skater_season as sea, skater_seasons as rel ")
                 .append("WHERE rel.skater_id = s.id ")
                 .append("   AND rel.seasons_id = sea.id ")
@@ -50,7 +51,7 @@ public class SkaterRepositoryImpl implements SkaterRepositoryCustom {
         Query query = this.entityManager.createNativeQuery(queryBuilder.toString());
 
         query.getResultList().forEach(o -> {
-            Long id = Long.parseLong(new BigInteger(o.toString()).toString());
+            Long id = Long.parseLong(new BigInteger(((Object[]) o)[0].toString()).toString());
             skaters.add(activeSkaters.get(id));
         });
 
