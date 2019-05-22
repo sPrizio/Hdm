@@ -37,11 +37,19 @@ public class TeamSeasonResource implements HdmResource {
 
     @Getter
     @Setter
+    private int points;
+
+    @Getter
+    @Setter
     private int goalsFor;
 
     @Getter
     @Setter
     private int goalsAgainst;
+
+    @Getter
+    @Setter
+    private int differential;
 
     @Override
     public boolean isPresent() {

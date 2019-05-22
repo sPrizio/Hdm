@@ -29,8 +29,10 @@ public class TeamSeasonConverter implements HdmConverter<TeamSeason, TeamSeasonR
             resource.setWins(entity.getWins());
             resource.setLosses(entity.getLosses());
             resource.setTies(entity.getTies());
+            resource.setPoints(calculatePoints(entity));
             resource.setGoalsFor(entity.getGoalsFor());
             resource.setGoalsAgainst(entity.getGoalsAgainst());
+            resource.setDifferential((entity.getGoalsFor() - entity.getGoalsAgainst()));
         }
 
         return resource;
@@ -44,5 +46,12 @@ public class TeamSeasonConverter implements HdmConverter<TeamSeason, TeamSeasonR
         entity.forEach(teamSeason -> resources.add(convert(teamSeason)));
 
         return resources;
+    }
+
+
+    //  HELPERS
+
+    private int calculatePoints(TeamSeason entity) {
+        return (entity.getWins() * 2) + entity.getTies();
     }
 }

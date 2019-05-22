@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @version 1.0
  */
 @RestController
-@RequestMapping("/api/teams")
+@RequestMapping("/api/team")
 public class TeamApiController extends AbstractHdmController<TeamResource> {
 
     private TeamFacade teamFacade;

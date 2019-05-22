@@ -62,7 +62,7 @@ public class TeamService implements ParticipantService<Team, TeamGameDetails> {
 
     @Override
     public List<Team> getAllParticipantsForSeason(String seasonString, String field, String order) {
-        return null;
+        return this.teamRepository.findBySeasonStringSorted(seasonString, field, order);
     }
 
     @Override
