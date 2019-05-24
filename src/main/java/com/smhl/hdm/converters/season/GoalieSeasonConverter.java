@@ -33,7 +33,9 @@ public class GoalieSeasonConverter implements HdmConverter<GoalieSeason, GoalieS
             resource.setSaves(entity.getSaves());
             resource.setShotsAgainst(entity.getShotsAgainst());
             resource.setGoalsAgainst(entity.getGoalsAgainst());
-            resource.setShotsAgainst(entity.getShutouts());
+            resource.setShutouts(entity.getShotsAgainst());
+            resource.setSavePercentage(entity.getSavePercentage());
+            resource.setGoalsAgainstAverage(entity.getGoalsAgainstAverage());
         }
 
         return resource;

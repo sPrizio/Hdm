@@ -71,7 +71,7 @@ public class GoalieService implements ParticipantService<Goalie, GoalieGameDetai
 
     @Override
     public List<Goalie> getAllParticipantsForSeason(String seasonString, String field, String order) {
-        return null;
+        return this.goalieRepository.findBySeasonStringSorted(seasonString, field, order);
     }
 
     @Override

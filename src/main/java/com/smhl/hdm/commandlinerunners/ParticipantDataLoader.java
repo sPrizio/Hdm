@@ -144,6 +144,7 @@ public class ParticipantDataLoader implements CommandLineRunner {
         Goalie goalie6 = new Goalie("Jared", "Bloggs", true);
         Goalie goalie7 = new Goalie("Zac", "Reed", true);
         Goalie goalie8 = new Goalie("Paul", "Cornish", true);
+        Goalie goalie9 = new Goalie("Blank", "Goalie", true);
 
         GoalieSeason goalieSeason13 = new GoalieSeason(SEASON1, 39, 39, 27, 4, 0, 893, 953, 60, 8);
         GoalieSeason goalieSeason12 = new GoalieSeason(SEASON2, 28, 28, 20, 4, 0, 625, 670, 45, 7);
@@ -177,6 +178,8 @@ public class ParticipantDataLoader implements CommandLineRunner {
         GoalieSeason goalieSeason82 = new GoalieSeason(SEASON2, 28, 28, 13, 10, 0, 785, 843, 58, 10);
         GoalieSeason goalieSeason83 = new GoalieSeason(SEASON3, 46, 46, 21, 18, 0, 1269, 1361, 92, 5);
 
+        GoalieSeason goalieSeason91 = new GoalieSeason(SEASON3, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
         goalie1.setSeasons(Sets.newHashSet(goalieSeason11, goalieSeason12, goalieSeason13));
         goalie2.setSeasons(Sets.newHashSet(goalieSeason21, goalieSeason22, goalieSeason23));
         goalie3.setSeasons(Sets.newHashSet(goalieSeason31, goalieSeason32, goalieSeason33));
@@ -185,6 +188,7 @@ public class ParticipantDataLoader implements CommandLineRunner {
         goalie6.setSeasons(Sets.newHashSet(goalieSeason61, goalieSeason62, goalieSeason63));
         goalie7.setSeasons(Sets.newHashSet(goalieSeason71, goalieSeason72, goalieSeason73));
         goalie8.setSeasons(Sets.newHashSet(goalieSeason81, goalieSeason82, goalieSeason83));
+        goalie9.setSeasons(Sets.newHashSet(goalieSeason91));
 
         this.goalieRepository.save(goalie1);
         this.goalieRepository.save(goalie2);
@@ -194,6 +198,7 @@ public class ParticipantDataLoader implements CommandLineRunner {
         this.goalieRepository.save(goalie6);
         this.goalieRepository.save(goalie7);
         this.goalieRepository.save(goalie8);
+        this.goalieRepository.save(goalie9);
     }
 
     /**
@@ -206,6 +211,7 @@ public class ParticipantDataLoader implements CommandLineRunner {
         Team team3 = new Team("Idaho Truckers", true);
         Team team4 = new Team("Winchester Rafters", true);
         Team team5 = new Team("South Dakota Bangers", true);
+        Team team6 = new Team("Blank Team", true);
 
         TeamSeason teamSeason11 = new TeamSeason(SEASON1, 82, 62, 16, 4, 325, 222);
         TeamSeason teamSeason12 = new TeamSeason(SEASON2, 82, 33, 39, 10, 226, 271);
@@ -227,16 +233,20 @@ public class ParticipantDataLoader implements CommandLineRunner {
         TeamSeason teamSeason52 = new TeamSeason(SEASON2, 82, 47, 31, 4, 258, 232);
         TeamSeason teamSeason53 = new TeamSeason(SEASON3, 82, 44, 30, 8, 249, 236);
 
+        TeamSeason teamSeason61 = new TeamSeason(SEASON3, 0, 0, 0, 0, 0, 0);
+
         team1.setSeasons(Sets.newHashSet(teamSeason11, teamSeason12, teamSeason13));
         team2.setSeasons(Sets.newHashSet(teamSeason21, teamSeason22, teamSeason23));
         team3.setSeasons(Sets.newHashSet(teamSeason31, teamSeason32, teamSeason33));
         team4.setSeasons(Sets.newHashSet(teamSeason41, teamSeason42, teamSeason43));
         team5.setSeasons(Sets.newHashSet(teamSeason51, teamSeason52, teamSeason53));
+        team6.setSeasons(Sets.newHashSet(teamSeason61));
 
         this.teamRepository.save(team1);
         this.teamRepository.save(team2);
         this.teamRepository.save(team3);
         this.teamRepository.save(team4);
         this.teamRepository.save(team5);
+        this.teamRepository.save(team6);
     }
 }

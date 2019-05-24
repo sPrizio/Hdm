@@ -80,7 +80,7 @@ public class GoalieConverter implements ParticipantConverter<Goalie, GoalieResou
         GoalieResource resource = new GoalieResource();
 
         resource.setName(entity.getName());
-        resource.setPosition(resource.getPosition());
+        resource.setPosition(entity.getPosition());
         resource.setSeasons(Sets.newHashSet(this.goalieSeasonConverter.convertAll(Lists.newArrayList(entity.getSeasons()))));
 
         return resource;

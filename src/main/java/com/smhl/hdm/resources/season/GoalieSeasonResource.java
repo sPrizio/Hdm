@@ -55,6 +55,14 @@ public class GoalieSeasonResource implements HdmResource {
     @Setter
     private int shutouts;
 
+    @Getter
+    @Setter
+    private double savePercentage;
+
+    @Getter
+    @Setter
+    private double goalsAgainstAverage;
+
     @Override
     public boolean isPresent() {
         return StringUtils.isNotEmpty(this.seasonString);

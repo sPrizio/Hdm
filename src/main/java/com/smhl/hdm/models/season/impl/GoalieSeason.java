@@ -154,6 +154,34 @@ public class GoalieSeason implements Season, Comparable<GoalieSeason> {
         this.shutouts += 1;
     }
 
+    /**
+     * Gets the save percentage
+     *
+     * @return saves / shots against
+     */
+    public double getSavePercentage() {
+
+        if (this.shotsAgainst == 0) {
+            return 0.0;
+        }
+
+        return Math.round(((double) this.saves / (double) this.shotsAgainst) * 1000.0) / 1000.0;
+    }
+
+    /**
+     * Gets the goals against average
+     *
+     * @return goals against per game
+     */
+    public double getGoalsAgainstAverage() {
+
+        if (this.gamesPlayed == 0) {
+            return 0.0;
+        }
+
+        return Math.round(((double) this.goalsAgainst / (double) this.gamesPlayed) * 100.0) / 100.0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
