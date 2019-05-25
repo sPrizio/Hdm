@@ -59,7 +59,7 @@ public class GoalieRepositoryImpl implements GoalieRepositoryCustom {
 
         //  build query
         queryBuilder
-                .append("SELECT g.id, ((saves / shots_against) / NULLIF(shots_against, 0)) as save_percentage, ((goals_against / games_played) / NULLIF(games_played, 0)) as goals_against_average ")
+                .append("SELECT g.id, (saves / NULLIF(shots_against, 0)) as save_percentage, (goals_against / NULLIF(games_played, 0)) as goals_against_average ")
                 .append("FROM goalie as g, goalie_season as sea, goalie_seasons as rel ")
                 .append("WHERE rel.goalie_id = g.id ")
                 .append("   AND rel.seasons_id = sea.id")
