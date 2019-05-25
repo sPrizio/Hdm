@@ -52,12 +52,27 @@ public class SkaterApiController extends AbstractHdmController<SkaterResource> {
     }
 
     /**
-     * Gets all active skaters in the system
+     * Gets all active skaters in the system sorted by a particular field
      *
-     * @return list of skaters that are marked as active
+     * @param seasonString season to consider
+     * @param field field upon which to sort the results
+     * @param order sort order
+     * @return list of skaters that are marked as active sorted by a field
      */
     @GetMapping("/all-active")
     public ResponseEntity<HdmApiResponse> getAllActiveSkaters(final @RequestParam String seasonString, final @RequestParam String field, final @RequestParam String order) {
         return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.skaterFacade.findAllParticipantsForSeason(seasonString, field, order)), HttpStatus.OK);
+    }
+
+    /**
+     * Returns the top active skaters for a stat and limits the number of results
+     *
+     * @param stat stat on which to obtain skaters
+     * @param limit integer limit of the result list
+     * @return limited list sorted based on a stat
+     */
+    @GetMapping("/top-active")
+    public ResponseEntity<HdmApiResponse> getTopSkatersForStatAndLimit(final @RequestParam String stat, final @RequestParam int limit) {
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.skaterFacade.findTopSkatersForStatAndLimit(stat, limit)), HttpStatus.OK);
     }
 }

@@ -1,6 +1,7 @@
 package com.smhl.hdm.repositories.participant.skater;
 
 import com.smhl.hdm.models.participant.impl.Skater;
+import com.smhl.hdm.utils.HdmUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -74,5 +75,15 @@ public class SkaterRepositoryImpl implements SkaterRepositoryCustom {
         });
 
         return skaters;
+    }
+
+    @Override
+    public List<Skater> findTopSkatersForStatAndLimit(String stat, int limit) {
+
+        if (limit > 0) {
+            return findBySeasonStringSorted(HdmUtils.getCurrentSeasonString(), stat, "desc").subList(0, limit);
+        } else {
+            return new ArrayList<>();
+        }
     }
 }

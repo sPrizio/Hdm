@@ -60,4 +60,16 @@ public class GoalieApiController extends AbstractHdmController<GoalieResource> {
     public ResponseEntity<HdmApiResponse> getAllActiveGoalies(final @RequestParam String seasonString, final @RequestParam String field, final @RequestParam String order) {
         return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.goalieFacade.findAllParticipantsForSeason(seasonString, field, order)), HttpStatus.OK);
     }
+
+    /**
+     * Gets top goalies for a given stat
+     *
+     * @param stat stat to rank goalies
+     * @param limit limit number of results
+     * @return limited list of goalies for a given stat
+     */
+    @GetMapping("/all-active")
+    public ResponseEntity<HdmApiResponse> getTopGoaliesForStatAndLimit(final @RequestParam String stat, final @RequestParam int limit) {
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.goalieFacade.findTopGoaliesForStatAndLimit(stat, limit)), HttpStatus.OK);
+    }
 }

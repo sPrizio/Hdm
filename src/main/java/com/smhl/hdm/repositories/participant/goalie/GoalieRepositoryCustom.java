@@ -15,4 +15,6 @@ public interface GoalieRepositoryCustom {
     List<Goalie> findBySeasonString(String seasonString);
 
     List<Goalie> findBySeasonStringSorted(String seasonString, String field, String order);
+
+    List<Goalie> findTopGoaliesForStatAndLimit(String stat, int limit);
 }

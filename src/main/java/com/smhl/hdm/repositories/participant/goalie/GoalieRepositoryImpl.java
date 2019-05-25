@@ -1,6 +1,7 @@
 package com.smhl.hdm.repositories.participant.goalie;
 
 import com.smhl.hdm.models.participant.impl.Goalie;
+import com.smhl.hdm.utils.HdmUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -74,5 +75,16 @@ public class GoalieRepositoryImpl implements GoalieRepositoryCustom {
         });
 
         return goalies;
+    }
+
+    @Override
+    public List<Goalie> findTopGoaliesForStatAndLimit(String stat, int limit) {
+
+        if (limit > 0) {
+            String order = stat.equals("goals_against_average") ? "asc" : "desc";
+            return findBySeasonStringSorted(HdmUtils.getCurrentSeasonString(), stat, order).subList(0, limit);
+        } else {
+            return new ArrayList<>();
+        }
     }
 }

@@ -29,6 +29,17 @@ public class GoalieFacade implements ParticipantFacade<GoalieResource> {
         this.goalieService = goalieService;
     }
 
+    /**
+     * Returns the top goalies for a given stat and limited by a number of results
+     *
+     * @param stat field to base goalies on
+     * @param limit integer limit of results
+     * @return limited list
+     */
+    public List<GoalieResource> findTopGoaliesForStatAndLimit(String stat, int limit) {
+       return this.goalieConverter.convertAll(this.goalieService.getTopGoaliesForStatAndLimit(stat, limit));
+    }
+
     @Override
     public List<GoalieResource> findAllParticipantsForSeason(String seasonString, String field, String order) {
         return this.goalieConverter.convertAllForSeason(seasonString, this.goalieService.getAllParticipantsForSeason(seasonString, field, order));

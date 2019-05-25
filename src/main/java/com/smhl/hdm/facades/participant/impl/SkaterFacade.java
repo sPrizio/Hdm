@@ -29,6 +29,17 @@ public class SkaterFacade implements ParticipantFacade<SkaterResource> {
         this.skaterService = skaterService;
     }
 
+    /**
+     * Returns the top skaters for a given stat category and limits the number of results
+     *
+     * @param stat field on which we want to judge skaters
+     * @param limit number of results to return
+     * @return sorted limited list based on a stat
+     */
+    public List<SkaterResource> findTopSkatersForStatAndLimit(String stat, int limit) {
+        return this.skaterConverter.convertAll(this.skaterService.getTopSkatersForStatAndLimit(stat, limit));
+    }
+
     @Override
     public List<SkaterResource> findAllParticipantsForSeason(String seasonString, String field, String order) {
         return this.skaterConverter.convertAllForSeason(seasonString, this.skaterService.getAllParticipantsForSeason(seasonString, field, order));

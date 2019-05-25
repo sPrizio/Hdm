@@ -31,6 +31,17 @@ public class SkaterService implements ParticipantService<Skater, SkaterGameDetai
         this.skaterSeasonService = skaterSeasonService;
     }
 
+    /**
+     * Returns the top skaters for a given stat category and limits the number of results
+     *
+     * @param stat field on which we want to judge skaters
+     * @param limit number of results to return
+     * @return sorted limited list based on a stat
+     */
+    public List<Skater> getTopSkatersForStatAndLimit(String stat, int limit) {
+        return this.skaterRepository.findTopSkatersForStatAndLimit(stat, limit);
+    }
+
     @Override
     public void updateStats(SkaterGameDetails details) {
 

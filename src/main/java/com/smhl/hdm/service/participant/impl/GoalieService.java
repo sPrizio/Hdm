@@ -32,6 +32,17 @@ public class GoalieService implements ParticipantService<Goalie, GoalieGameDetai
         this.goalieSeasonService = goalieSeasonService;
     }
 
+    /**
+     * Returns the top goalies for a given stat and limited by a number of results
+     *
+     * @param stat field to base goalies on
+     * @param limit integer limit of results
+     * @return limited list
+     */
+    public List<Goalie> getTopGoaliesForStatAndLimit(String stat, int limit) {
+        return this.goalieRepository.findTopGoaliesForStatAndLimit(stat, limit);
+    }
+
     @Override
     public void updateStats(GoalieGameDetails details) {
 
