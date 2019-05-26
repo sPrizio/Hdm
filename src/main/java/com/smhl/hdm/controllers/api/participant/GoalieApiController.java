@@ -68,7 +68,7 @@ public class GoalieApiController extends AbstractHdmController<GoalieResource> {
      * @param limit limit number of results
      * @return limited list of goalies for a given stat
      */
-    @GetMapping("/all-active")
+    @GetMapping("/top-active")
     public ResponseEntity<HdmApiResponse> getTopGoaliesForStatAndLimit(final @RequestParam String stat, final @RequestParam int limit) {
         return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.goalieFacade.findTopGoaliesForStatAndLimit(stat, limit)), HttpStatus.OK);
     }
