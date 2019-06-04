@@ -1,8 +1,8 @@
-package com.smhl.hdm.models.game;
+package com.smhl.hdm.models.entities.game;
 
-import com.smhl.hdm.models.HdmEntity;
-import com.smhl.hdm.models.participant.impl.Skater;
-import com.smhl.hdm.models.participant.impl.Team;
+import com.smhl.hdm.models.entities.HdmEntity;
+import com.smhl.hdm.models.entities.participant.impl.Skater;
+import com.smhl.hdm.models.entities.participant.impl.Team;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;

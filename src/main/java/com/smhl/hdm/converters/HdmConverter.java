@@ -1,6 +1,6 @@
 package com.smhl.hdm.converters;
 
-import com.smhl.hdm.models.HdmEntity;
+import com.smhl.hdm.models.entities.HdmEntity;
 import com.smhl.hdm.resources.HdmResource;
 
 import java.util.List;

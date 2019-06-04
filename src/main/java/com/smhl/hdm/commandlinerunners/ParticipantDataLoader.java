@@ -2,12 +2,12 @@ package com.smhl.hdm.commandlinerunners;
 
 import com.google.common.collect.Sets;
 import com.smhl.hdm.enums.ParticipantPosition;
-import com.smhl.hdm.models.participant.impl.Goalie;
-import com.smhl.hdm.models.participant.impl.Skater;
-import com.smhl.hdm.models.participant.impl.Team;
-import com.smhl.hdm.models.season.impl.GoalieSeason;
-import com.smhl.hdm.models.season.impl.SkaterSeason;
-import com.smhl.hdm.models.season.impl.TeamSeason;
+import com.smhl.hdm.models.entities.participant.impl.Goalie;
+import com.smhl.hdm.models.entities.participant.impl.Skater;
+import com.smhl.hdm.models.entities.participant.impl.Team;
+import com.smhl.hdm.models.entities.season.impl.GoalieSeason;
+import com.smhl.hdm.models.entities.season.impl.SkaterSeason;
+import com.smhl.hdm.models.entities.season.impl.TeamSeason;
 import com.smhl.hdm.repositories.participant.goalie.GoalieRepository;
 import com.smhl.hdm.repositories.participant.skater.SkaterRepository;
 import com.smhl.hdm.repositories.participant.team.TeamRepository;

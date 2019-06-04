@@ -1,10 +1,10 @@
-package com.smhl.hdm.models.details.game;
+package com.smhl.hdm.models.entities.details.game;
 
-import com.smhl.hdm.models.details.Details;
-import com.smhl.hdm.models.details.participant.GoalieGameDetails;
-import com.smhl.hdm.models.details.participant.SkaterGameDetails;
-import com.smhl.hdm.models.details.participant.TeamGameDetails;
-import com.smhl.hdm.models.game.ScoringPlay;
+import com.smhl.hdm.models.entities.details.Details;
+import com.smhl.hdm.models.entities.details.participant.GoalieGameDetails;
+import com.smhl.hdm.models.entities.details.participant.SkaterGameDetails;
+import com.smhl.hdm.models.entities.details.participant.TeamGameDetails;
+import com.smhl.hdm.models.entities.game.ScoringPlay;
 import lombok.*;
 
 import javax.persistence.*;

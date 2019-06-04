@@ -1,4 +1,4 @@
-package com.smhl.hdm.models;
+package com.smhl.hdm.models.entities;
 
 /**
  * A parent to all entities contained within this system

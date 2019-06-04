@@ -1,6 +1,6 @@
 package com.smhl.hdm.repositories.seasonstring;
 
-import com.smhl.hdm.models.seasonstring.SeasonString;
+import com.smhl.hdm.models.entities.seasonstring.SeasonString;
 import org.springframework.data.repository.CrudRepository;
 
 /**

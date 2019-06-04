@@ -1,7 +1,8 @@
-package com.smhl.hdm.models.participant.impl;
+package com.smhl.hdm.models.entities.participant.impl;
 
-import com.smhl.hdm.models.participant.Participant;
-import com.smhl.hdm.models.season.impl.TeamSeason;
+import com.smhl.hdm.enums.ParticipantPosition;
+import com.smhl.hdm.models.entities.participant.Participant;
+import com.smhl.hdm.models.entities.season.impl.GoalieSeason;
 import com.smhl.hdm.utils.HdmUtils;
 import lombok.*;
 import org.apache.commons.collections4.CollectionUtils;
@@ -13,7 +14,7 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * A team in this context refers to a collection of players representing a unified group sharing a common goal
+ * An implementation of a participant who's purpose is to defend their team's net
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -21,7 +22,7 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class Team implements Participant<TeamSeason> {
+public class Goalie implements Participant<GoalieSeason> {
 
     @Id
     @Getter
@@ -32,7 +33,18 @@ public class Team implements Participant<TeamSeason> {
     @Setter
     @Column
     @NonNull
-    private String name;
+    private String firstName;
+
+    @Getter
+    @Setter
+    @Column
+    @NonNull
+    private String lastName;
+
+    @Getter
+    @Setter
+    @Column
+    private String position = ParticipantPosition.GOALIE.toString();
 
     @Getter
     @Setter
@@ -43,7 +55,7 @@ public class Team implements Participant<TeamSeason> {
     @Getter
     @Setter
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<TeamSeason> seasons;
+    private Set<GoalieSeason> seasons;
 
 
     //  METHODS
@@ -51,13 +63,13 @@ public class Team implements Participant<TeamSeason> {
     /**
      * Returns the current season
      *
-     * @return most recent skater season
+     * @return most recent goalie season
      */
-    public TeamSeason getCurrentSeason() {
+    public GoalieSeason getCurrentSeason() {
         if (CollectionUtils.isNotEmpty(this.seasons)) {
-            Optional<TeamSeason> season = this.seasons
+            Optional<GoalieSeason> season = this.seasons
                     .stream()
-                    .max(Comparator.comparing(TeamSeason::getSeasonString));
+                    .max(Comparator.comparing(GoalieSeason::getSeasonString));
 
             if (season.isPresent() && season.get().getSeasonString().equals(HdmUtils.getCurrentSeasonString())) {
                 return season.get();
@@ -73,9 +85,9 @@ public class Team implements Participant<TeamSeason> {
      * @param seasonString season string that we're looking for
      * @return returns season if found, null otherwise
      */
-    public TeamSeason getSeasonForSeasonString(String seasonString) {
+    public GoalieSeason getSeasonForSeasonString(String seasonString) {
         if (CollectionUtils.isNotEmpty(this.seasons) && StringUtils.isNotEmpty(seasonString)) {
-            Optional<TeamSeason> season = this.seasons
+            Optional<GoalieSeason> season = this.seasons
                     .stream()
                     .filter(s -> s.getSeasonString().equals(seasonString))
                     .findFirst();
@@ -86,5 +98,14 @@ public class Team implements Participant<TeamSeason> {
         }
 
         return null;
+    }
+
+    /**
+     * Returns a concatenation of a skater's first and last name
+     *
+     * @return first name + " " + last name
+     */
+    public String getName() {
+        return this.firstName.trim() + " " + this.lastName.trim();
     }
 }

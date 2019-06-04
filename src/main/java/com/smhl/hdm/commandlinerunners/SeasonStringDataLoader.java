@@ -1,6 +1,6 @@
 package com.smhl.hdm.commandlinerunners;
 
-import com.smhl.hdm.models.seasonstring.SeasonString;
+import com.smhl.hdm.models.entities.seasonstring.SeasonString;
 import com.smhl.hdm.repositories.seasonstring.SeasonStringRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

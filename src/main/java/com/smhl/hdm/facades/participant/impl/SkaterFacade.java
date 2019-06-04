@@ -2,7 +2,7 @@ package com.smhl.hdm.facades.participant.impl;
 
 import com.smhl.hdm.converters.participant.impl.SkaterConverter;
 import com.smhl.hdm.facades.participant.ParticipantFacade;
-import com.smhl.hdm.models.participant.impl.Skater;
+import com.smhl.hdm.models.entities.participant.impl.Skater;
 import com.smhl.hdm.resources.participant.impl.SkaterResource;
 import com.smhl.hdm.service.participant.impl.SkaterService;
 import org.springframework.beans.factory.annotation.Autowired;

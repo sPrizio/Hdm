@@ -1,7 +1,7 @@
-package com.smhl.hdm.models.participant;
+package com.smhl.hdm.models.entities.participant;
 
-import com.smhl.hdm.models.HdmEntity;
-import com.smhl.hdm.models.season.Season;
+import com.smhl.hdm.models.entities.HdmEntity;
+import com.smhl.hdm.models.entities.season.Season;
 
 import java.util.Set;
 

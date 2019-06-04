@@ -1,8 +1,8 @@
-package com.smhl.hdm.models.details.participant;
+package com.smhl.hdm.models.entities.details.participant;
 
-import com.smhl.hdm.models.details.Details;
-import com.smhl.hdm.models.participant.impl.Skater;
-import com.smhl.hdm.models.participant.impl.Team;
+import com.smhl.hdm.models.entities.details.Details;
+import com.smhl.hdm.models.entities.participant.impl.Skater;
+import com.smhl.hdm.models.entities.participant.impl.Team;
 import lombok.*;
 
 import javax.persistence.*;

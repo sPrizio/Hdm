@@ -2,9 +2,9 @@ package com.smhl.hdm.service.participant.impl;
 
 import com.google.common.collect.Lists;
 import com.smhl.hdm.enums.GameResult;
-import com.smhl.hdm.models.details.participant.TeamGameDetails;
-import com.smhl.hdm.models.participant.impl.Team;
-import com.smhl.hdm.models.season.impl.TeamSeason;
+import com.smhl.hdm.models.entities.details.participant.TeamGameDetails;
+import com.smhl.hdm.models.entities.participant.impl.Team;
+import com.smhl.hdm.models.entities.season.impl.TeamSeason;
 import com.smhl.hdm.repositories.participant.team.TeamRepository;
 import com.smhl.hdm.service.participant.ParticipantService;
 import com.smhl.hdm.service.season.impl.TeamSeasonService;

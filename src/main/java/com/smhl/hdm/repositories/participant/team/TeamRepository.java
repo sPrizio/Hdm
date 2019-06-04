@@ -1,6 +1,6 @@
 package com.smhl.hdm.repositories.participant.team;
 
-import com.smhl.hdm.models.participant.impl.Team;
+import com.smhl.hdm.models.entities.participant.impl.Team;
 import com.smhl.hdm.repositories.HdmRepository;
 import org.springframework.data.repository.CrudRepository;
 

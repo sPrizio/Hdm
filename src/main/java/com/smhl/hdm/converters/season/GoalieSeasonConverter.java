@@ -1,7 +1,7 @@
 package com.smhl.hdm.converters.season;
 
 import com.smhl.hdm.converters.HdmConverter;
-import com.smhl.hdm.models.season.impl.GoalieSeason;
+import com.smhl.hdm.models.entities.season.impl.GoalieSeason;
 import com.smhl.hdm.resources.season.GoalieSeasonResource;
 import org.springframework.stereotype.Component;
 

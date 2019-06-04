@@ -1,6 +1,6 @@
 package com.smhl.hdm.repositories.game;
 
-import com.smhl.hdm.models.game.Game;
+import com.smhl.hdm.models.entities.game.Game;
 import com.smhl.hdm.repositories.HdmRepository;
 import org.springframework.data.repository.CrudRepository;
 

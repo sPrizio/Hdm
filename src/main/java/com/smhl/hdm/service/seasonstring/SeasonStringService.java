@@ -1,7 +1,7 @@
 package com.smhl.hdm.service.seasonstring;
 
 import com.google.common.collect.Lists;
-import com.smhl.hdm.models.seasonstring.SeasonString;
+import com.smhl.hdm.models.entities.seasonstring.SeasonString;
 import com.smhl.hdm.repositories.seasonstring.SeasonStringRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

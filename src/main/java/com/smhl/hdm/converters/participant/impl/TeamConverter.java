@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.smhl.hdm.converters.participant.ParticipantConverter;
 import com.smhl.hdm.converters.season.TeamSeasonConverter;
-import com.smhl.hdm.models.participant.impl.Team;
+import com.smhl.hdm.models.entities.participant.impl.Team;
 import com.smhl.hdm.resources.participant.impl.TeamResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

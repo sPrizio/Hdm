@@ -1,6 +1,6 @@
 package com.smhl.hdm.service;
 
-import com.smhl.hdm.models.HdmEntity;
+import com.smhl.hdm.models.entities.HdmEntity;
 
 import java.util.List;
 import java.util.Optional;

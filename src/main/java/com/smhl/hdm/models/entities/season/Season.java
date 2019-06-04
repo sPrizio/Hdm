@@ -1,6 +1,6 @@
-package com.smhl.hdm.models.season;
+package com.smhl.hdm.models.entities.season;
 
-import com.smhl.hdm.models.HdmEntity;
+import com.smhl.hdm.models.entities.HdmEntity;
 
 /**
  * Represents a season, a unit of time that represents a collection of games that a participant was involved in for a give period of time

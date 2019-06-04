@@ -1,4 +1,4 @@
-package com.smhl.hdm.models.seasonstring;
+package com.smhl.hdm.models.entities.seasonstring;
 
 import lombok.*;
 

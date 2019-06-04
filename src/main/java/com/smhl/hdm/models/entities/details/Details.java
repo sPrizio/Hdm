@@ -1,6 +1,6 @@
-package com.smhl.hdm.models.details;
+package com.smhl.hdm.models.entities.details;
 
-import com.smhl.hdm.models.HdmEntity;
+import com.smhl.hdm.models.entities.HdmEntity;
 
 /**
  * A generic details class that we may use as our parent

@@ -1,7 +1,7 @@
 package com.smhl.hdm.converters.participant;
 
 import com.smhl.hdm.converters.HdmConverter;
-import com.smhl.hdm.models.participant.Participant;
+import com.smhl.hdm.models.entities.participant.Participant;
 import com.smhl.hdm.resources.HdmResource;
 
 import java.util.List;

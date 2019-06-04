@@ -1,6 +1,6 @@
 package com.smhl.hdm.repositories.participant.skater;
 
-import com.smhl.hdm.models.participant.impl.Skater;
+import com.smhl.hdm.models.entities.participant.impl.Skater;
 import com.smhl.hdm.utils.HdmUtils;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of the custom skater repository
@@ -81,7 +82,12 @@ public class SkaterRepositoryImpl implements SkaterRepositoryCustom {
     public List<Skater> findTopSkatersForStatAndLimit(String stat, int limit) {
 
         if (limit > 0) {
-            return findBySeasonStringSorted(HdmUtils.getCurrentSeasonString(), stat, "desc").subList(0, limit);
+            return
+                    findBySeasonStringSorted(HdmUtils.getCurrentSeasonString(), stat, "desc")
+                            .stream()
+                            .filter(skater -> skater.getCurrentSeason().getGamesPlayed() > 1)
+                            .collect(Collectors.toList())
+                            .subList(0, limit);
         } else {
             return new ArrayList<>();
         }

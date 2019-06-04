@@ -2,7 +2,7 @@ package com.smhl.hdm.facades.participant.impl;
 
 import com.smhl.hdm.converters.participant.impl.GoalieConverter;
 import com.smhl.hdm.facades.participant.ParticipantFacade;
-import com.smhl.hdm.models.participant.impl.Goalie;
+import com.smhl.hdm.models.entities.participant.impl.Goalie;
 import com.smhl.hdm.resources.participant.impl.GoalieResource;
 import com.smhl.hdm.service.participant.impl.GoalieService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.smhl.hdm.service.season;
 
-import com.smhl.hdm.models.season.Season;
+import com.smhl.hdm.models.entities.season.Season;
 import com.smhl.hdm.service.HdmService;
 
 /**

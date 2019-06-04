@@ -1,9 +1,9 @@
 package com.smhl.hdm.service.participant.impl;
 
 import com.google.common.collect.Lists;
-import com.smhl.hdm.models.details.participant.SkaterGameDetails;
-import com.smhl.hdm.models.participant.impl.Skater;
-import com.smhl.hdm.models.season.impl.SkaterSeason;
+import com.smhl.hdm.models.entities.details.participant.SkaterGameDetails;
+import com.smhl.hdm.models.entities.participant.impl.Skater;
+import com.smhl.hdm.models.entities.season.impl.SkaterSeason;
 import com.smhl.hdm.repositories.participant.skater.SkaterRepository;
 import com.smhl.hdm.service.participant.ParticipantService;
 import com.smhl.hdm.service.season.impl.SkaterSeasonService;

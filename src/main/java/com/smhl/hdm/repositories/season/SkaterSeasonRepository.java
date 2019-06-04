@@ -1,6 +1,6 @@
 package com.smhl.hdm.repositories.season;
 
-import com.smhl.hdm.models.season.impl.SkaterSeason;
+import com.smhl.hdm.models.entities.season.impl.SkaterSeason;
 import com.smhl.hdm.repositories.HdmRepository;
 import org.springframework.data.repository.CrudRepository;
 

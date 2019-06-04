@@ -1,6 +1,6 @@
 package com.smhl.hdm.repositories;
 
-import com.smhl.hdm.models.HdmEntity;
+import com.smhl.hdm.models.entities.HdmEntity;
 
 /**
  * Parent-level repository designed for custom, yet common functionality

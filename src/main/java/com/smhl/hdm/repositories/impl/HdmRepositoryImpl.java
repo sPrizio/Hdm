@@ -1,6 +1,6 @@
 package com.smhl.hdm.repositories.impl;
 
-import com.smhl.hdm.models.HdmEntity;
+import com.smhl.hdm.models.entities.HdmEntity;
 import com.smhl.hdm.repositories.HdmRepository;
 import org.springframework.stereotype.Repository;
 

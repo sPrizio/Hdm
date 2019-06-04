@@ -1,6 +1,6 @@
 package com.smhl.hdm.repositories.participant.skater;
 
-import com.smhl.hdm.models.participant.impl.Skater;
+import com.smhl.hdm.models.entities.participant.impl.Skater;
 
 import java.util.List;
 

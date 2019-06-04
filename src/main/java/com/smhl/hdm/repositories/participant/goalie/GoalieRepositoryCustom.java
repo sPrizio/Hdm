@@ -1,6 +1,6 @@
 package com.smhl.hdm.repositories.participant.goalie;
 
-import com.smhl.hdm.models.participant.impl.Goalie;
+import com.smhl.hdm.models.entities.participant.impl.Goalie;
 
 import java.util.List;
 

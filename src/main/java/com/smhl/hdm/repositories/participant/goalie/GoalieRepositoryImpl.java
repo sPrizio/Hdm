@@ -1,6 +1,6 @@
 package com.smhl.hdm.repositories.participant.goalie;
 
-import com.smhl.hdm.models.participant.impl.Goalie;
+import com.smhl.hdm.models.entities.participant.impl.Goalie;
 import com.smhl.hdm.utils.HdmUtils;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of the custom dao for goalies
@@ -82,7 +83,12 @@ public class GoalieRepositoryImpl implements GoalieRepositoryCustom {
 
         if (limit > 0) {
             String order = stat.equals("goals_against_average") ? "asc" : "desc";
-            return findBySeasonStringSorted(HdmUtils.getCurrentSeasonString(), stat, order).subList(0, limit);
+            return
+                    findBySeasonStringSorted(HdmUtils.getCurrentSeasonString(), stat, order)
+                            .stream()
+                            .filter(goalie -> goalie.getCurrentSeason().getGamesPlayed() > 1)
+                            .collect(Collectors.toList())
+                            .subList(0, limit);
         } else {
             return new ArrayList<>();
         }
