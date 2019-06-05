@@ -1,15 +1,17 @@
 package com.smhl.hdm.service.statistic.impl;
 
+import com.smhl.hdm.constants.CoreConstants;
 import com.smhl.hdm.models.entities.participant.impl.Skater;
 import com.smhl.hdm.models.entities.season.impl.SkaterSeason;
 import com.smhl.hdm.models.nonentities.Statistic;
 import com.smhl.hdm.service.participant.impl.SkaterService;
 import com.smhl.hdm.service.statistic.StatisticsService;
+import com.smhl.hdm.utils.StatisticsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of the statistics service class for skaters
@@ -29,21 +31,46 @@ public class SkaterStatisticsService implements StatisticsService<Skater> {
 
 
     @Override
-    public Statistic<Skater> calculate(Skater entity) {
+    public Statistic calculate(Skater entity) {
 
         if (this.skaterService.find(entity.getId()).isEmpty()) {
-            return new Statistic<>();
+            return new Statistic();
         }
 
-        Map<String, Double> stats = new HashMap<>();
+        Map<String, DoubleSummaryStatistics> statisticsMap = new HashMap<>();
 
-        Double d = entity.getSeasons()
-                .stream()
-                .mapToInt(SkaterSeason::getGamesPlayed)
-                .sum() * 1.0;
+        CoreConstants.SKATER_SEASON_COLLECTORS.forEach(
+                (attribute, collector) -> statisticsMap.put(attribute, new StatisticsUtils<SkaterSeason>().calculateStatistics(attribute, collector, entity.getSeasons()))
+        );
 
-        stats.put("careerGP", d);
+        return new Statistic(statisticsMap);
+    }
 
-        return new Statistic<>(entity, stats);
+    @Override
+    public Statistic calculate(List<Skater> entities, String seasonString) {
+
+        if (
+                entities
+                        .stream()
+                        .anyMatch(skater -> this.skaterService.find(skater.getId()).isEmpty())
+        ) {
+            return new Statistic();
+        }
+
+        Map<String, DoubleSummaryStatistics> statisticsMap = new HashMap<>();
+        List<SkaterSeason> seasons =
+                entities
+                        .stream()
+                        .map(
+                                skater ->
+                                        skater.getSeasonForSeasonString(seasonString))
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toList());
+
+        CoreConstants.SKATER_SEASON_COLLECTORS.forEach(
+                (attribute, collector) -> statisticsMap.put(attribute, new StatisticsUtils<SkaterSeason>().calculateStatistics(attribute, collector, seasons))
+        );
+
+        return new Statistic(statisticsMap);
     }
 }

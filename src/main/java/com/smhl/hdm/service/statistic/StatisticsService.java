@@ -3,6 +3,8 @@ package com.smhl.hdm.service.statistic;
 import com.smhl.hdm.models.entities.participant.Participant;
 import com.smhl.hdm.models.nonentities.Statistic;
 
+import java.util.List;
+
 /**
  * Parent-level statistic interface for obtaining statistic for a particular entity
  *
@@ -11,5 +13,7 @@ import com.smhl.hdm.models.nonentities.Statistic;
  */
 public interface StatisticsService<P extends Participant> {
 
-    Statistic<P> calculate(P entity);
+    Statistic calculate(P entity);
+
+    Statistic calculate(List<P> entities, String seasonString);
 }

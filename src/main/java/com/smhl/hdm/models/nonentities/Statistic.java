@@ -1,8 +1,8 @@
 package com.smhl.hdm.models.nonentities;
 
-import com.smhl.hdm.models.entities.participant.Participant;
 import lombok.*;
 
+import java.util.DoubleSummaryStatistics;
 import java.util.Map;
 
 /**
@@ -13,17 +13,12 @@ import java.util.Map;
  */
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class Statistic<P extends Participant> {
+public class Statistic {
 
     @Getter
     @Setter
     @NonNull
-    private P entity;
-
-    @Getter
-    @Setter
-    @NonNull
-    private Map<String, Double> stats;
+    private Map<String, DoubleSummaryStatistics> stats;
 
 
     /**
@@ -32,6 +27,6 @@ public class Statistic<P extends Participant> {
      * @return true if the attrs are null or if the stat map is empty
      */
     public boolean isEmpty() {
-        return (this.entity == null && stats == null) || this.stats.isEmpty();
+        return (this.stats == null) || this.stats.isEmpty();
     }
 }
