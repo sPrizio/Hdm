@@ -11,4 +11,6 @@ import org.springframework.data.repository.CrudRepository;
  * @version 1.0
  */
 public interface GameRepository extends HdmRepository, CrudRepository<Game, Long> {
+
+    Game findBySeasonString(final String seasonString);
 }

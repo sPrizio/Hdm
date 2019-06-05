@@ -21,6 +21,10 @@ public class SkaterResource implements ParticipantResource {
 
     @Getter
     @Setter
+    private Long code;
+
+    @Getter
+    @Setter
     private String name;
 
     @Getter
@@ -37,7 +41,8 @@ public class SkaterResource implements ParticipantResource {
 
     @Override
     public boolean isPresent() {
-        return StringUtils.isNotEmpty(this.name) &&
+        return
+                StringUtils.isNotEmpty(this.name) &&
                 StringUtils.isNotEmpty(this.position) &&
                 this.season.isPresent() &&
                 CollectionUtils.isNotEmpty(this.seasons);

@@ -33,7 +33,8 @@ public class TeamResource implements ParticipantResource {
 
     @Override
     public boolean isPresent() {
-        return StringUtils.isNotEmpty(this.name) &&
+        return
+                StringUtils.isNotEmpty(this.name) &&
                 this.season.isPresent() &&
                 CollectionUtils.isNotEmpty(this.seasons);
     }

@@ -78,6 +78,7 @@ public class SkaterConverter implements ParticipantConverter<Skater, SkaterResou
 
         SkaterResource resource = new SkaterResource();
 
+        resource.setCode(entity.getId());
         resource.setName(entity.getName());
         resource.setPosition(entity.getPosition());
         resource.setSeasons(Sets.newHashSet(this.skaterSeasonConverter.convertAll(Lists.newArrayList(entity.getSeasons()))));

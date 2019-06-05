@@ -19,6 +19,7 @@ import com.smhl.hdm.repositories.game.GameRepository;
 import com.smhl.hdm.repositories.participant.goalie.GoalieRepository;
 import com.smhl.hdm.repositories.participant.skater.SkaterRepository;
 import com.smhl.hdm.repositories.participant.team.TeamRepository;
+import com.smhl.hdm.utils.HdmUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
@@ -80,11 +81,11 @@ public class GameDataLoader implements CommandLineRunner {
         Team team4 = teams.get(3);
         Team team5 = teams.get(4);
 
-        Game game1 = new Game(dateTime, GameStatus.COMPLETE.toString(), team1, team2);
-        Game game2 = new Game(dateTime.plusWeeks(1), GameStatus.COMPLETE.toString(), team3, team1);
-        Game game3 = new Game(dateTime.plusWeeks(2), GameStatus.COMPLETE.toString(), team4, team3);
-        Game game4 = new Game(dateTime.plusWeeks(3), GameStatus.COMPLETE.toString(), team2, team5);
-        Game game5 = new Game(dateTime.plusWeeks(4), GameStatus.COMPLETE.toString(), team5, team4);
+        Game game1 = new Game(dateTime, HdmUtils.getCurrentSeasonString(), GameStatus.COMPLETE.toString(), team1, team2);
+        Game game2 = new Game(dateTime.plusWeeks(1), HdmUtils.getCurrentSeasonString(), GameStatus.COMPLETE.toString(), team3, team1);
+        Game game3 = new Game(dateTime.plusWeeks(2), HdmUtils.getCurrentSeasonString(), GameStatus.COMPLETE.toString(), team4, team3);
+        Game game4 = new Game(dateTime.plusWeeks(3), HdmUtils.getCurrentSeasonString(), GameStatus.COMPLETE.toString(), team2, team5);
+        Game game5 = new Game(dateTime.plusWeeks(4), HdmUtils.getCurrentSeasonString(), GameStatus.COMPLETE.toString(), team5, team4);
 
         //  GAME 1
 

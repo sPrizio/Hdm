@@ -34,6 +34,12 @@ public class Game implements HdmEntity {
     @Setter
     @Column
     @NonNull
+    private String seasonString;
+
+    @Getter
+    @Setter
+    @Column
+    @NonNull
     private String gameStatus;
 
     @Getter
