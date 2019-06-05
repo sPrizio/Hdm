@@ -1,10 +1,10 @@
-package com.smhl.hdm.facades.participant.impl;
+package com.smhl.hdm.facades.entities.participant.impl;
 
 import com.smhl.hdm.converters.participant.impl.SkaterConverter;
-import com.smhl.hdm.facades.participant.ParticipantFacade;
+import com.smhl.hdm.facades.entities.participant.ParticipantFacade;
 import com.smhl.hdm.models.entities.participant.impl.Skater;
 import com.smhl.hdm.resources.participant.impl.SkaterResource;
-import com.smhl.hdm.service.participant.impl.SkaterService;
+import com.smhl.hdm.service.entities.participant.impl.SkaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -32,7 +32,7 @@ public class SkaterFacade implements ParticipantFacade<SkaterResource> {
     /**
      * Returns the top skaters for a given stat category and limits the number of results
      *
-     * @param stat field on which we want to judge skaters
+     * @param stat  field on which we want to judge skaters
      * @param limit number of results to return
      * @return sorted limited list based on a stat
      */

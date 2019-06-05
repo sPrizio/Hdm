@@ -1,4 +1,4 @@
-package com.smhl.hdm.service;
+package com.smhl.hdm.service.entities;
 
 import com.smhl.hdm.models.entities.HdmEntity;
 

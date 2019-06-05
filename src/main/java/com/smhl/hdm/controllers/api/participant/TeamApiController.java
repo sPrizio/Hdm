@@ -3,7 +3,7 @@ package com.smhl.hdm.controllers.api.participant;
 import com.smhl.hdm.controllers.AbstractHdmController;
 import com.smhl.hdm.controllers.response.HdmApiResponse;
 import com.smhl.hdm.enums.HdmApiResponseResult;
-import com.smhl.hdm.facades.participant.impl.TeamFacade;
+import com.smhl.hdm.facades.entities.participant.impl.TeamFacade;
 import com.smhl.hdm.resources.participant.impl.TeamResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

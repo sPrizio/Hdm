@@ -1,10 +1,10 @@
-package com.smhl.hdm.facades.participant.impl;
+package com.smhl.hdm.facades.entities.participant.impl;
 
 import com.smhl.hdm.converters.participant.impl.GoalieConverter;
-import com.smhl.hdm.facades.participant.ParticipantFacade;
+import com.smhl.hdm.facades.entities.participant.ParticipantFacade;
 import com.smhl.hdm.models.entities.participant.impl.Goalie;
 import com.smhl.hdm.resources.participant.impl.GoalieResource;
-import com.smhl.hdm.service.participant.impl.GoalieService;
+import com.smhl.hdm.service.entities.participant.impl.GoalieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -32,12 +32,12 @@ public class GoalieFacade implements ParticipantFacade<GoalieResource> {
     /**
      * Returns the top goalies for a given stat and limited by a number of results
      *
-     * @param stat field to base goalies on
+     * @param stat  field to base goalies on
      * @param limit integer limit of results
      * @return limited list
      */
     public List<GoalieResource> findTopGoaliesForStatAndLimit(String stat, int limit) {
-       return this.goalieConverter.convertAll(this.goalieService.getTopGoaliesForStatAndLimit(stat, limit));
+        return this.goalieConverter.convertAll(this.goalieService.getTopGoaliesForStatAndLimit(stat, limit));
     }
 
     @Override

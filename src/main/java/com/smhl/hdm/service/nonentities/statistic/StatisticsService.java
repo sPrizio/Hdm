@@ -1,4 +1,4 @@
-package com.smhl.hdm.service.statistic;
+package com.smhl.hdm.service.nonentities.statistic;
 
 import com.smhl.hdm.models.entities.participant.Participant;
 import com.smhl.hdm.models.nonentities.Statistic;

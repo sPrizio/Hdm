@@ -20,9 +20,9 @@ public class StatisticsUtils<E extends Season> {
     /**
      * Obtains numerical statistics for a list of objects given a custom collector
      *
-     * @param key attribute on which we wish to aggregate information
+     * @param key       attribute on which we wish to aggregate information
      * @param collector custom collector to aggregate information
-     * @param entities list of entities on which to compute information
+     * @param entities  list of entities on which to compute information
      * @return summary statistics for an entity's attributes
      */
     public DoubleSummaryStatistics calculateStatistics(String key, Collector<E, ?, DoubleSummaryStatistics> collector, Collection<E> entities) {

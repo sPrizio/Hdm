@@ -3,7 +3,8 @@ package com.smhl.hdm.controllers.api.participant;
 import com.smhl.hdm.controllers.AbstractHdmController;
 import com.smhl.hdm.controllers.response.HdmApiResponse;
 import com.smhl.hdm.enums.HdmApiResponseResult;
-import com.smhl.hdm.facades.participant.impl.SkaterFacade;
+import com.smhl.hdm.facades.entities.participant.impl.SkaterFacade;
+import com.smhl.hdm.facades.nonentities.statistics.impl.SkaterStatisticsFacade;
 import com.smhl.hdm.resources.participant.impl.SkaterResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,10 +22,12 @@ import org.springframework.web.bind.annotation.*;
 public class SkaterApiController extends AbstractHdmController<SkaterResource> {
 
     private SkaterFacade skaterFacade;
+    private SkaterStatisticsFacade skaterStatisticsFacade;
 
     @Autowired
-    public SkaterApiController(SkaterFacade skaterFacade) {
+    public SkaterApiController(SkaterFacade skaterFacade, SkaterStatisticsFacade skaterStatisticsFacade) {
         this.skaterFacade = skaterFacade;
+        this.skaterStatisticsFacade = skaterStatisticsFacade;
     }
 
 
@@ -55,8 +58,8 @@ public class SkaterApiController extends AbstractHdmController<SkaterResource> {
      * Gets all active skaters in the system sorted by a particular field
      *
      * @param seasonString season to consider
-     * @param field field upon which to sort the results
-     * @param order sort order
+     * @param field        field upon which to sort the results
+     * @param order        sort order
      * @return list of skaters that are marked as active sorted by a field
      */
     @GetMapping("/all-active")
@@ -67,12 +70,23 @@ public class SkaterApiController extends AbstractHdmController<SkaterResource> {
     /**
      * Returns the top active skaters for a stat and limits the number of results
      *
-     * @param stat stat on which to obtain skaters
+     * @param stat  stat on which to obtain skaters
      * @param limit integer limit of the result list
      * @return limited list sorted based on a stat
      */
     @GetMapping("/top-active")
     public ResponseEntity<HdmApiResponse> getTopSkatersForStatAndLimit(final @RequestParam String stat, final @RequestParam int limit) {
         return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.skaterFacade.findTopSkatersForStatAndLimit(stat, limit)), HttpStatus.OK);
+    }
+
+    /**
+     * Returns a statistics object that contains statistical information for various skater stat attribute categories
+     *
+     * @param seasonString season of which we want to obtain the stats
+     * @return stat object
+     */
+    @GetMapping("/stats-for-active")
+    public ResponseEntity<HdmApiResponse> getStatisticsForActiveSkaters(final @RequestParam String seasonString) {
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.skaterStatisticsFacade.obtainActiveStatistics(seasonString)), HttpStatus.OK);
     }
 }

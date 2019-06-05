@@ -3,7 +3,7 @@ package com.smhl.hdm.controllers.api;
 import com.smhl.hdm.controllers.AbstractHdmController;
 import com.smhl.hdm.controllers.response.HdmApiResponse;
 import com.smhl.hdm.enums.HdmApiResponseResult;
-import com.smhl.hdm.service.seasonstring.SeasonStringService;
+import com.smhl.hdm.service.entities.seasonstring.SeasonStringService;
 import com.smhl.hdm.utils.HdmUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

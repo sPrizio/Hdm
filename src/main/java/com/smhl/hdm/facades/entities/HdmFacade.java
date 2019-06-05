@@ -1,4 +1,4 @@
-package com.smhl.hdm.facades;
+package com.smhl.hdm.facades.entities;
 
 import com.smhl.hdm.resources.HdmResource;
 

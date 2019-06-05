@@ -1,13 +1,11 @@
-package com.smhl.hdm.service.statistic.impl;
+package com.smhl.hdm.service.nonentities.statistic.impl;
 
 import com.smhl.hdm.constants.CoreConstants;
 import com.smhl.hdm.models.entities.participant.impl.Skater;
 import com.smhl.hdm.models.entities.season.impl.SkaterSeason;
 import com.smhl.hdm.models.nonentities.Statistic;
-import com.smhl.hdm.service.participant.impl.SkaterService;
-import com.smhl.hdm.service.statistic.StatisticsService;
+import com.smhl.hdm.service.nonentities.statistic.StatisticsService;
 import com.smhl.hdm.utils.StatisticsUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -22,20 +20,8 @@ import java.util.stream.Collectors;
 @Service
 public class SkaterStatisticsService implements StatisticsService<Skater> {
 
-    private SkaterService skaterService;
-
-    @Autowired
-    public SkaterStatisticsService(SkaterService skaterService) {
-        this.skaterService = skaterService;
-    }
-
-
     @Override
     public Statistic calculate(Skater entity) {
-
-        if (this.skaterService.find(entity.getId()).isEmpty()) {
-            return new Statistic();
-        }
 
         Map<String, DoubleSummaryStatistics> statisticsMap = new HashMap<>();
 
@@ -48,14 +34,6 @@ public class SkaterStatisticsService implements StatisticsService<Skater> {
 
     @Override
     public Statistic calculate(List<Skater> entities, String seasonString) {
-
-        if (
-                entities
-                        .stream()
-                        .anyMatch(skater -> this.skaterService.find(skater.getId()).isEmpty())
-        ) {
-            return new Statistic();
-        }
 
         Map<String, DoubleSummaryStatistics> statisticsMap = new HashMap<>();
         List<SkaterSeason> seasons =

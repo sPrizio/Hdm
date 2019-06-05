@@ -1,9 +1,9 @@
-package com.smhl.hdm.service.season.impl;
+package com.smhl.hdm.service.entities.season.impl;
 
 import com.google.common.collect.Lists;
 import com.smhl.hdm.models.entities.season.impl.SkaterSeason;
 import com.smhl.hdm.repositories.season.SkaterSeasonRepository;
-import com.smhl.hdm.service.season.SeasonService;
+import com.smhl.hdm.service.entities.season.SeasonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.smhl.hdm.service.participant.impl;
+package com.smhl.hdm.service.entities.participant.impl;
 
 import com.google.common.collect.Lists;
 import com.smhl.hdm.enums.GameResult;
@@ -6,8 +6,8 @@ import com.smhl.hdm.models.entities.details.participant.GoalieGameDetails;
 import com.smhl.hdm.models.entities.participant.impl.Goalie;
 import com.smhl.hdm.models.entities.season.impl.GoalieSeason;
 import com.smhl.hdm.repositories.participant.goalie.GoalieRepository;
-import com.smhl.hdm.service.participant.ParticipantService;
-import com.smhl.hdm.service.season.impl.GoalieSeasonService;
+import com.smhl.hdm.service.entities.participant.ParticipantService;
+import com.smhl.hdm.service.entities.season.impl.GoalieSeasonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +35,7 @@ public class GoalieService implements ParticipantService<Goalie, GoalieGameDetai
     /**
      * Returns the top goalies for a given stat and limited by a number of results
      *
-     * @param stat field to base goalies on
+     * @param stat  field to base goalies on
      * @param limit integer limit of results
      * @return limited list
      */

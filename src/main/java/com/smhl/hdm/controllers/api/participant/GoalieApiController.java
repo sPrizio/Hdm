@@ -3,7 +3,8 @@ package com.smhl.hdm.controllers.api.participant;
 import com.smhl.hdm.controllers.AbstractHdmController;
 import com.smhl.hdm.controllers.response.HdmApiResponse;
 import com.smhl.hdm.enums.HdmApiResponseResult;
-import com.smhl.hdm.facades.participant.impl.GoalieFacade;
+import com.smhl.hdm.facades.entities.participant.impl.GoalieFacade;
+import com.smhl.hdm.facades.nonentities.statistics.impl.GoalieStatisticsFacade;
 import com.smhl.hdm.resources.participant.impl.GoalieResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,10 +22,12 @@ import org.springframework.web.bind.annotation.*;
 public class GoalieApiController extends AbstractHdmController<GoalieResource> {
 
     private GoalieFacade goalieFacade;
+    private GoalieStatisticsFacade goalieStatisticsFacade;
 
     @Autowired
-    public GoalieApiController(GoalieFacade goalieFacade) {
+    public GoalieApiController(GoalieFacade goalieFacade, GoalieStatisticsFacade goalieStatisticsFacade) {
         this.goalieFacade = goalieFacade;
+        this.goalieStatisticsFacade = goalieStatisticsFacade;
     }
 
 
@@ -64,12 +67,23 @@ public class GoalieApiController extends AbstractHdmController<GoalieResource> {
     /**
      * Gets top goalies for a given stat
      *
-     * @param stat stat to rank goalies
+     * @param stat  stat to rank goalies
      * @param limit limit number of results
      * @return limited list of goalies for a given stat
      */
     @GetMapping("/top-active")
     public ResponseEntity<HdmApiResponse> getTopGoaliesForStatAndLimit(final @RequestParam String stat, final @RequestParam int limit) {
         return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.goalieFacade.findTopGoaliesForStatAndLimit(stat, limit)), HttpStatus.OK);
+    }
+
+    /**
+     * Obtains stats information for goalie attribute categories
+     *
+     * @param seasonString season that we're looking at
+     * @return stat object response
+     */
+    @GetMapping("/stats-for-active")
+    public ResponseEntity<HdmApiResponse> getStatisticsForActiveGoalies(final @RequestParam String seasonString) {
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.goalieStatisticsFacade.obtainActiveStatistics(seasonString)), HttpStatus.OK);
     }
 }

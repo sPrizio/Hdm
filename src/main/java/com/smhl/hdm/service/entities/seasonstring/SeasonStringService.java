@@ -1,4 +1,4 @@
-package com.smhl.hdm.service.seasonstring;
+package com.smhl.hdm.service.entities.seasonstring;
 
 import com.google.common.collect.Lists;
 import com.smhl.hdm.models.entities.seasonstring.SeasonString;

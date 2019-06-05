@@ -1,12 +1,12 @@
-package com.smhl.hdm.service.participant.impl;
+package com.smhl.hdm.service.entities.participant.impl;
 
 import com.google.common.collect.Lists;
 import com.smhl.hdm.models.entities.details.participant.SkaterGameDetails;
 import com.smhl.hdm.models.entities.participant.impl.Skater;
 import com.smhl.hdm.models.entities.season.impl.SkaterSeason;
 import com.smhl.hdm.repositories.participant.skater.SkaterRepository;
-import com.smhl.hdm.service.participant.ParticipantService;
-import com.smhl.hdm.service.season.impl.SkaterSeasonService;
+import com.smhl.hdm.service.entities.participant.ParticipantService;
+import com.smhl.hdm.service.entities.season.impl.SkaterSeasonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +34,7 @@ public class SkaterService implements ParticipantService<Skater, SkaterGameDetai
     /**
      * Returns the top skaters for a given stat category and limits the number of results
      *
-     * @param stat field on which we want to judge skaters
+     * @param stat  field on which we want to judge skaters
      * @param limit number of results to return
      * @return sorted limited list based on a stat
      */

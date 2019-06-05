@@ -1,6 +1,6 @@
-package com.smhl.hdm.facades.participant;
+package com.smhl.hdm.facades.entities.participant;
 
-import com.smhl.hdm.facades.HdmFacade;
+import com.smhl.hdm.facades.entities.HdmFacade;
 import com.smhl.hdm.resources.participant.ParticipantResource;
 
 import java.util.List;

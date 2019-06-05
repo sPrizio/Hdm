@@ -1,10 +1,10 @@
-package com.smhl.hdm.facades.participant.impl;
+package com.smhl.hdm.facades.entities.participant.impl;
 
 import com.smhl.hdm.converters.participant.impl.TeamConverter;
-import com.smhl.hdm.facades.participant.ParticipantFacade;
+import com.smhl.hdm.facades.entities.participant.ParticipantFacade;
 import com.smhl.hdm.models.entities.participant.impl.Team;
 import com.smhl.hdm.resources.participant.impl.TeamResource;
-import com.smhl.hdm.service.participant.impl.TeamService;
+import com.smhl.hdm.service.entities.participant.impl.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

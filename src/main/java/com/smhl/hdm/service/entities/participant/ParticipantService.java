@@ -1,8 +1,8 @@
-package com.smhl.hdm.service.participant;
+package com.smhl.hdm.service.entities.participant;
 
 import com.smhl.hdm.models.entities.details.Details;
 import com.smhl.hdm.models.entities.participant.Participant;
-import com.smhl.hdm.service.HdmService;
+import com.smhl.hdm.service.entities.HdmService;
 
 import java.util.List;
 
