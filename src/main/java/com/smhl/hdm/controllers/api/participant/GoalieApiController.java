@@ -41,7 +41,7 @@ public class GoalieApiController extends AbstractHdmController<GoalieResource> {
      */
     @GetMapping("/{id}")
     public ResponseEntity<HdmApiResponse> getGoalie(final @PathVariable("id") Long id) {
-        return findParticipant(id, this.goalieFacade.find(id));
+        return findEntity(id, this.goalieFacade.find(id));
     }
 
     /**

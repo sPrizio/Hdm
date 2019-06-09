@@ -38,7 +38,7 @@ public class TeamApiController extends AbstractHdmController<TeamResource> {
      */
     @GetMapping("/{id}")
     public ResponseEntity<HdmApiResponse> getSkater(final @PathVariable("id") Long id) {
-        return findParticipant(id, this.teamFacade.find(id));
+        return findEntity(id, this.teamFacade.find(id));
     }
 
     /**

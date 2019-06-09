@@ -30,6 +30,11 @@ public class GameFacade implements HdmFacade<GameResource> {
     }
 
 
+    public GameResource findForSeason(String seasonString) {
+        return this.gameConverter.convert(this.gameService.findBySeasonString(seasonString));
+    }
+
+
     @Override
     public GameResource find(Long id) {
 
