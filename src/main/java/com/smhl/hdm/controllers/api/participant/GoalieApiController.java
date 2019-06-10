@@ -3,13 +3,19 @@ package com.smhl.hdm.controllers.api.participant;
 import com.smhl.hdm.controllers.AbstractHdmController;
 import com.smhl.hdm.controllers.response.HdmApiResponse;
 import com.smhl.hdm.enums.HdmApiResponseResult;
+import com.smhl.hdm.facades.entities.game.GameFacade;
 import com.smhl.hdm.facades.entities.participant.impl.GoalieFacade;
 import com.smhl.hdm.facades.nonentities.statistics.impl.GoalieStatisticsFacade;
+import com.smhl.hdm.models.nonentities.Statistic;
+import com.smhl.hdm.resources.details.participant.GoalieGameDetailsResource;
 import com.smhl.hdm.resources.participant.impl.GoalieResource;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Controller that exposes various endpoints for information about goalies
@@ -23,11 +29,13 @@ public class GoalieApiController extends AbstractHdmController<GoalieResource> {
 
     private GoalieFacade goalieFacade;
     private GoalieStatisticsFacade goalieStatisticsFacade;
+    private GameFacade gameFacade;
 
     @Autowired
-    public GoalieApiController(GoalieFacade goalieFacade, GoalieStatisticsFacade goalieStatisticsFacade) {
+    public GoalieApiController(GoalieFacade goalieFacade, GoalieStatisticsFacade goalieStatisticsFacade, GameFacade gameFacade) {
         this.goalieFacade = goalieFacade;
         this.goalieStatisticsFacade = goalieStatisticsFacade;
+        this.gameFacade = gameFacade;
     }
 
 
@@ -77,6 +85,24 @@ public class GoalieApiController extends AbstractHdmController<GoalieResource> {
     }
 
     /**
+     * Returns a statistics object that contains statistical information for a goalie's stat categories
+     *
+     * @param id goalie id
+     * @return goalie career statistical information
+     */
+    @GetMapping("/stats-for-goalie/{id}")
+    public ResponseEntity<HdmApiResponse> getStatisticsForGoalie(final @PathVariable Long id) {
+
+        Statistic statistic = this.goalieStatisticsFacade.obtainStatistics(id);
+
+        if (!statistic.isEmpty()) {
+            return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.goalieStatisticsFacade.obtainStatistics(id)), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "Goalie could not be found"), HttpStatus.OK);
+    }
+
+    /**
      * Obtains stats information for goalie attribute categories
      *
      * @param seasonString season that we're looking at
@@ -84,6 +110,32 @@ public class GoalieApiController extends AbstractHdmController<GoalieResource> {
      */
     @GetMapping("/stats-for-active")
     public ResponseEntity<HdmApiResponse> getStatisticsForActiveGoalies(final @RequestParam String seasonString) {
-        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.goalieStatisticsFacade.obtainActiveStatistics(seasonString)), HttpStatus.OK);
+
+        Statistic statistic = this.goalieStatisticsFacade.obtainActiveStatistics(seasonString);
+
+        if (!statistic.isEmpty()) {
+            return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.goalieStatisticsFacade.obtainActiveStatistics(seasonString)), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "Internal Server Error"), HttpStatus.OK);
+    }
+
+    /**
+     * Returns a collection of recent games for the given goalie
+     *
+     * @param id    goalie id
+     * @param limit number of games to be returned in the list
+     * @return a collection of recent games this participant was involved in
+     */
+    @GetMapping("/recent-games/{id}")
+    public ResponseEntity<HdmApiResponse> getRecentGamesForGoalie(final @PathVariable("id") Long id, final @RequestParam int limit) {
+
+        List<GoalieGameDetailsResource> games = this.gameFacade.findRecentGameDetailsForGoalie(id, limit);
+
+        if (CollectionUtils.isNotEmpty(games)) {
+            return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, games), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "No game details were found for the given goalie id"), HttpStatus.OK);
     }
 }

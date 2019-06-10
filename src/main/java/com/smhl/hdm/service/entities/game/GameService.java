@@ -1,6 +1,8 @@
 package com.smhl.hdm.service.entities.game;
 
 import com.google.common.collect.Lists;
+import com.smhl.hdm.models.entities.details.participant.GoalieGameDetails;
+import com.smhl.hdm.models.entities.details.participant.SkaterGameDetails;
 import com.smhl.hdm.models.entities.game.Game;
 import com.smhl.hdm.repositories.game.GameRepository;
 import com.smhl.hdm.service.entities.HdmService;
@@ -24,6 +26,14 @@ public class GameService implements HdmService<Game> {
     @Autowired
     public GameService(GameRepository gameRepository) {
         this.gameRepository = gameRepository;
+    }
+
+    public List<SkaterGameDetails> findSkaterGameDetails(String seasonString, Long id, int limit) {
+        return this.gameRepository.findSkaterGameDetails(seasonString, id, limit);
+    }
+
+    public List<GoalieGameDetails> findGoalieGameDetails(String seasonString, Long id, int limit) {
+        return this.gameRepository.findGoalieGameDetails(seasonString, id, limit);
     }
 
     public Game findBySeasonString(String seasonString) {

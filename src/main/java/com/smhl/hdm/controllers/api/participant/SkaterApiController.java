@@ -3,13 +3,19 @@ package com.smhl.hdm.controllers.api.participant;
 import com.smhl.hdm.controllers.AbstractHdmController;
 import com.smhl.hdm.controllers.response.HdmApiResponse;
 import com.smhl.hdm.enums.HdmApiResponseResult;
+import com.smhl.hdm.facades.entities.game.GameFacade;
 import com.smhl.hdm.facades.entities.participant.impl.SkaterFacade;
 import com.smhl.hdm.facades.nonentities.statistics.impl.SkaterStatisticsFacade;
+import com.smhl.hdm.models.nonentities.Statistic;
+import com.smhl.hdm.resources.details.participant.SkaterGameDetailsResource;
 import com.smhl.hdm.resources.participant.impl.SkaterResource;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Controller that exposes various endpoints for information about Skaters
@@ -23,11 +29,13 @@ public class SkaterApiController extends AbstractHdmController<SkaterResource> {
 
     private SkaterFacade skaterFacade;
     private SkaterStatisticsFacade skaterStatisticsFacade;
+    private GameFacade gameFacade;
 
     @Autowired
-    public SkaterApiController(SkaterFacade skaterFacade, SkaterStatisticsFacade skaterStatisticsFacade) {
+    public SkaterApiController(SkaterFacade skaterFacade, SkaterStatisticsFacade skaterStatisticsFacade, GameFacade gameFacade) {
         this.skaterFacade = skaterFacade;
         this.skaterStatisticsFacade = skaterStatisticsFacade;
+        this.gameFacade = gameFacade;
     }
 
 
@@ -80,6 +88,24 @@ public class SkaterApiController extends AbstractHdmController<SkaterResource> {
     }
 
     /**
+     * Returns a statistics object that contains statistical information for a skater's stat categories
+     *
+     * @param id skater id
+     * @return skater career statistical information
+     */
+    @GetMapping("/stats-for-skater/{id}")
+    public ResponseEntity<HdmApiResponse> getStatisticsForSkater(final @PathVariable("id") Long id) {
+
+        Statistic statistic = this.skaterStatisticsFacade.obtainStatistics(id);
+
+        if (!statistic.isEmpty()) {
+            return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.skaterStatisticsFacade.obtainStatistics(id)), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "Skater could not be found"), HttpStatus.OK);
+    }
+
+    /**
      * Returns a statistics object that contains statistical information for various skater stat attribute categories
      *
      * @param seasonString season of which we want to obtain the stats
@@ -87,6 +113,32 @@ public class SkaterApiController extends AbstractHdmController<SkaterResource> {
      */
     @GetMapping("/stats-for-active")
     public ResponseEntity<HdmApiResponse> getStatisticsForActiveSkaters(final @RequestParam String seasonString) {
-        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.skaterStatisticsFacade.obtainActiveStatistics(seasonString)), HttpStatus.OK);
+
+        Statistic statistic = this.skaterStatisticsFacade.obtainActiveStatistics(seasonString);
+
+        if (!statistic.isEmpty()) {
+            return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.skaterStatisticsFacade.obtainActiveStatistics(seasonString)), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "Internal Server Error"), HttpStatus.OK);
+    }
+
+    /**
+     * Returns a collection of recent games for the given skater
+     *
+     * @param id    skater id
+     * @param limit number of games to be returned in the list
+     * @return a collection of recent games this participant was involved in
+     */
+    @GetMapping("/recent-games/{id}")
+    public ResponseEntity<HdmApiResponse> getRecentGamesForSkater(final @PathVariable("id") Long id, final @RequestParam int limit) {
+
+        List<SkaterGameDetailsResource> games = this.gameFacade.findRecentGameDetailsForSkater(id, limit);
+
+        if (CollectionUtils.isNotEmpty(games)) {
+            return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, games), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "No game details were found for the given skater id"), HttpStatus.OK);
     }
 }

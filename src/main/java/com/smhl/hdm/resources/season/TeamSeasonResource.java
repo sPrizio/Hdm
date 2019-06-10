@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Objects;
+
 /**
  * DTO for team seasons
  *
@@ -13,7 +15,7 @@ import org.apache.commons.lang3.StringUtils;
  * @version 1.0
  */
 @NoArgsConstructor
-public class TeamSeasonResource implements HdmResource {
+public class TeamSeasonResource implements HdmResource, Comparable<TeamSeasonResource> {
 
     @Getter
     @Setter
@@ -54,5 +56,35 @@ public class TeamSeasonResource implements HdmResource {
     @Override
     public boolean isPresent() {
         return StringUtils.isNotEmpty(this.seasonString);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        TeamSeasonResource that = (TeamSeasonResource) o;
+        return
+                this.gamesPlayed == that.gamesPlayed &&
+                this.wins == that.wins &&
+                this.losses == that.losses &&
+                this.ties == that.ties &&
+                this.points == that.points &&
+                this.goalsFor == that.goalsFor &&
+                this.goalsAgainst == that.goalsAgainst &&
+                this.differential == that.differential &&
+                this.seasonString.equals(that.seasonString);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.seasonString, this.gamesPlayed, this.wins, this.losses, this.ties, this.points, this.goalsFor, this.goalsAgainst, this.differential);
+    }
+
+    @Override
+    public int compareTo(TeamSeasonResource o) {
+        return this.seasonString.compareTo(o.seasonString);
     }
 }

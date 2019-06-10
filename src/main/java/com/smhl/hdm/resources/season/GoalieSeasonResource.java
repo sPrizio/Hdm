@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Objects;
+
 /**
  * DTO for goalie seasons
  *
@@ -13,7 +15,7 @@ import org.apache.commons.lang3.StringUtils;
  * @version 1.0
  */
 @NoArgsConstructor
-public class GoalieSeasonResource implements HdmResource {
+public class GoalieSeasonResource implements HdmResource, Comparable<GoalieSeasonResource> {
 
     @Getter
     @Setter
@@ -66,5 +68,38 @@ public class GoalieSeasonResource implements HdmResource {
     @Override
     public boolean isPresent() {
         return StringUtils.isNotEmpty(this.seasonString);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        GoalieSeasonResource that = (GoalieSeasonResource) o;
+        return
+                this.gamesPlayed == that.gamesPlayed &&
+                this.gamesStarted == that.gamesStarted &&
+                this.wins == that.wins &&
+                this.losses == that.losses &&
+                this.ties == that.ties &&
+                this.saves == that.saves &&
+                this.shotsAgainst == that.shotsAgainst &&
+                this.goalsAgainst == that.goalsAgainst &&
+                this.shutouts == that.shutouts &&
+                Double.compare(that.savePercentage, this.savePercentage) == 0 &&
+                Double.compare(that.goalsAgainstAverage, this.goalsAgainstAverage) == 0 &&
+                this.seasonString.equals(that.seasonString);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.seasonString, this.gamesPlayed, this.gamesStarted, this.wins, this.losses, this.ties, this.saves, this.shotsAgainst, this.goalsAgainst, this.shutouts, this.savePercentage, this.goalsAgainstAverage);
+    }
+
+    @Override
+    public int compareTo(GoalieSeasonResource o) {
+        return this.seasonString.compareTo(o.seasonString);
     }
 }

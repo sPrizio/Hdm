@@ -10,7 +10,7 @@ import org.springframework.data.repository.CrudRepository;
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
  */
-public interface GameRepository extends HdmRepository, CrudRepository<Game, Long> {
+public interface GameRepository extends HdmRepository, GameRepositoryCustom, CrudRepository<Game, Long> {
 
     Game findBySeasonString(final String seasonString);
 }
