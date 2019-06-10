@@ -8,6 +8,7 @@ import com.smhl.hdm.models.entities.game.ScoringPlay;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
@@ -25,6 +26,12 @@ public class GameDetails implements Details {
     @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Getter
+    @Setter
+    @Column
+    @NonNull
+    private LocalDateTime gameTime;
 
     @Getter
     @Setter

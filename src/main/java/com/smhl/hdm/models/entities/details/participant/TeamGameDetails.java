@@ -5,6 +5,7 @@ import com.smhl.hdm.models.entities.participant.impl.Team;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  * A class meant to hold detailed information about a team's performance in a match
@@ -21,6 +22,12 @@ public class TeamGameDetails implements Details {
     @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Getter
+    @Setter
+    @Column
+    @NonNull
+    private LocalDateTime gameTime;
 
     @Getter
     @Setter

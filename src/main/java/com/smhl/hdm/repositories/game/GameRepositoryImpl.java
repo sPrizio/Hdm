@@ -28,7 +28,7 @@ public class GameRepositoryImpl implements GameRepositoryCustom {
         StringBuilder queryBuilder = new StringBuilder();
 
         queryBuilder
-                .append("SELECT sgd.id, sgd.assists, sgd.blocked_shots, sgd.goals, sgd.shots, sgd.skater_id, sgd.team_id, sgd.game_details_id ")
+                .append("SELECT sgd.id, sgd.game_time, sgd.assists, sgd.blocked_shots, sgd.goals, sgd.shots, sgd.skater_id, sgd.team_id, sgd.game_details_id ")
                 .append("FROM game as g, game_details as gd, skater_game_details as sgd ")
                 .append("WHERE g.game_details_id = gd.id ")
                 .append("   AND g.season_string = ").append('\'').append(seasonString).append('\'')
@@ -47,7 +47,7 @@ public class GameRepositoryImpl implements GameRepositoryCustom {
         StringBuilder queryBuilder = new StringBuilder();
 
         queryBuilder
-                .append("SELECT ggd.id, ggd.game_result, ggd.goals_against, ggd.is_starter, ggd.saves, ggd.shots_against, ggd.goalie_id, ggd.team_id, ggd.game_details_id ")
+                .append("SELECT ggd.id, ggd.game_time, ggd.game_result, ggd.goals_against, ggd.is_starter, ggd.saves, ggd.shots_against, ggd.goalie_id, ggd.team_id, ggd.game_details_id ")
                 .append("FROM game as g, game_details as gd, goalie_game_details as ggd ")
                 .append("WHERE g.game_details_id = gd.id ")
                 .append("   AND g.season_string = ").append('\'').append(seasonString).append('\'')

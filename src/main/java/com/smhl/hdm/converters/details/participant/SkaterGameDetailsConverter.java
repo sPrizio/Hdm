@@ -36,10 +36,13 @@ public class SkaterGameDetailsConverter implements HdmConverter<SkaterGameDetail
         SkaterGameDetailsResource resource = new SkaterGameDetailsResource();
 
         if (Objects.nonNull(entity)) {
+            resource.setCode(entity.getId());
+            resource.setGameTime(entity.getGameTime());
             resource.setSkater(this.skaterConverter.convert(entity.getSkater()));
             resource.setTeam(this.teamConverter.convert(entity.getTeam()));
             resource.setGoals(entity.getGoals());
             resource.setAssists(entity.getAssists());
+            resource.setPoints((entity.getGoals() + entity.getAssists()));
             resource.setShots(entity.getShots());
             resource.setBlockedShots(entity.getBlockedShots());
         }

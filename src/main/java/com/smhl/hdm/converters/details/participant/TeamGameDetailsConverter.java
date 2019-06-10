@@ -34,6 +34,7 @@ public class TeamGameDetailsConverter implements HdmConverter<TeamGameDetails, T
 
         if (Objects.nonNull(entity)) {
             resource.setCode(entity.getId());
+            resource.setGameTime(entity.getGameTime());
             resource.setTeam(this.teamConverter.convert(entity.getTeam()));
             resource.setGameResult(entity.getGameResult());
             resource.setGoalsFor(entity.getGoalsFor());

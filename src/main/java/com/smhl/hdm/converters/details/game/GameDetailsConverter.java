@@ -46,6 +46,7 @@ public class GameDetailsConverter implements HdmConverter<GameDetails, GameDetai
 
         if (Objects.nonNull(entity)) {
             resource.setCode(entity.getId());
+            resource.setGameTime(entity.getGameTime());
             resource.setHomeTeamScore(entity.getHomeTeamScore());
             resource.setAwayTeamScore(entity.getAwayTeamScore());
             resource.setSkaterGameDetails(Sets.newHashSet(this.skaterGameDetailsConverter.convertAll(Lists.newArrayList(entity.getSkaterGameDetails()))));

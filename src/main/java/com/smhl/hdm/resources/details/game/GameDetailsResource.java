@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.commons.collections4.CollectionUtils;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
@@ -23,6 +24,10 @@ public class GameDetailsResource implements HdmResource {
     @Getter
     @Setter
     private Long code;
+
+    @Getter
+    @Setter
+    private LocalDateTime gameTime;
 
     @Getter
     @Setter
@@ -53,6 +58,7 @@ public class GameDetailsResource implements HdmResource {
     public boolean isPresent() {
         return
                 this.code != null &&
+                this.gameTime != null &&
                 CollectionUtils.isNotEmpty(this.skaterGameDetails) &&
                 CollectionUtils.isNotEmpty(this.goalieGameDetails) &&
                 CollectionUtils.isNotEmpty(this.teamGameDetails) &&

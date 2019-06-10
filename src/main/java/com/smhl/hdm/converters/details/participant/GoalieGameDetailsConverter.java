@@ -38,6 +38,7 @@ public class GoalieGameDetailsConverter implements HdmConverter<GoalieGameDetail
 
         if (Objects.nonNull(entity)) {
             resource.setCode(entity.getId());
+            resource.setGameTime(entity.getGameTime());
             resource.setGoalie(this.goalieConverter.convert(entity.getGoalie()));
             resource.setTeam(this.teamConverter.convert(entity.getTeam()));
             resource.setStarter(entity.isStarter());

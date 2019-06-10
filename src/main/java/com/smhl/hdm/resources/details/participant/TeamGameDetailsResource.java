@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
+import java.time.LocalDateTime;
+
 /**
  * A DTO for TeamGameDetails
  *
@@ -19,6 +21,10 @@ public class TeamGameDetailsResource implements HdmResource {
     @Getter
     @Setter
     private Long code;
+
+    @Getter
+    @Setter
+    private LocalDateTime gameTime;
 
     @Getter
     @Setter
@@ -41,6 +47,7 @@ public class TeamGameDetailsResource implements HdmResource {
     public boolean isPresent() {
         return
                 this.code != null &&
+                this.gameTime != null &&
                 this.team.isPresent() &&
                 StringUtils.isNotEmpty(gameResult);
     }

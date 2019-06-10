@@ -51,7 +51,6 @@ public class GameResource implements HdmResource {
     public boolean isPresent() {
         return
                 this.code != null &&
-                this.gameTime != null &&
                 StringUtils.isNotEmpty(this.seasonString) &&
                 StringUtils.isNotEmpty(this.gameStatus) &&
                 this.homeTeam.isPresent() &&

@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 /**
  * A DTO for SkaterGameDetails
  *
@@ -19,6 +21,10 @@ public class SkaterGameDetailsResource implements HdmResource {
     @Getter
     @Setter
     private Long code;
+
+    @Getter
+    @Setter
+    private LocalDateTime gameTime;
 
     @Getter
     @Setter
@@ -38,6 +44,10 @@ public class SkaterGameDetailsResource implements HdmResource {
 
     @Getter
     @Setter
+    private int points;
+
+    @Getter
+    @Setter
     private int shots;
 
     @Getter
@@ -49,6 +59,7 @@ public class SkaterGameDetailsResource implements HdmResource {
     public boolean isPresent() {
         return
                 this.code != null &&
+                this.gameTime != null &&
                 this.skater.isPresent() &&
                 this.team.isPresent();
     }
