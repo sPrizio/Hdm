@@ -34,8 +34,7 @@ public class SkaterMilestoneService implements MilestoneService<Skater> {
                 value = entity.getCurrentSeason().getPoints();
                 break;
             default:
-                value = 0;
-                break;
+                return new Milestone();
         }
 
         return new Milestone(stat, value, MilestoneUtils.calculatePlateau(value));

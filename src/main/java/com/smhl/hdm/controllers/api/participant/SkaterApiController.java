@@ -5,7 +5,9 @@ import com.smhl.hdm.controllers.response.HdmApiResponse;
 import com.smhl.hdm.enums.HdmApiResponseResult;
 import com.smhl.hdm.facades.entities.game.GameFacade;
 import com.smhl.hdm.facades.entities.participant.impl.SkaterFacade;
+import com.smhl.hdm.facades.nonentities.milestone.impl.SkaterMilestoneFacade;
 import com.smhl.hdm.facades.nonentities.statistics.impl.SkaterStatisticsFacade;
+import com.smhl.hdm.models.nonentities.Milestone;
 import com.smhl.hdm.models.nonentities.Statistic;
 import com.smhl.hdm.resources.details.participant.SkaterGameDetailsResource;
 import com.smhl.hdm.resources.participant.impl.SkaterResource;
@@ -30,12 +32,14 @@ public class SkaterApiController extends AbstractHdmController<SkaterResource> {
     private SkaterFacade skaterFacade;
     private SkaterStatisticsFacade skaterStatisticsFacade;
     private GameFacade gameFacade;
+    private SkaterMilestoneFacade skaterMilestoneFacade;
 
     @Autowired
-    public SkaterApiController(SkaterFacade skaterFacade, SkaterStatisticsFacade skaterStatisticsFacade, GameFacade gameFacade) {
+    public SkaterApiController(SkaterFacade skaterFacade, SkaterStatisticsFacade skaterStatisticsFacade, GameFacade gameFacade, SkaterMilestoneFacade skaterMilestoneFacade) {
         this.skaterFacade = skaterFacade;
         this.skaterStatisticsFacade = skaterStatisticsFacade;
         this.gameFacade = gameFacade;
+        this.skaterMilestoneFacade = skaterMilestoneFacade;
     }
 
 
@@ -140,5 +144,24 @@ public class SkaterApiController extends AbstractHdmController<SkaterResource> {
         }
 
         return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "No game details were found for the given skater id"), HttpStatus.OK);
+    }
+
+    /**
+     * Returns a milestone object for the given stat
+     *
+     * @param id   skater id
+     * @param stat stat on which we wish to obtain a milestone
+     * @return milestone object
+     */
+    @GetMapping("/milestone/{id}")
+    public ResponseEntity<HdmApiResponse> getMilestoneForSkater(final @PathVariable("id") Long id, final @RequestParam String stat) {
+
+        Milestone milestone = this.skaterMilestoneFacade.obtainMilestone(stat, id);
+
+        if (milestone.isPresent()) {
+            return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, milestone), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "No milestone could be obtained for the given skater id"), HttpStatus.OK);
     }
 }

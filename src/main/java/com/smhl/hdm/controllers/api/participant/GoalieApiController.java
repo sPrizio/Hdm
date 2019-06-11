@@ -5,7 +5,9 @@ import com.smhl.hdm.controllers.response.HdmApiResponse;
 import com.smhl.hdm.enums.HdmApiResponseResult;
 import com.smhl.hdm.facades.entities.game.GameFacade;
 import com.smhl.hdm.facades.entities.participant.impl.GoalieFacade;
+import com.smhl.hdm.facades.nonentities.milestone.impl.GoalieMilestoneFacade;
 import com.smhl.hdm.facades.nonentities.statistics.impl.GoalieStatisticsFacade;
+import com.smhl.hdm.models.nonentities.Milestone;
 import com.smhl.hdm.models.nonentities.Statistic;
 import com.smhl.hdm.resources.details.participant.GoalieGameDetailsResource;
 import com.smhl.hdm.resources.participant.impl.GoalieResource;
@@ -30,12 +32,14 @@ public class GoalieApiController extends AbstractHdmController<GoalieResource> {
     private GoalieFacade goalieFacade;
     private GoalieStatisticsFacade goalieStatisticsFacade;
     private GameFacade gameFacade;
+    private GoalieMilestoneFacade goalieMilestoneFacade;
 
     @Autowired
-    public GoalieApiController(GoalieFacade goalieFacade, GoalieStatisticsFacade goalieStatisticsFacade, GameFacade gameFacade) {
+    public GoalieApiController(GoalieFacade goalieFacade, GoalieStatisticsFacade goalieStatisticsFacade, GameFacade gameFacade, GoalieMilestoneFacade goalieMilestoneFacade) {
         this.goalieFacade = goalieFacade;
         this.goalieStatisticsFacade = goalieStatisticsFacade;
         this.gameFacade = gameFacade;
+        this.goalieMilestoneFacade = goalieMilestoneFacade;
     }
 
 
@@ -137,5 +141,24 @@ public class GoalieApiController extends AbstractHdmController<GoalieResource> {
         }
 
         return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "No game details were found for the given goalie id"), HttpStatus.OK);
+    }
+
+    /**
+     * Gets a milestone object for the given goalie and stat attribute
+     *
+     * @param id   goalie id
+     * @param stat stat we want to look at
+     * @return milestone object
+     */
+    @GetMapping("/milestone/{id}")
+    public ResponseEntity<HdmApiResponse> getMilestoneForGoalie(final @PathVariable("id") Long id, final @RequestParam String stat) {
+
+        Milestone milestone = this.goalieMilestoneFacade.obtainMilestone(stat, id);
+
+        if (milestone.isPresent()) {
+            return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, milestone), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "No milestone could be obtained for the given goalie id"), HttpStatus.OK);
     }
 }
