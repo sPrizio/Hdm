@@ -1,6 +1,7 @@
 package com.smhl.hdm.models.nonentities;
 
 import lombok.*;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * A class representation of a milestone. In this case a milestone is a statistical plateau that a participant is close to reaching
@@ -26,4 +27,9 @@ public class Milestone {
     @Setter
     @NonNull
     private Integer plateau;
+
+
+    public boolean isPresent() {
+        return StringUtils.isNotEmpty(this.name) && this.value != null && this.plateau != null;
+    }
 }
