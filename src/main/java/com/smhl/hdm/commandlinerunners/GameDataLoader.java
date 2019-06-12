@@ -225,6 +225,7 @@ public class GameDataLoader implements CommandLineRunner {
         SkaterGameDetails skaterGameDetails46 = new SkaterGameDetails(dateTime.plusWeeks(3), skaters.get(5), team5, 1, 1, 11, 3);
         SkaterGameDetails skaterGameDetails47 = new SkaterGameDetails(dateTime.plusWeeks(3), skaters.get(6), team5, 1, 1, 12, 4);
         SkaterGameDetails skaterGameDetails48 = new SkaterGameDetails(dateTime.plusWeeks(3), skaters.get(7), team5, 0, 1, 4, 0);
+        SkaterGameDetails skaterGameDetails49 = new SkaterGameDetails(dateTime.plusWeeks(3), skaters.get(8), team5, 1, 0, 10, 1);
 
         //  goalie details
         GoalieGameDetails goalieGameDetails41 = new GoalieGameDetails(dateTime.plusWeeks(3), goalies.get(1), team2, true, GameResult.TIE.toString(), 27, 24, 3);
@@ -240,7 +241,7 @@ public class GameDataLoader implements CommandLineRunner {
                 3,
                 Sets.newHashSet(
                         skaterGameDetails41, skaterGameDetails42, skaterGameDetails43, skaterGameDetails44, skaterGameDetails45,
-                        skaterGameDetails46, skaterGameDetails47, skaterGameDetails48
+                        skaterGameDetails46, skaterGameDetails47, skaterGameDetails48, skaterGameDetails49
                 ),
                 Sets.newHashSet(goalieGameDetails41, goalieGameDetails42),
                 Sets.newHashSet(teamGameDetails41, teamGameDetails42),

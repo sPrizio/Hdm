@@ -21,6 +21,10 @@ public class TeamResource implements ParticipantResource {
 
     @Getter
     @Setter
+    private Long code;
+
+    @Getter
+    @Setter
     private String name;
 
     @Getter

@@ -74,6 +74,7 @@ public class TeamConverter implements ParticipantConverter<Team, TeamResource> {
 
         TeamResource resource = new TeamResource();
 
+        resource.setCode(entity.getId());
         resource.setName(entity.getName());
         resource.setSeasons(Sets.newTreeSet(this.teamSeasonConverter.convertAll(Lists.newArrayList(entity.getSeasons()))));
 
