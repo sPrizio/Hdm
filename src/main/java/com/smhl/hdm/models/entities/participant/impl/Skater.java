@@ -54,7 +54,7 @@ public class Skater implements Participant<SkaterSeason> {
 
     @Getter
     @Setter
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<SkaterSeason> seasons;
 
 

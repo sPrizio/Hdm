@@ -42,7 +42,7 @@ public class Team implements Participant<TeamSeason> {
 
     @Getter
     @Setter
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<TeamSeason> seasons;
 
 

@@ -43,7 +43,7 @@ public class ScoringPlayResource implements HdmResource {
                 this.code != null &&
                 this.team.isPresent() &&
                 this.scoringSkater.isPresent() &&
-                this.primaryAssistingSkater.isPresent() &&
-                this.secondaryAssistingSkater.isPresent();
+                this.primaryAssistingSkater != null && this.primaryAssistingSkater.isPresent() &&
+                this.secondaryAssistingSkater != null && this.secondaryAssistingSkater.isPresent();
     }
 }

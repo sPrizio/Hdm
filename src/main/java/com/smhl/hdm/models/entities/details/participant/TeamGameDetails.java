@@ -31,7 +31,7 @@ public class TeamGameDetails implements Details {
 
     @Getter
     @Setter
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "team_id")
     @NonNull
     private Team team;

@@ -36,8 +36,8 @@ public class GameService implements HdmService<Game> {
         return this.gameRepository.findGoalieGameDetails(seasonString, id, limit);
     }
 
-    public Game findBySeasonString(String seasonString) {
-        return this.gameRepository.findBySeasonString(seasonString);
+    public List<Game> findBySeasonString(String seasonString) {
+        return this.gameRepository.findBySeasonStringOrderByGameTimeDesc(seasonString);
     }
 
     @Override

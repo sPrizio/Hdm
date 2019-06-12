@@ -4,6 +4,8 @@ import com.smhl.hdm.models.entities.game.Game;
 import com.smhl.hdm.repositories.HdmRepository;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
+
 /**
  * DAO access-layer for Game
  *
@@ -12,5 +14,5 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface GameRepository extends HdmRepository, GameRepositoryCustom, CrudRepository<Game, Long> {
 
-    Game findBySeasonString(final String seasonString);
+    List<Game> findBySeasonStringOrderByGameTimeDesc(final String seasonString);
 }

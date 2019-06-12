@@ -5,10 +5,13 @@ import com.smhl.hdm.controllers.response.HdmApiResponse;
 import com.smhl.hdm.enums.HdmApiResponseResult;
 import com.smhl.hdm.facades.entities.game.GameFacade;
 import com.smhl.hdm.resources.game.GameResource;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Controls various endpoints for Game-related information retrieval
@@ -59,12 +62,12 @@ public class GameApiController extends AbstractHdmController<GameResource> {
     @GetMapping("/all-for-season")
     public ResponseEntity<HdmApiResponse> getAllGamesForSeason(final @RequestParam String seasonString) {
 
-        GameResource resource = this.gameFacade.findForSeason(seasonString);
+        List<GameResource> resources = this.gameFacade.findForSeason(seasonString);
 
-        if (!resource.isPresent()) {
+        if (CollectionUtils.isEmpty(resources)) {
             return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "No games found for given season"), HttpStatus.OK);
         }
 
-        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, resource), HttpStatus.OK);
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, resources), HttpStatus.OK);
     }
 }

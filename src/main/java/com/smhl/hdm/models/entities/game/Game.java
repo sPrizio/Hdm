@@ -44,21 +44,21 @@ public class Game implements HdmEntity {
 
     @Getter
     @Setter
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "home_team_id")
     @NonNull
     private Team homeTeam;
 
     @Getter
     @Setter
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "away_team_id")
     @NonNull
     private Team awayTeam;
 
     @Getter
     @Setter
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "game_details_id")
     private GameDetails gameDetails;
 }

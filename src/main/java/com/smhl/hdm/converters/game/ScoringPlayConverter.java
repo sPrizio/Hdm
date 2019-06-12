@@ -40,8 +40,15 @@ public class ScoringPlayConverter implements HdmConverter<ScoringPlay, ScoringPl
             resource.setCode(entity.getId());
             resource.setTeam(this.teamConverter.convert(entity.getTeam()));
             resource.setScoringSkater(this.skaterConverter.convert(entity.getScoringSkater()));
-            resource.setPrimaryAssistingSkater(this.skaterConverter.convert(entity.getPrimaryAssistingSkater()));
-            resource.setSecondaryAssistingSkater(this.skaterConverter.convert(entity.getSecondaryAssistingSkater()));
+
+            //  since the assisting skaters can be null, we need to null check them
+            if (Objects.nonNull(entity.getPrimaryAssistingSkater())) {
+                resource.setPrimaryAssistingSkater(this.skaterConverter.convert(entity.getPrimaryAssistingSkater()));
+            }
+
+            if (Objects.nonNull(entity.getSecondaryAssistingSkater())) {
+                resource.setSecondaryAssistingSkater(this.skaterConverter.convert(entity.getSecondaryAssistingSkater()));
+            }
         }
 
         return resource;

@@ -47,8 +47,8 @@ public class GameFacade implements HdmFacade<GameResource> {
         return this.skaterGameDetailsConverter.convertAll(this.gameService.findSkaterGameDetails(HdmUtils.getCurrentSeasonString(), id, limit));
     }
 
-    public GameResource findForSeason(String seasonString) {
-        return this.gameConverter.convert(this.gameService.findBySeasonString(seasonString));
+    public List<GameResource> findForSeason(String seasonString) {
+        return this.gameConverter.convertAll(this.gameService.findBySeasonString(seasonString));
     }
 
     @Override
