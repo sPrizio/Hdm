@@ -1,11 +1,13 @@
 package com.smhl.hdm.service.entities.game;
 
 import com.google.common.collect.Lists;
+import com.smhl.hdm.enums.GameStatus;
 import com.smhl.hdm.models.entities.details.participant.GoalieGameDetails;
 import com.smhl.hdm.models.entities.details.participant.SkaterGameDetails;
 import com.smhl.hdm.models.entities.game.Game;
 import com.smhl.hdm.repositories.game.GameRepository;
 import com.smhl.hdm.service.entities.HdmService;
+import com.smhl.hdm.utils.HdmUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,10 @@ public class GameService implements HdmService<Game> {
     @Autowired
     public GameService(GameRepository gameRepository) {
         this.gameRepository = gameRepository;
+    }
+
+    public Game findLatestCompletedGame() {
+        return this.gameRepository.findFirstBySeasonStringAndGameStatusOrderByGameTimeDesc(HdmUtils.getCurrentSeasonString(), GameStatus.COMPLETE.toString());
     }
 
     public List<SkaterGameDetails> findSkaterGameDetails(String seasonString, Long id, int limit) {

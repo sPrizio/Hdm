@@ -15,4 +15,6 @@ import java.util.List;
 public interface GameRepository extends HdmRepository, GameRepositoryCustom, CrudRepository<Game, Long> {
 
     List<Game> findBySeasonStringOrderByGameTimeDesc(final String seasonString);
+
+    Game findFirstBySeasonStringAndGameStatusOrderByGameTimeDesc(final String seasonString, final String gameStatus);
 }

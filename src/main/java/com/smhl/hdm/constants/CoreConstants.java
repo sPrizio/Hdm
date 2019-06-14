@@ -1,5 +1,6 @@
 package com.smhl.hdm.constants;
 
+import com.smhl.hdm.models.entities.details.participant.SkaterGameDetails;
 import com.smhl.hdm.models.entities.season.impl.GoalieSeason;
 import com.smhl.hdm.models.entities.season.impl.SkaterSeason;
 
@@ -53,5 +54,12 @@ public class CoreConstants {
             new AbstractMap.SimpleEntry<>("shutouts", Collectors.summarizingDouble(GoalieSeason::getShutouts)),
             new AbstractMap.SimpleEntry<>("savePercentage", Collectors.summarizingDouble(GoalieSeason::getSavePercentage)),
             new AbstractMap.SimpleEntry<>("goalsAgainstAverage", Collectors.summarizingDouble(GoalieSeason::getGoalsAgainstAverage))
+    );
+
+    public static final Map<String, Collector<SkaterGameDetails, ?, DoubleSummaryStatistics>> SKATER_GAME_DETAILS_COLLECTORS = Map.ofEntries(
+            new AbstractMap.SimpleEntry<>("goals", Collectors.summarizingDouble(SkaterGameDetails::getGoals)),
+            new AbstractMap.SimpleEntry<>("assists", Collectors.summarizingDouble(SkaterGameDetails::getAssists)),
+            new AbstractMap.SimpleEntry<>("shots", Collectors.summarizingDouble(SkaterGameDetails::getShots)),
+            new AbstractMap.SimpleEntry<>("blockedShots", Collectors.summarizingDouble(SkaterGameDetails::getBlockedShots))
     );
 }

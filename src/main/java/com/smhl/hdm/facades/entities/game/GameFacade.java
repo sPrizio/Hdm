@@ -38,6 +38,9 @@ public class GameFacade implements HdmFacade<GameResource> {
         this.goalieGameDetailsConverter = goalieGameDetailsConverter;
     }
 
+    public GameResource findLatestCompletedGame() {
+        return this.gameConverter.convert(this.gameService.findLatestCompletedGame());
+    }
 
     public List<GoalieGameDetailsResource> findRecentGameDetailsForGoalie(Long id, int limit) {
         return this.goalieGameDetailsConverter.convertAll(this.gameService.findGoalieGameDetails(HdmUtils.getCurrentSeasonString(), id, limit));

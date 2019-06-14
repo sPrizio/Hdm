@@ -5,6 +5,8 @@ import com.smhl.hdm.controllers.response.HdmApiResponse;
 import com.smhl.hdm.enums.HdmApiResponseResult;
 import com.smhl.hdm.facades.entities.game.GameFacade;
 import com.smhl.hdm.resources.game.GameResource;
+import com.smhl.hdm.service.entities.game.GameService;
+import com.smhl.hdm.service.nonentities.star.GameStarService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/game")
 public class GameApiController extends AbstractHdmController<GameResource> {
+
+    //  TEMP
+    @Autowired
+    private GameStarService gameStarService;
+
+    @Autowired
+    private GameService gameService;
 
     private GameFacade gameFacade;
 
@@ -69,5 +78,35 @@ public class GameApiController extends AbstractHdmController<GameResource> {
         }
 
         return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, resources), HttpStatus.OK);
+    }
+
+    /**
+     * Finds the most recent game that is complete for the current season
+     *
+     * @return most recently completed game
+     */
+    @GetMapping
+    public ResponseEntity<HdmApiResponse> getLatestCompletedGame() {
+
+        GameResource resource = this.gameFacade.findLatestCompletedGame();
+
+        if (resource.isPresent()) {
+            return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, resource), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "No recently completed game found"), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/three-stars")
+    public ResponseEntity<HdmApiResponse> getThreeStarsForGame(final @PathVariable("id") Long id) {
+
+        ResponseEntity<HdmApiResponse> response = findEntity(id, this.gameFacade.find(id));
+
+        if (response.getBody() == null || response.getBody().getResponse() == null || response.getBody().getResponse().equals(HdmApiResponseResult.FAILURE)) {
+            return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "Could not identify 3 stars for the given game id"), HttpStatus.OK);
+        }
+
+        //  TODO: implement 3 stars for game
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.gameStarService.calculateStars(this.gameService.find(id).get())), HttpStatus.OK);
     }
 }

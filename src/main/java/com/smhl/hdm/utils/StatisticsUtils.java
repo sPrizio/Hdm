@@ -1,6 +1,6 @@
 package com.smhl.hdm.utils;
 
-import com.smhl.hdm.models.entities.season.Season;
+import com.smhl.hdm.models.entities.details.Details;
 import lombok.NoArgsConstructor;
 
 import java.util.Collection;
@@ -9,13 +9,13 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
- * Utility classes for statistics calculations
+ * Utility class for calculating statistics for collections
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
  */
 @NoArgsConstructor
-public class StatisticsUtils<E extends Season> {
+public class StatisticsUtils<E> {
 
     /**
      * Obtains numerical statistics for a list of objects given a custom collector
