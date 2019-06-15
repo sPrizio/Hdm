@@ -2,7 +2,7 @@ package com.smhl.hdm.service.entities.participant.impl;
 
 import com.google.common.collect.Lists;
 import com.smhl.hdm.enums.GameResult;
-import com.smhl.hdm.models.entities.details.participant.TeamGameDetails;
+import com.smhl.hdm.models.entities.details.participant.impl.TeamGameDetails;
 import com.smhl.hdm.models.entities.participant.impl.Team;
 import com.smhl.hdm.models.entities.season.impl.TeamSeason;
 import com.smhl.hdm.repositories.participant.team.TeamRepository;
@@ -35,7 +35,7 @@ public class TeamService implements ParticipantService<Team, TeamGameDetails> {
     @Override
     public void updateStats(TeamGameDetails details) {
 
-        TeamSeason season = details.getTeam().getCurrentSeason();
+        TeamSeason season = details.getParticipant().getCurrentSeason();
 
         if (season != null) {
 

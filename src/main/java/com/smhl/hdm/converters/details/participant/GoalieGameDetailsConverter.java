@@ -3,7 +3,7 @@ package com.smhl.hdm.converters.details.participant;
 import com.smhl.hdm.converters.HdmConverter;
 import com.smhl.hdm.converters.participant.impl.GoalieConverter;
 import com.smhl.hdm.converters.participant.impl.TeamConverter;
-import com.smhl.hdm.models.entities.details.participant.GoalieGameDetails;
+import com.smhl.hdm.models.entities.details.participant.impl.GoalieGameDetails;
 import com.smhl.hdm.resources.details.participant.GoalieGameDetailsResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -39,7 +39,7 @@ public class GoalieGameDetailsConverter implements HdmConverter<GoalieGameDetail
         if (Objects.nonNull(entity)) {
             resource.setCode(entity.getId());
             resource.setGameTime(entity.getGameTime());
-            resource.setGoalie(this.goalieConverter.convert(entity.getGoalie()));
+            resource.setGoalie(this.goalieConverter.convert(entity.getParticipant()));
             resource.setTeam(this.teamConverter.convert(entity.getTeam()));
             resource.setStarter(entity.isStarter());
             resource.setGameResult(entity.getGameResult());

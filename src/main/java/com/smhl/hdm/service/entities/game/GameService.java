@@ -2,8 +2,8 @@ package com.smhl.hdm.service.entities.game;
 
 import com.google.common.collect.Lists;
 import com.smhl.hdm.enums.GameStatus;
-import com.smhl.hdm.models.entities.details.participant.GoalieGameDetails;
-import com.smhl.hdm.models.entities.details.participant.SkaterGameDetails;
+import com.smhl.hdm.models.entities.details.participant.impl.GoalieGameDetails;
+import com.smhl.hdm.models.entities.details.participant.impl.SkaterGameDetails;
 import com.smhl.hdm.models.entities.game.Game;
 import com.smhl.hdm.repositories.game.GameRepository;
 import com.smhl.hdm.service.entities.HdmService;

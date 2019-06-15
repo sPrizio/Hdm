@@ -1,9 +1,9 @@
 package com.smhl.hdm.models.entities.details.game;
 
 import com.smhl.hdm.models.entities.details.Details;
-import com.smhl.hdm.models.entities.details.participant.GoalieGameDetails;
-import com.smhl.hdm.models.entities.details.participant.SkaterGameDetails;
-import com.smhl.hdm.models.entities.details.participant.TeamGameDetails;
+import com.smhl.hdm.models.entities.details.participant.impl.GoalieGameDetails;
+import com.smhl.hdm.models.entities.details.participant.impl.SkaterGameDetails;
+import com.smhl.hdm.models.entities.details.participant.impl.TeamGameDetails;
 import com.smhl.hdm.models.entities.game.ScoringPlay;
 import lombok.*;
 

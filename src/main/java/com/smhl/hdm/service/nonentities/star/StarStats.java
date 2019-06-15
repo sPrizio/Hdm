@@ -1,9 +1,13 @@
 package com.smhl.hdm.service.nonentities.star;
 
+import com.smhl.hdm.constants.CoreConstants;
 import com.smhl.hdm.models.entities.details.Details;
+import com.smhl.hdm.models.entities.details.participant.impl.SkaterGameDetails;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.DoubleSummaryStatistics;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -19,15 +23,20 @@ public class StarStats<D extends Details> implements Comparable<StarStats> {
     private D details;
 
     @Getter
+    private Map<String, DoubleSummaryStatistics> statistics;
+
+    @Getter
     private Double score;
 
-    StarStats(D details, Double goalsPercentage, Double assistsPercentage, Double shotsPercentage, Double blockedShotsPercentage) {
+    StarStats(D details, Map<String, DoubleSummaryStatistics> statistics) {
         this.details = details;
-        this.score =  calculateScore(goalsPercentage, assistsPercentage, shotsPercentage, blockedShotsPercentage);
+        this.statistics = statistics;
+        this.score =  calculateScore();
     }
 
     @Override
     public boolean equals(Object o) {
+
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -48,7 +57,35 @@ public class StarStats<D extends Details> implements Comparable<StarStats> {
         return this.score.compareTo(o.score);
     }
 
-    private Double calculateScore(Double goalsPercentage, Double assistsPercentage, Double shotsPercentage, Double blockedShotsPercentage) {
-        return goalsPercentage + assistsPercentage + shotsPercentage + blockedShotsPercentage;
+    private Double calculateScore() {
+
+        this.score = 0.0;
+
+        if (this.details instanceof SkaterGameDetails) {
+            this.score += calculateVariance(((SkaterGameDetails) this.details).getGoals(), this.statistics.get("goals").getAverage()) * CoreConstants.GOAL_RANK_MULTIPLIER;
+            this.score += calculateVariance(((SkaterGameDetails) this.details).getAssists(), this.statistics.get("assists").getAverage()) * CoreConstants.ASSIST_RANK_MULTIPLIER;
+            this.score += calculateVariance(((SkaterGameDetails) this.details).getShots(), this.statistics.get("shots").getAverage()) * CoreConstants.SHOT_RANK_MULTIPLIER;
+            this.score += calculateVariance(((SkaterGameDetails) this.details).getBlockedShots(), this.statistics.get("blockedShots").getAverage()) * CoreConstants.BLOCKED_SHOT_RANK_MULTIPLIER;
+        }
+
+        return this.score;
+    }
+
+    /**
+     * Calculates the percentage change between two number inputs
+     *
+     * @param xi - skater  performance metric (goals, assists...)
+     * @param xf - game averages
+     * @return decimal value of the percentage change, 0 if the change is negative
+     */
+    private Double calculateVariance(Number xi, Number xf) {
+        Double initial = xi.doubleValue();
+        Double finalNum = xf.doubleValue();
+
+        if ((initial - finalNum) < 0) {
+            return 0.0;
+        }
+
+        return (initial - finalNum) / finalNum;
     }
 }

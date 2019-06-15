@@ -1,6 +1,6 @@
-package com.smhl.hdm.models.entities.details.participant;
+package com.smhl.hdm.models.entities.details.participant.impl;
 
-import com.smhl.hdm.models.entities.details.Details;
+import com.smhl.hdm.models.entities.details.participant.ParticipantDetails;
 import com.smhl.hdm.models.entities.participant.impl.Goalie;
 import com.smhl.hdm.models.entities.participant.impl.Team;
 import lombok.*;
@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class GoalieGameDetails implements Details {
+public class GoalieGameDetails implements ParticipantDetails<Goalie> {
 
     @Id
     @Getter
@@ -35,7 +35,7 @@ public class GoalieGameDetails implements Details {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "goalie_id")
     @NonNull
-    private Goalie goalie;
+    private Goalie participant;
 
     @Getter
     @Setter

@@ -5,8 +5,6 @@ import com.smhl.hdm.controllers.response.HdmApiResponse;
 import com.smhl.hdm.enums.HdmApiResponseResult;
 import com.smhl.hdm.facades.entities.game.GameFacade;
 import com.smhl.hdm.resources.game.GameResource;
-import com.smhl.hdm.service.entities.game.GameService;
-import com.smhl.hdm.service.nonentities.star.GameStarService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,13 +22,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/game")
 public class GameApiController extends AbstractHdmController<GameResource> {
-
-    //  TEMP
-    @Autowired
-    private GameStarService gameStarService;
-
-    @Autowired
-    private GameService gameService;
 
     private GameFacade gameFacade;
 
@@ -97,6 +88,12 @@ public class GameApiController extends AbstractHdmController<GameResource> {
         return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "No recently completed game found"), HttpStatus.OK);
     }
 
+    /**
+     * Finds the 3 stars for a game
+     *
+     * @param id game that we're looking at
+     * @return list of 3 top players for a game
+     */
     @GetMapping("/{id}/three-stars")
     public ResponseEntity<HdmApiResponse> getThreeStarsForGame(final @PathVariable("id") Long id) {
 
@@ -106,7 +103,6 @@ public class GameApiController extends AbstractHdmController<GameResource> {
             return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "Could not identify 3 stars for the given game id"), HttpStatus.OK);
         }
 
-        //  TODO: implement 3 stars for game
-        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.gameStarService.calculateStars(this.gameService.find(id).get())), HttpStatus.OK);
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.gameFacade.find3StarsForGame((GameResource) response.getBody().getData())), HttpStatus.OK);
     }
 }

@@ -5,14 +5,17 @@ import com.smhl.hdm.converters.details.participant.SkaterGameDetailsConverter;
 import com.smhl.hdm.converters.game.GameConverter;
 import com.smhl.hdm.facades.entities.HdmFacade;
 import com.smhl.hdm.models.entities.game.Game;
+import com.smhl.hdm.models.nonentities.star.impl.GameStar;
 import com.smhl.hdm.resources.details.participant.GoalieGameDetailsResource;
 import com.smhl.hdm.resources.details.participant.SkaterGameDetailsResource;
 import com.smhl.hdm.resources.game.GameResource;
 import com.smhl.hdm.service.entities.game.GameService;
+import com.smhl.hdm.service.nonentities.star.GameStarService;
 import com.smhl.hdm.utils.HdmUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,15 +30,28 @@ public class GameFacade implements HdmFacade<GameResource> {
 
     private GameService gameService;
     private GameConverter gameConverter;
+    private GameStarService gameStarService;
     private SkaterGameDetailsConverter skaterGameDetailsConverter;
     private GoalieGameDetailsConverter goalieGameDetailsConverter;
 
     @Autowired
-    public GameFacade(GameService gameService, GameConverter gameConverter, SkaterGameDetailsConverter skaterGameDetailsConverter, GoalieGameDetailsConverter goalieGameDetailsConverter) {
+    public GameFacade(GameService gameService, GameConverter gameConverter, GameStarService gameStarService, SkaterGameDetailsConverter skaterGameDetailsConverter, GoalieGameDetailsConverter goalieGameDetailsConverter) {
         this.gameService = gameService;
         this.gameConverter = gameConverter;
+        this.gameStarService = gameStarService;
         this.skaterGameDetailsConverter = skaterGameDetailsConverter;
         this.goalieGameDetailsConverter = goalieGameDetailsConverter;
+    }
+
+    public List<GameStar> find3StarsForGame(GameResource gameResource) {
+
+        Optional<Game> game = this.gameService.find(gameResource.getCode());
+
+        if (game.isPresent()) {
+            return this.gameStarService.calculateStars(game.get());
+        }
+
+        return new ArrayList<>();
     }
 
     public GameResource findLatestCompletedGame() {

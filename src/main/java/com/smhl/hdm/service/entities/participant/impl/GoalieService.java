@@ -2,7 +2,7 @@ package com.smhl.hdm.service.entities.participant.impl;
 
 import com.google.common.collect.Lists;
 import com.smhl.hdm.enums.GameResult;
-import com.smhl.hdm.models.entities.details.participant.GoalieGameDetails;
+import com.smhl.hdm.models.entities.details.participant.impl.GoalieGameDetails;
 import com.smhl.hdm.models.entities.participant.impl.Goalie;
 import com.smhl.hdm.models.entities.season.impl.GoalieSeason;
 import com.smhl.hdm.repositories.participant.goalie.GoalieRepository;
@@ -46,7 +46,7 @@ public class GoalieService implements ParticipantService<Goalie, GoalieGameDetai
     @Override
     public void updateStats(GoalieGameDetails details) {
 
-        GoalieSeason season = details.getGoalie().getCurrentSeason();
+        GoalieSeason season = details.getParticipant().getCurrentSeason();
 
         if (season != null) {
 

@@ -1,7 +1,7 @@
 package com.smhl.hdm.repositories.game;
 
-import com.smhl.hdm.models.entities.details.participant.GoalieGameDetails;
-import com.smhl.hdm.models.entities.details.participant.SkaterGameDetails;
+import com.smhl.hdm.models.entities.details.participant.impl.GoalieGameDetails;
+import com.smhl.hdm.models.entities.details.participant.impl.SkaterGameDetails;
 
 import java.util.List;
 

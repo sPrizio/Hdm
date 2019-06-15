@@ -1,6 +1,6 @@
 package com.smhl.hdm.constants;
 
-import com.smhl.hdm.models.entities.details.participant.SkaterGameDetails;
+import com.smhl.hdm.models.entities.details.participant.impl.SkaterGameDetails;
 import com.smhl.hdm.models.entities.season.impl.GoalieSeason;
 import com.smhl.hdm.models.entities.season.impl.SkaterSeason;
 
@@ -31,7 +31,7 @@ public class CoreConstants {
     public static final LocalDate NOW_AS_LOCALDATE = LocalDate.now(MONTREAL);
     public static final LocalDateTime NOW_AS_LOCALDATETIME = LocalDateTime.now(MONTREAL);
 
-    //  Statistical collectors
+    //  statistical collectors
     public static final Map<String, Collector<SkaterSeason, ?, DoubleSummaryStatistics>> SKATER_SEASON_COLLECTORS = Map.ofEntries(
             new AbstractMap.SimpleEntry<>("gamesPlayed", Collectors.summarizingDouble(SkaterSeason::getGamesPlayed)),
             new AbstractMap.SimpleEntry<>("goals", Collectors.summarizingDouble(SkaterSeason::getGoals)),
@@ -62,4 +62,10 @@ public class CoreConstants {
             new AbstractMap.SimpleEntry<>("shots", Collectors.summarizingDouble(SkaterGameDetails::getShots)),
             new AbstractMap.SimpleEntry<>("blockedShots", Collectors.summarizingDouble(SkaterGameDetails::getBlockedShots))
     );
+
+    //  stars
+    public static final Double GOAL_RANK_MULTIPLIER = 3.3;
+    public static final Double ASSIST_RANK_MULTIPLIER = 2.15;
+    public static final Double SHOT_RANK_MULTIPLIER = 1.1;
+    public static final Double BLOCKED_SHOT_RANK_MULTIPLIER = 1.35;
 }

@@ -2,7 +2,7 @@ package com.smhl.hdm.service.nonentities.star;
 
 import com.smhl.hdm.comparators.StarStatsComparator;
 import com.smhl.hdm.constants.CoreConstants;
-import com.smhl.hdm.models.entities.details.participant.SkaterGameDetails;
+import com.smhl.hdm.models.entities.details.participant.impl.SkaterGameDetails;
 import com.smhl.hdm.models.entities.game.Game;
 import com.smhl.hdm.models.nonentities.star.impl.GameStar;
 import com.smhl.hdm.utils.StatisticsUtils;
@@ -25,7 +25,7 @@ public class GameStarService {
      * @param game game of which we want to collect 3 stars
      * @return a list of star objects
      */
-    public Object calculateStars(Game game) {
+    public List<GameStar> calculateStars(Game game) {
 
         if (Objects.isNull(game)) {
             return new ArrayList<>();
@@ -43,16 +43,27 @@ public class GameStarService {
         game.getGameDetails().getSkaterGameDetails()
                 .forEach(details -> skaterStats.add(calculateStatsForGame(details, gameStats)));
 
-
-        //  TODO: implement a way to always ensure the same order of stars if they have the same score (alphabetical)
-        //  TODO: display these on the game page
         skaterStats.sort(StarStatsComparator.compare());
-        Iterator<StarStats<SkaterGameDetails>> iterator = skaterStats.iterator();
-        int count = 0;
 
-        while (iterator.hasNext() && count < 3) {
-            stars.add(obtainGameStar(iterator.next()));
-            count += 1;
+        if (skaterStats.size() > 2) {
+            for (int i = skaterStats.size() - 1; i > ((skaterStats.size() - 1) - 3); i = i - 1) {
+                stars.add(obtainGameStar(skaterStats.get(i)));
+            }
+
+            //  sort equivalent stars by name
+            if (
+                    stars.get(0).getScore().equals(stars.get(1).getScore()) &&
+                    stars.get(0).getDetails().getParticipant().getName().compareTo(stars.get(1).getDetails().getParticipant().getName()) > 0
+            ) {
+                Collections.swap(stars, 0, 1);
+            }
+
+            if (
+                    stars.get(1).getScore().equals(stars.get(2).getScore()) &&
+                    stars.get(1).getDetails().getParticipant().getName().compareTo(stars.get(2).getDetails().getParticipant().getName()) > 0
+            ) {
+                Collections.swap(stars, 1, 2);
+            }
         }
 
         return stars;
@@ -68,10 +79,7 @@ public class GameStarService {
     private StarStats<SkaterGameDetails> calculateStatsForGame(SkaterGameDetails details, Map<String, DoubleSummaryStatistics> statistics) {
         return new StarStats<>(
                 details,
-                details.getGoals() - statistics.get("goals").getAverage(),
-                details.getAssists() - statistics.get("assists").getAverage(),
-                details.getShots() - statistics.get("shots").getAverage(),
-                details.getBlockedShots() - statistics.get("blockedShots").getAverage()
+                statistics
         );
     }
 
@@ -82,6 +90,6 @@ public class GameStarService {
      * @return game star object
      */
     private GameStar<SkaterGameDetails> obtainGameStar(StarStats<SkaterGameDetails> starStats) {
-        return new GameStar<>(starStats.getDetails());
+        return new GameStar<>(starStats.getDetails(), starStats.getScore());
     }
 }

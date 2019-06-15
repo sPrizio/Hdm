@@ -1,7 +1,7 @@
 package com.smhl.hdm.service.entities.participant.impl;
 
 import com.google.common.collect.Lists;
-import com.smhl.hdm.models.entities.details.participant.SkaterGameDetails;
+import com.smhl.hdm.models.entities.details.participant.impl.SkaterGameDetails;
 import com.smhl.hdm.models.entities.participant.impl.Skater;
 import com.smhl.hdm.models.entities.season.impl.SkaterSeason;
 import com.smhl.hdm.repositories.participant.skater.SkaterRepository;
@@ -45,7 +45,7 @@ public class SkaterService implements ParticipantService<Skater, SkaterGameDetai
     @Override
     public void updateStats(SkaterGameDetails details) {
 
-        SkaterSeason season = details.getSkater().getCurrentSeason();
+        SkaterSeason season = details.getParticipant().getCurrentSeason();
 
         if (season != null) {
             season.incrementGamesPlayed();

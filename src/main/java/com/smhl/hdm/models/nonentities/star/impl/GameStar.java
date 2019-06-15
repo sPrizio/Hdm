@@ -1,6 +1,6 @@
 package com.smhl.hdm.models.nonentities.star.impl;
 
-import com.smhl.hdm.models.entities.details.Details;
+import com.smhl.hdm.models.entities.details.participant.ParticipantDetails;
 import com.smhl.hdm.models.nonentities.star.Star;
 import lombok.*;
 
@@ -12,10 +12,15 @@ import lombok.*;
  */
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class GameStar<D extends Details> implements Star {
+public class GameStar<D extends ParticipantDetails> implements Star {
 
     @Getter
     @Setter
     @NonNull
     private D details;
+
+    @Getter
+    @Setter
+    @NonNull
+    private Double score;
 }
