@@ -36,6 +36,11 @@ public class HdmApiController extends AbstractHdmController {
     }
 
 
+    @GetMapping("/")
+    public ResponseEntity<HdmApiResponse> getApi() {
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, "HDM Version 0.1"), OK);
+    }
+
     @GetMapping("/current-season")
     public ResponseEntity<HdmApiResponse> getCurrentSeasonString() {
         return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, HdmUtils.getCurrentSeasonString()), OK);
