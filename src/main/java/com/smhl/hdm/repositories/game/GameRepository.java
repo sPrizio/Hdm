@@ -4,6 +4,7 @@ import com.smhl.hdm.models.entities.game.Game;
 import com.smhl.hdm.repositories.HdmRepository;
 import org.springframework.data.repository.CrudRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -17,4 +18,6 @@ public interface GameRepository extends HdmRepository, GameRepositoryCustom, Cru
     List<Game> findBySeasonStringOrderByGameTimeDesc(final String seasonString);
 
     Game findFirstBySeasonStringAndGameStatusOrderByGameTimeDesc(final String seasonString, final String gameStatus);
+
+    Game findByGameTime(final LocalDateTime gameTime);
 }

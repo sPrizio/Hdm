@@ -11,6 +11,7 @@ import com.smhl.hdm.utils.HdmUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +29,10 @@ public class GameService implements HdmService<Game> {
     @Autowired
     public GameService(GameRepository gameRepository) {
         this.gameRepository = gameRepository;
+    }
+
+    public Game findByGameTime(LocalDateTime gameTime) {
+        return this.gameRepository.findByGameTime(gameTime);
     }
 
     public Game findLatestCompletedGame() {

@@ -5,6 +5,7 @@ import com.smhl.hdm.enums.GameStatus;
 import com.smhl.hdm.enums.ValidationResponseResult;
 import com.smhl.hdm.models.entities.participant.impl.Team;
 import com.smhl.hdm.models.entities.seasonstring.SeasonString;
+import com.smhl.hdm.service.entities.game.GameService;
 import com.smhl.hdm.service.entities.participant.impl.TeamService;
 import com.smhl.hdm.service.entities.seasonstring.SeasonStringService;
 import com.smhl.hdm.validation.result.ValidationResult;
@@ -15,10 +16,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -30,13 +30,15 @@ import java.util.stream.Collectors;
 @Component
 public class GameValidator extends AbstractHdmValidator implements HdmValidator {
 
+    private GameService gameService;
     private SeasonStringService seasonStringService;
     private TeamService teamService;
 
     private static final List<String> EXPECTED_PARAMS = Arrays.asList("gameTime", "seasonString", "gameStatus", "homeTeam", "awayTeam");
 
     @Autowired
-    public GameValidator(SeasonStringService seasonStringService, TeamService teamService) {
+    public GameValidator(GameService gameService, SeasonStringService seasonStringService, TeamService teamService) {
+        this.gameService = gameService;
         this.seasonStringService = seasonStringService;
         this.teamService = teamService;
     }
@@ -61,6 +63,10 @@ public class GameValidator extends AbstractHdmValidator implements HdmValidator 
             return new ValidationResult(ValidationResponseResult.FAILED, "Invalid date format. Date must be of the format 'yyyy-MM-dd HH:mm:ss'");
         }
 
+        if (this.gameService.findByGameTime(LocalDateTime.parse(date, DateTimeFormatter.ofPattern(CoreConstants.DATE_FORMAT_LONG, Locale.CANADA))) != null) {
+            return new ValidationResult(ValidationResponseResult.FAILED, "A game with that game time already exists");
+        }
+
         //  season string
         if (super.isTooLarge(season) || super.hasUnacceptableSymbol(season) || super.hasCriticalWord(season) || isInvalidSeasonString(season)) {
             return new ValidationResult(ValidationResponseResult.FAILED, "Invalid season string. Season string is not of the form 'year1-year2' or is not a valid season string");
@@ -81,6 +87,10 @@ public class GameValidator extends AbstractHdmValidator implements HdmValidator 
 
         if (super.isOverflow(h) || super.isOverflow(a)) {
             return new ValidationResult(ValidationResponseResult.FAILED, "The given team id was too long");
+        }
+
+        if (h.equals(a)) {
+            return new ValidationResult(ValidationResponseResult.FAILED, "The same team was supplied as both the home and away teams");
         }
 
         Optional<Team> hh = this.teamService.find(h);
@@ -105,9 +115,9 @@ public class GameValidator extends AbstractHdmValidator implements HdmValidator 
     private boolean isInvalidSeasonString(String seasonString) {
 
         return
-                !this.seasonStringService.getAllSeasonStrings()
+                this.seasonStringService.getAllSeasonStrings()
                         .stream()
                         .map(SeasonString::getSeason)
-                        .anyMatch(s -> s.equals(seasonString));
+                        .noneMatch(s -> s.equals(seasonString));
     }
 }
