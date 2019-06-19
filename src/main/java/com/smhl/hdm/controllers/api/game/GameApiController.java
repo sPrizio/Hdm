@@ -2,16 +2,22 @@ package com.smhl.hdm.controllers.api.game;
 
 import com.smhl.hdm.controllers.AbstractHdmController;
 import com.smhl.hdm.controllers.response.HdmApiResponse;
+import com.smhl.hdm.enums.GameStatus;
 import com.smhl.hdm.enums.HdmApiResponseResult;
 import com.smhl.hdm.facades.entities.game.GameFacade;
 import com.smhl.hdm.resources.game.GameResource;
+import com.smhl.hdm.validation.result.ValidationResult;
+import com.smhl.hdm.validation.validator.impl.game.GameValidator;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Controls various endpoints for Game-related information retrieval
@@ -24,14 +30,18 @@ import java.util.List;
 public class GameApiController extends AbstractHdmController<GameResource> {
 
     private GameFacade gameFacade;
+    private GameValidator gameValidator;
 
     @Autowired
-    public GameApiController(GameFacade gameFacade) {
+    public GameApiController(GameFacade gameFacade, GameValidator gameValidator) {
         this.gameFacade = gameFacade;
+        this.gameValidator = gameValidator;
     }
 
 
     //  METHODS
+
+    //  *************** GET ***************
 
     /**
      * Finds a game for the given id
@@ -104,5 +114,34 @@ public class GameApiController extends AbstractHdmController<GameResource> {
         }
 
         return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.gameFacade.find3StarsForGame((GameResource) response.getBody().getData())), HttpStatus.OK);
+    }
+
+    /**
+     * Returns a list of the possible states that a game can be in
+     *
+     * @return array list of game status values
+     */
+    @GetMapping("/status-enums")
+    public ResponseEntity<HdmApiResponse> getGameStates() {
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, Arrays.stream(GameStatus.values()).map(Enum::name).collect(Collectors.toList())), HttpStatus.OK);
+    }
+
+
+    //  *************** POST ***************
+
+    @PostMapping(value = "/create")
+    @ResponseBody
+    public ResponseEntity<HdmApiResponse> createGame(final @RequestBody Map<String, Object> params) {
+
+        ValidationResult result = this.gameValidator.validate(params);
+
+        if (result.isValid()) {
+
+            //  TODO: create game
+
+            return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, result), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, result), HttpStatus.OK);
     }
 }

@@ -31,6 +31,9 @@ public class CoreConstants {
     public static final LocalDate NOW_AS_LOCALDATE = LocalDate.now(MONTREAL);
     public static final LocalDateTime NOW_AS_LOCALDATETIME = LocalDateTime.now(MONTREAL);
 
+    public static final String DATE_FORMAT_LONG = "yyyy-MM-dd HH:mm:ss";
+    public static final String DATE_FORMAT_MEDIUM = "yyyy-MM-dd";
+
     //  statistical collectors
     public static final Map<String, Collector<SkaterSeason, ?, DoubleSummaryStatistics>> SKATER_SEASON_COLLECTORS = Map.ofEntries(
             new AbstractMap.SimpleEntry<>("gamesPlayed", Collectors.summarizingDouble(SkaterSeason::getGamesPlayed)),
