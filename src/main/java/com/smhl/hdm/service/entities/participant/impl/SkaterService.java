@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -38,7 +39,7 @@ public class SkaterService implements ParticipantService<Skater, SkaterGameDetai
      * @param limit number of results to return
      * @return sorted limited list based on a stat
      */
-    public List<Skater> getTopSkatersForStatAndLimit(String stat, int limit) {
+    public List<Skater> getTopSkatersForStatAndLimit(String stat, Integer limit) {
         return this.skaterRepository.findTopSkatersForStatAndLimit(stat, limit);
     }
 
@@ -89,5 +90,10 @@ public class SkaterService implements ParticipantService<Skater, SkaterGameDetai
         if (find(id).isPresent()) {
             this.skaterRepository.deleteById(id);
         }
+    }
+
+    @Override
+    public Skater create(Map<String, Object> params) {
+        return null;
     }
 }

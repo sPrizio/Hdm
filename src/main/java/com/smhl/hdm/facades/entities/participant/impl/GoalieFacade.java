@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -36,7 +37,7 @@ public class GoalieFacade implements ParticipantFacade<GoalieResource> {
      * @param limit integer limit of results
      * @return limited list
      */
-    public List<GoalieResource> findTopGoaliesForStatAndLimit(String stat, int limit) {
+    public List<GoalieResource> findTopGoaliesForStatAndLimit(String stat, Integer limit) {
         return this.goalieConverter.convertAll(this.goalieService.getTopGoaliesForStatAndLimit(stat, limit));
     }
 
@@ -60,5 +61,15 @@ public class GoalieFacade implements ParticipantFacade<GoalieResource> {
     @Override
     public List<GoalieResource> findAll() {
         return this.goalieConverter.convertAll(this.goalieService.findAll());
+    }
+
+    @Override
+    public GoalieResource create(Map<String, Object> params) {
+        return null;
+    }
+
+    @Override
+    public void delete(Long id) {
+        this.goalieService.delete(id);
     }
 }

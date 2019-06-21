@@ -1,5 +1,6 @@
 package com.smhl.hdm.validation.validator.impl;
 
+import com.smhl.hdm.constants.CoreConstants;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -7,7 +8,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
 /**
@@ -98,7 +102,7 @@ public abstract class AbstractHdmValidator {
      * @param integer - passed integer
      * @return true if integer is less than 0
      */
-    public boolean isNegative(int integer) {
+    public boolean isNegative(Integer integer) {
         return integer < 0;
     }
 
@@ -118,7 +122,7 @@ public abstract class AbstractHdmValidator {
      * @param integer - passed string
      * @return true if the integer is greater than 1000
      */
-    public boolean isTooLarge(int integer) {
+    public boolean isTooLarge(Integer integer) {
         return integer > 1000;
     }
 
@@ -156,7 +160,7 @@ public abstract class AbstractHdmValidator {
         }
 
         LocalDateTime dateTime;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format, Locale.CANADA);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format, CoreConstants.HDM_LOCALE);
 
         try {
             dateTime = LocalDateTime.parse(s, formatter);

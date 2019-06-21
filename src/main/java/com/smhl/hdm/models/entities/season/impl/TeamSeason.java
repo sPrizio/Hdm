@@ -32,37 +32,37 @@ public class TeamSeason implements Season, Comparable<TeamSeason> {
     @Setter
     @Column
     @NonNull
-    private int gamesPlayed;
+    private Integer gamesPlayed;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private int wins;
+    private Integer wins;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private int losses;
+    private Integer losses;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private int ties;
+    private Integer ties;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private int goalsFor;
+    private Integer goalsFor;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private int goalsAgainst;
+    private Integer goalsAgainst;
 
 
     //  METHODS
@@ -100,7 +100,7 @@ public class TeamSeason implements Season, Comparable<TeamSeason> {
      *
      * @param increment amount to increment by
      */
-    public void incrementGoalsFor(int increment) {
+    public void incrementGoalsFor(Integer increment) {
         this.goalsFor += increment;
     }
 
@@ -109,7 +109,7 @@ public class TeamSeason implements Season, Comparable<TeamSeason> {
      *
      * @param increment amount to increment by
      */
-    public void incrementGoalsAgainst(int increment) {
+    public void incrementGoalsAgainst(Integer increment) {
         this.goalsAgainst += increment;
     }
 
@@ -122,19 +122,19 @@ public class TeamSeason implements Season, Comparable<TeamSeason> {
 
         TeamSeason that = (TeamSeason) o;
         return
-                gamesPlayed == that.gamesPlayed &&
-                        wins == that.wins &&
-                        losses == that.losses &&
-                        ties == that.ties &&
-                        goalsFor == that.goalsFor &&
-                        goalsAgainst == that.goalsAgainst &&
-                        id.equals(that.id) &&
-                        seasonString.equals(that.seasonString);
+                this.gamesPlayed.equals(that.gamesPlayed) &&
+                        this.wins.equals(that.wins) &&
+                        this.losses.equals(that.losses) &&
+                        this.ties.equals(that.ties) &&
+                        this.goalsFor.equals(that.goalsFor) &&
+                        this.goalsAgainst.equals(that.goalsAgainst) &&
+                        this.id.equals(that.id) &&
+                        this.seasonString.equals(that.seasonString);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, seasonString, gamesPlayed, wins, losses, ties, goalsFor, goalsAgainst);
+        return Objects.hash(this.id, this.seasonString, this.gamesPlayed, this.wins, this.losses, this.ties, this.goalsFor, this.goalsAgainst);
     }
 
     @Override

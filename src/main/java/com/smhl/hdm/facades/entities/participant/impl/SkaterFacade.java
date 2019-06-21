@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -36,7 +37,7 @@ public class SkaterFacade implements ParticipantFacade<SkaterResource> {
      * @param limit number of results to return
      * @return sorted limited list based on a stat
      */
-    public List<SkaterResource> findTopSkatersForStatAndLimit(String stat, int limit) {
+    public List<SkaterResource> findTopSkatersForStatAndLimit(String stat, Integer limit) {
         return this.skaterConverter.convertAll(this.skaterService.getTopSkatersForStatAndLimit(stat, limit));
     }
 
@@ -60,5 +61,15 @@ public class SkaterFacade implements ParticipantFacade<SkaterResource> {
     @Override
     public List<SkaterResource> findAll() {
         return this.skaterConverter.convertAll(this.skaterService.findAll());
+    }
+
+    @Override
+    public SkaterResource create(Map<String, Object> params) {
+        return null;
+    }
+
+    @Override
+    public void delete(Long id) {
+        this.skaterService.delete(id);
     }
 }

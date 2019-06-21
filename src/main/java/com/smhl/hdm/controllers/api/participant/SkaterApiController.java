@@ -87,7 +87,7 @@ public class SkaterApiController extends AbstractHdmController<SkaterResource> {
      * @return limited list sorted based on a stat
      */
     @GetMapping("/top-active")
-    public ResponseEntity<HdmApiResponse> getTopSkatersForStatAndLimit(final @RequestParam String stat, final @RequestParam int limit) {
+    public ResponseEntity<HdmApiResponse> getTopSkatersForStatAndLimit(final @RequestParam String stat, final @RequestParam Integer limit) {
         return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.skaterFacade.findTopSkatersForStatAndLimit(stat, limit)), HttpStatus.OK);
     }
 
@@ -135,7 +135,7 @@ public class SkaterApiController extends AbstractHdmController<SkaterResource> {
      * @return a collection of recent games this participant was involved in
      */
     @GetMapping("/recent-games/{id}")
-    public ResponseEntity<HdmApiResponse> getRecentGamesForSkater(final @PathVariable("id") Long id, final @RequestParam int limit) {
+    public ResponseEntity<HdmApiResponse> getRecentGamesForSkater(final @PathVariable("id") Long id, final @RequestParam Integer limit) {
 
         List<SkaterGameDetailsResource> games = this.gameFacade.findRecentGameDetailsForSkater(id, limit);
 

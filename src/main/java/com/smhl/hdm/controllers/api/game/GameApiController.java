@@ -129,19 +129,44 @@ public class GameApiController extends AbstractHdmController<GameResource> {
 
     //  *************** POST ***************
 
+    /**
+     * Creates a new game in the system
+     *
+     * @param params request params containing information for a new game
+     * @return newly created game
+     */
     @PostMapping(value = "/create")
-    @ResponseBody
     public ResponseEntity<HdmApiResponse> createGame(final @RequestBody Map<String, Object> params) {
 
         ValidationResult result = this.gameValidator.validate(params);
 
         if (result.isValid()) {
 
-            //  TODO: create game
+            GameResource resource = this.gameFacade.create(params);
 
-            return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, result), HttpStatus.OK);
+            if (resource != null) {
+                return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, resource), HttpStatus.OK);
+            }
+
+            return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "Game could not be created"), HttpStatus.OK);
         }
 
         return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, result), HttpStatus.OK);
+    }
+
+
+    //  *************** DELETE ***************
+
+    /**
+     * Deletes a game by its id. Based on our data model, all related details classes and scoring plays
+     * will also be deleted
+     *
+     * @param id game id
+     * @return void
+     */
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<HdmApiResponse> deleteGame(final @PathVariable("id") Long id) {
+        this.gameFacade.delete(id);
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, "Deleted game with id " + id), HttpStatus.OK);
     }
 }

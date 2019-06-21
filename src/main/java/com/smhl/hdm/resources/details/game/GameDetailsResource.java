@@ -31,11 +31,11 @@ public class GameDetailsResource implements HdmResource {
 
     @Getter
     @Setter
-    private int homeTeamScore;
+    private Integer homeTeamScore;
 
     @Getter
     @Setter
-    private int awayTeamScore;
+    private Integer awayTeamScore;
 
     @Getter
     @Setter

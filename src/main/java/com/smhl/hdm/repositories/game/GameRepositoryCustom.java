@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface GameRepositoryCustom {
 
-    List<SkaterGameDetails> findSkaterGameDetails(String seasonString, Long id, int limit);
+    List<SkaterGameDetails> findSkaterGameDetails(String seasonString, Long id, Integer limit);
 
-    List<GoalieGameDetails> findGoalieGameDetails(String seasonString, Long id, int limit);
+    List<GoalieGameDetails> findGoalieGameDetails(String seasonString, Long id, Integer limit);
 }

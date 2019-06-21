@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -50,5 +51,15 @@ public class TeamFacade implements ParticipantFacade<TeamResource> {
     @Override
     public List<TeamResource> findAll() {
         return this.teamConverter.convertAll(this.teamService.findAll());
+    }
+
+    @Override
+    public TeamResource create(Map<String, Object> params) {
+        return null;
+    }
+
+    @Override
+    public void delete(Long id) {
+        this.teamService.delete(id);
     }
 }

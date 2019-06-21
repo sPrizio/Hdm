@@ -3,6 +3,7 @@ package com.smhl.hdm.facades.entities;
 import com.smhl.hdm.resources.HdmResource;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Facades are classes that return resource objects for entities. They are meant to expose data to the front-end
@@ -15,4 +16,8 @@ public interface HdmFacade<R extends HdmResource> {
     R find(Long id);
 
     List<R> findAll();
+
+    R create(Map<String, Object> params);
+
+    void delete(Long id);
 }

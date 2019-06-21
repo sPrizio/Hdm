@@ -51,7 +51,7 @@ public class TeamSeasonConverter implements HdmConverter<TeamSeason, TeamSeasonR
 
     //  HELPERS
 
-    private int calculatePoints(TeamSeason entity) {
+    private Integer calculatePoints(TeamSeason entity) {
         return (entity.getWins() * 2) + entity.getTies();
     }
 }

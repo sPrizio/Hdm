@@ -16,5 +16,5 @@ public interface SkaterRepositoryCustom {
 
     List<Skater> findBySeasonStringSorted(String seasonString, String field, String order);
 
-    List<Skater> findTopSkatersForStatAndLimit(String stat, int limit);
+    List<Skater> findTopSkatersForStatAndLimit(String stat, Integer limit);
 }

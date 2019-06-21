@@ -32,31 +32,31 @@ public class SkaterSeason implements Season, Comparable<SkaterSeason> {
     @Setter
     @Column
     @NonNull
-    private int gamesPlayed;
+    private Integer gamesPlayed;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private int goals;
+    private Integer goals;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private int assists;
+    private Integer assists;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private int shots;
+    private Integer shots;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private int blockedShots;
+    private Integer blockedShots;
 
 
     //  METHODS
@@ -66,7 +66,7 @@ public class SkaterSeason implements Season, Comparable<SkaterSeason> {
      *
      * @return goals summed with assists
      */
-    public int getPoints() {
+    public Integer getPoints() {
         return this.goals + this.assists;
     }
 
@@ -75,7 +75,7 @@ public class SkaterSeason implements Season, Comparable<SkaterSeason> {
      *
      * @return points divided by games played
      */
-    public double getPointsPerGame() {
+    public Double getPointsPerGame() {
         if (this.gamesPlayed > 0) {
             return Math.round(((double) getPoints() / (double) this.gamesPlayed) * 100.0) / 100.0;
         }
@@ -95,7 +95,7 @@ public class SkaterSeason implements Season, Comparable<SkaterSeason> {
      *
      * @param increment amount to increment goals by
      */
-    public void incrementGoals(int increment) {
+    public void incrementGoals(Integer increment) {
         this.goals += increment;
     }
 
@@ -104,7 +104,7 @@ public class SkaterSeason implements Season, Comparable<SkaterSeason> {
      *
      * @param increment amount to increment assists by
      */
-    public void incrementAssists(int increment) {
+    public void incrementAssists(Integer increment) {
         this.assists += increment;
     }
 
@@ -113,7 +113,7 @@ public class SkaterSeason implements Season, Comparable<SkaterSeason> {
      *
      * @param increment amount to increment shots by
      */
-    public void incrementShots(int increment) {
+    public void incrementShots(Integer increment) {
         this.shots += increment;
     }
 
@@ -122,7 +122,7 @@ public class SkaterSeason implements Season, Comparable<SkaterSeason> {
      *
      * @param increment amount to increment blocked shots by
      */
-    public void incrementBlockedShots(int increment) {
+    public void incrementBlockedShots(Integer increment) {
         this.blockedShots += increment;
     }
 
@@ -136,18 +136,18 @@ public class SkaterSeason implements Season, Comparable<SkaterSeason> {
 
         SkaterSeason that = (SkaterSeason) o;
         return
-                gamesPlayed == that.gamesPlayed &&
-                        goals == that.goals &&
-                        assists == that.assists &&
-                        shots == that.shots &&
-                        blockedShots == that.blockedShots &&
-                        id.equals(that.id) &&
-                        seasonString.equals(that.seasonString);
+                this.gamesPlayed.equals(that.gamesPlayed) &&
+                        this.goals.equals(that.goals) &&
+                        this.assists.equals(that.assists) &&
+                        this.shots.equals(that.shots) &&
+                        this.blockedShots.equals(that.blockedShots) &&
+                        this.id.equals(that.id) &&
+                        this.seasonString.equals(that.seasonString);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, seasonString, gamesPlayed, goals, assists, shots, blockedShots);
+        return Objects.hash(this.id, this.seasonString, this.gamesPlayed, this.goals, this.assists, this.shots, this.blockedShots);
     }
 
     @Override

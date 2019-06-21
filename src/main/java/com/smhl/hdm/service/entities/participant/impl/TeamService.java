@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -91,5 +92,10 @@ public class TeamService implements ParticipantService<Team, TeamGameDetails> {
         if (find(id).isPresent()) {
             this.teamRepository.deleteById(id);
         }
+    }
+
+    @Override
+    public Team create(Map<String, Object> params) {
+        return null;
     }
 }

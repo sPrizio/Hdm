@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -52,5 +53,10 @@ public class TeamSeasonService implements SeasonService<TeamSeason> {
         if (find(id).isPresent()) {
             this.teamSeasonRepository.deleteById(id);
         }
+    }
+
+    @Override
+    public TeamSeason create(Map<String, Object> params) {
+        return null;
     }
 }

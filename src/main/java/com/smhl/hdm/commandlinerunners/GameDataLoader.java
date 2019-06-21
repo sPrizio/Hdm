@@ -14,7 +14,6 @@ import com.smhl.hdm.models.entities.game.ScoringPlay;
 import com.smhl.hdm.models.entities.participant.impl.Goalie;
 import com.smhl.hdm.models.entities.participant.impl.Skater;
 import com.smhl.hdm.models.entities.participant.impl.Team;
-import com.smhl.hdm.repositories.details.GameDetailsRepository;
 import com.smhl.hdm.repositories.game.GameRepository;
 import com.smhl.hdm.repositories.participant.goalie.GoalieRepository;
 import com.smhl.hdm.repositories.participant.skater.SkaterRepository;
@@ -44,21 +43,18 @@ public class GameDataLoader implements CommandLineRunner {
     private GoalieRepository goalieRepository;
     private TeamRepository teamRepository;
     private GameRepository gameRepository;
-    private GameDetailsRepository gameDetailsRepository;
 
     @Autowired
     public GameDataLoader(
             SkaterRepository skaterRepository,
             GoalieRepository goalieRepository,
             TeamRepository teamRepository,
-            GameRepository gameRepository,
-            GameDetailsRepository gameDetailsRepository
+            GameRepository gameRepository
     ) {
         this.skaterRepository = skaterRepository;
         this.goalieRepository = goalieRepository;
         this.teamRepository = teamRepository;
         this.gameRepository = gameRepository;
-        this.gameDetailsRepository = gameDetailsRepository;
     }
 
     @Override
@@ -285,12 +281,6 @@ public class GameDataLoader implements CommandLineRunner {
                 Sets.newHashSet(teamGameDetails51, teamGameDetails52),
                 Sets.newHashSet(scoringPlay51, scoringPlay52, scoringPlay53, scoringPlay54)
         );
-
-        gameDetails1 = this.gameDetailsRepository.save(gameDetails1);
-        gameDetails2 = this.gameDetailsRepository.save(gameDetails2);
-        gameDetails3 = this.gameDetailsRepository.save(gameDetails3);
-        gameDetails4 = this.gameDetailsRepository.save(gameDetails4);
-        gameDetails5 = this.gameDetailsRepository.save(gameDetails5);
 
         game1.setGameDetails(gameDetails1);
         game2.setGameDetails(gameDetails2);

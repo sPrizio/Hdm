@@ -23,47 +23,47 @@ public class GoalieSeasonResource implements HdmResource, Comparable<GoalieSeaso
 
     @Getter
     @Setter
-    private int gamesPlayed;
+    private Integer gamesPlayed;
 
     @Getter
     @Setter
-    private int gamesStarted;
+    private Integer gamesStarted;
 
     @Getter
     @Setter
-    private int wins;
+    private Integer wins;
 
     @Getter
     @Setter
-    private int losses;
+    private Integer losses;
 
     @Getter
     @Setter
-    private int ties;
+    private Integer ties;
 
     @Getter
     @Setter
-    private int saves;
+    private Integer saves;
 
     @Getter
     @Setter
-    private int shotsAgainst;
+    private Integer shotsAgainst;
 
     @Getter
     @Setter
-    private int goalsAgainst;
+    private Integer goalsAgainst;
 
     @Getter
     @Setter
-    private int shutouts;
+    private Integer shutouts;
 
     @Getter
     @Setter
-    private double savePercentage;
+    private Double savePercentage;
 
     @Getter
     @Setter
-    private double goalsAgainstAverage;
+    private Double goalsAgainstAverage;
 
     @Override
     public boolean isPresent() {
@@ -79,15 +79,15 @@ public class GoalieSeasonResource implements HdmResource, Comparable<GoalieSeaso
 
         GoalieSeasonResource that = (GoalieSeasonResource) o;
         return
-                this.gamesPlayed == that.gamesPlayed &&
-                this.gamesStarted == that.gamesStarted &&
-                this.wins == that.wins &&
-                this.losses == that.losses &&
-                this.ties == that.ties &&
-                this.saves == that.saves &&
-                this.shotsAgainst == that.shotsAgainst &&
-                this.goalsAgainst == that.goalsAgainst &&
-                this.shutouts == that.shutouts &&
+                this.gamesPlayed.equals(that.gamesPlayed) &&
+                this.gamesStarted.equals(that.gamesStarted) &&
+                this.wins.equals(that.wins) &&
+                this.losses.equals(that.losses) &&
+                this.ties.equals(that.ties) &&
+                this.saves.equals(that.saves) &&
+                this.shotsAgainst.equals(that.shotsAgainst) &&
+                this.goalsAgainst.equals(that.goalsAgainst) &&
+                this.shutouts.equals(that.shutouts) &&
                 Double.compare(that.savePercentage, this.savePercentage) == 0 &&
                 Double.compare(that.goalsAgainstAverage, this.goalsAgainstAverage) == 0 &&
                 this.seasonString.equals(that.seasonString);

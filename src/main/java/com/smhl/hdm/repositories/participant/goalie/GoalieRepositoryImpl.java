@@ -79,7 +79,7 @@ public class GoalieRepositoryImpl implements GoalieRepositoryCustom {
     }
 
     @Override
-    public List<Goalie> findTopGoaliesForStatAndLimit(String stat, int limit) {
+    public List<Goalie> findTopGoaliesForStatAndLimit(String stat, Integer limit) {
 
         if (limit > 0) {
             String order = stat.equals("goals_against_average") ? "asc" : "desc";

@@ -23,7 +23,7 @@ public class GameRepositoryImpl implements GameRepositoryCustom {
     private EntityManager entityManager;
 
     @Override
-    public List<SkaterGameDetails> findSkaterGameDetails(String seasonString, Long id, int limit) {
+    public List<SkaterGameDetails> findSkaterGameDetails(String seasonString, Long id, Integer limit) {
 
         StringBuilder queryBuilder = new StringBuilder();
 
@@ -42,7 +42,7 @@ public class GameRepositoryImpl implements GameRepositoryCustom {
     }
 
     @Override
-    public List<GoalieGameDetails> findGoalieGameDetails(String seasonString, Long id, int limit) {
+    public List<GoalieGameDetails> findGoalieGameDetails(String seasonString, Long id, Integer limit) {
 
         StringBuilder queryBuilder = new StringBuilder();
 

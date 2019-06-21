@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -52,5 +53,10 @@ public class GoalieSeasonService implements SeasonService<GoalieSeason> {
         if (find(id).isPresent()) {
             this.goalieSeasonRepository.deleteById(id);
         }
+    }
+
+    @Override
+    public GoalieSeason create(Map<String, Object> params) {
+        return null;
     }
 }

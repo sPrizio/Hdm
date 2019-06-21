@@ -39,7 +39,7 @@ public class HdmUtils {
      * @param yearOffset years off set of current season
      * @return season string for offset
      */
-    public static String getCurrentSeasonString(int yearOffset) {
+    public static String getCurrentSeasonString(Integer yearOffset) {
 
         LocalDate today = CoreConstants.NOW_AS_LOCALDATE.plusYears(yearOffset);
 

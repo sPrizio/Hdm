@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -39,7 +40,7 @@ public class GoalieService implements ParticipantService<Goalie, GoalieGameDetai
      * @param limit integer limit of results
      * @return limited list
      */
-    public List<Goalie> getTopGoaliesForStatAndLimit(String stat, int limit) {
+    public List<Goalie> getTopGoaliesForStatAndLimit(String stat, Integer limit) {
         return this.goalieRepository.findTopGoaliesForStatAndLimit(stat, limit);
     }
 
@@ -52,7 +53,7 @@ public class GoalieService implements ParticipantService<Goalie, GoalieGameDetai
 
             season.incrementGamesPlayed();
 
-            if (details.isStarter()) {
+            if (details.getIsStarter()) {
                 season.incrementGamesStarted();
             }
 
@@ -111,5 +112,10 @@ public class GoalieService implements ParticipantService<Goalie, GoalieGameDetai
         if (find(id).isPresent()) {
             this.goalieRepository.deleteById(id);
         }
+    }
+
+    @Override
+    public Goalie create(Map<String, Object> params) {
+        return null;
     }
 }

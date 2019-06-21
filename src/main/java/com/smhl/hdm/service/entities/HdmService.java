@@ -3,6 +3,7 @@ package com.smhl.hdm.service.entities;
 import com.smhl.hdm.models.entities.HdmEntity;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -22,4 +23,6 @@ public interface HdmService<E extends HdmEntity> {
     E save(E entity);
 
     void delete(Long id);
+
+    E create(Map<String, Object> params);
 }
