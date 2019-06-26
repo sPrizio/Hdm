@@ -21,6 +21,8 @@ public class Statistic {
     private Map<String, DoubleSummaryStatistics> stats;
 
 
+    //  METHODS
+
     /**
      * Determines whether this stat container is empty. We consider empty stats to be fully null or to have an empty map of stats
      *

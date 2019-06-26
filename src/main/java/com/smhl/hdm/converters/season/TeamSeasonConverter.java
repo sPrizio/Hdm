@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Converter for team season resources
+ * Converter for team season resources. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">www.saprizio.com</a>
  * @version 1.0
@@ -51,6 +51,15 @@ public class TeamSeasonConverter implements HdmConverter<TeamSeason, TeamSeasonR
 
     //  HELPERS
 
+    /**
+     * Calculates the points associated for a win, loss and tie for a team. Following standard hockey rules we have:
+     *      Win  = 2 points
+     *      Tie  = 1 point
+     *      Loss = 0 points
+     *
+     * @param entity entity that we're looking at
+     * @return integer value of a teams points based on their season performance
+     */
     private Integer calculatePoints(TeamSeason entity) {
         return (entity.getWins() * 2) + entity.getTies();
     }

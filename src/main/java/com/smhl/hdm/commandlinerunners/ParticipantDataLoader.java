@@ -27,13 +27,13 @@ import org.springframework.stereotype.Component;
 @Order(2)
 public class ParticipantDataLoader implements CommandLineRunner {
 
-    private static final String SEASON1 = HdmUtils.getCurrentSeasonString(-2);
-    private static final String SEASON2 = HdmUtils.getCurrentSeasonString(-1);
-    private static final String SEASON3 = HdmUtils.getCurrentSeasonString();
-
     private SkaterRepository skaterRepository;
     private GoalieRepository goalieRepository;
     private TeamRepository teamRepository;
+
+    private static final String SEASON1 = HdmUtils.getCurrentSeasonString(-2);
+    private static final String SEASON2 = HdmUtils.getCurrentSeasonString(-1);
+    private static final String SEASON3 = HdmUtils.getCurrentSeasonString();
 
     @Autowired
     public ParticipantDataLoader(SkaterRepository skaterRepository, GoalieRepository goalieRepository, TeamRepository teamRepository) {
@@ -41,6 +41,9 @@ public class ParticipantDataLoader implements CommandLineRunner {
         this.goalieRepository = goalieRepository;
         this.teamRepository = teamRepository;
     }
+
+
+    //  METHODS
 
     @Override
     public void run(String... args) {

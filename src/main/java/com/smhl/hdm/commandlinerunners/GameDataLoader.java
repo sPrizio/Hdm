@@ -37,12 +37,12 @@ import java.util.List;
 @Order(3)
 public class GameDataLoader implements CommandLineRunner {
 
-    private LocalDateTime dateTime = LocalDateTime.of(CoreConstants.NOW_AS_LOCALDATE.getYear(), 1, 1, 13, 0, 0);
-
     private SkaterRepository skaterRepository;
     private GoalieRepository goalieRepository;
     private TeamRepository teamRepository;
     private GameRepository gameRepository;
+
+    private LocalDateTime dateTime = LocalDateTime.of(CoreConstants.NOW_AS_LOCALDATE.getYear(), 1, 1, 13, 0, 0);
 
     @Autowired
     public GameDataLoader(
@@ -56,6 +56,9 @@ public class GameDataLoader implements CommandLineRunner {
         this.teamRepository = teamRepository;
         this.gameRepository = gameRepository;
     }
+
+
+    //  METHODS
 
     @Override
     public void run(String... args) {

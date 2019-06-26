@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Coverter for skater game details resources
+ * Converter for skater game details resources. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -29,6 +29,9 @@ public class SkaterGameDetailsConverter implements HdmConverter<SkaterGameDetail
         this.skaterConverter = skaterConverter;
         this.teamConverter = teamConverter;
     }
+
+
+    //  METHODS
 
     @Override
     public SkaterGameDetailsResource convert(SkaterGameDetails entity) {

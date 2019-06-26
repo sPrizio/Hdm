@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * An implementation of a participant who's purpose is to attack the opposing team's goaltender
+ * An implementation of a participant who's purpose is to attack the opposing team's goalie
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -65,6 +65,7 @@ public class Skater implements Participant<SkaterSeason> {
      *
      * @return most recent skater season
      */
+    @Override
     public SkaterSeason getCurrentSeason() {
         if (CollectionUtils.isNotEmpty(this.seasons)) {
             Optional<SkaterSeason> season = this.seasons
@@ -85,6 +86,7 @@ public class Skater implements Participant<SkaterSeason> {
      * @param seasonString season string that we're looking for
      * @return returns season if found, null otherwise
      */
+    @Override
     public SkaterSeason getSeasonForSeasonString(String seasonString) {
         if (CollectionUtils.isNotEmpty(this.seasons) && StringUtils.isNotEmpty(seasonString)) {
             Optional<SkaterSeason> season = this.seasons
@@ -105,6 +107,7 @@ public class Skater implements Participant<SkaterSeason> {
      *
      * @return first name + " " + last name
      */
+    @Override
     public String getName() {
         return this.firstName.trim() + " " + this.lastName.trim();
     }

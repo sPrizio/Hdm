@@ -11,5 +11,10 @@ import com.smhl.hdm.models.entities.participant.Participant;
  */
 public interface ParticipantDetails<P extends Participant> extends Details {
 
+    /**
+     * Returns the participant for use as a getter
+     *
+     * @return participant
+     */
     P getParticipant();
 }

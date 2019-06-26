@@ -15,7 +15,8 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
- * A class that contains constants used for core functionality
+ * A class that contains constants used for core functionality. We want to keep the system dynamic and logically compartmentalized, as such
+ * we localize constants to this class as much as possible so changes need only be made in one spot
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0

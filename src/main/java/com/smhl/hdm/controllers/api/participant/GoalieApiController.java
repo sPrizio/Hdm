@@ -45,6 +45,8 @@ public class GoalieApiController extends AbstractHdmController<GoalieResource> {
 
     //  METHODS
 
+    //  *************** GET ***************
+
     /**
      * Finds a goalie for the given id
      *

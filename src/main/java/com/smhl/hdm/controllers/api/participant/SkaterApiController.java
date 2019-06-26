@@ -45,6 +45,8 @@ public class SkaterApiController extends AbstractHdmController<SkaterResource> {
 
     //  METHODS
 
+    //  *************** GET ***************
+
     /**
      * Finds a skater for the given id
      *

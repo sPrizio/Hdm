@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 /**
- * Implementation of a season for a skater. Meant to track stats like goals, assists, points, etc.
+ * Class implementation for a delineation of time representing a Skater's performance over a period of time known as a season
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -60,6 +60,35 @@ public class SkaterSeason implements Season, Comparable<SkaterSeason> {
 
 
     //  METHODS
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        SkaterSeason that = (SkaterSeason) o;
+        return
+                this.gamesPlayed.equals(that.gamesPlayed) &&
+                        this.goals.equals(that.goals) &&
+                        this.assists.equals(that.assists) &&
+                        this.shots.equals(that.shots) &&
+                        this.blockedShots.equals(that.blockedShots) &&
+                        this.id.equals(that.id) &&
+                        this.seasonString.equals(that.seasonString);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.id, this.seasonString, this.gamesPlayed, this.goals, this.assists, this.shots, this.blockedShots);
+    }
+
+    @Override
+    public int compareTo(SkaterSeason season) {
+        return this.seasonString.compareTo(season.getSeasonString());
+    }
 
     /**
      * Returns a skater's points for the season
@@ -124,34 +153,5 @@ public class SkaterSeason implements Season, Comparable<SkaterSeason> {
      */
     public void incrementBlockedShots(Integer increment) {
         this.blockedShots += increment;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-
-        if (o == null || getClass() != o.getClass())
-            return false;
-
-        SkaterSeason that = (SkaterSeason) o;
-        return
-                this.gamesPlayed.equals(that.gamesPlayed) &&
-                        this.goals.equals(that.goals) &&
-                        this.assists.equals(that.assists) &&
-                        this.shots.equals(that.shots) &&
-                        this.blockedShots.equals(that.blockedShots) &&
-                        this.id.equals(that.id) &&
-                        this.seasonString.equals(that.seasonString);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.id, this.seasonString, this.gamesPlayed, this.goals, this.assists, this.shots, this.blockedShots);
-    }
-
-    @Override
-    public int compareTo(SkaterSeason season) {
-        return this.seasonString.compareTo(season.getSeasonString());
     }
 }

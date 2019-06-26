@@ -11,7 +11,8 @@ import lombok.Setter;
 import javax.persistence.*;
 
 /**
- * A class representation of a scoring play in a game
+ * A class representation of a scoring play in a game. A scoring play is a moment when a team
+ * scores a goal on another team
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0

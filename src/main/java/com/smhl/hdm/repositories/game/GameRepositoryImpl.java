@@ -22,6 +22,9 @@ public class GameRepositoryImpl implements GameRepositoryCustom {
     @PersistenceContext
     private EntityManager entityManager;
 
+
+    //  METHODS
+
     @Override
     public List<SkaterGameDetails> findSkaterGameDetails(String seasonString, Long id, Integer limit) {
 

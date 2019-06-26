@@ -30,6 +30,8 @@ public class TeamApiController extends AbstractHdmController<TeamResource> {
 
     //  METHODS
 
+    //  *************** GET ***************
+
     /**
      * Finds a team for the given id
      *

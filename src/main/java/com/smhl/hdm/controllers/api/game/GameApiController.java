@@ -104,7 +104,7 @@ public class GameApiController extends AbstractHdmController<GameResource> {
     /**
      * Finds the 3 stars for a game
      *
-     * @param id game that we're looking at
+     * @param id if od the game that we're looking at
      * @return list of 3 top players for a game
      */
     @GetMapping("/{id}/three-stars")
@@ -192,7 +192,7 @@ public class GameApiController extends AbstractHdmController<GameResource> {
      * will also be deleted
      *
      * @param id game id
-     * @return void
+     * @return result of the deletion
      */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<HdmApiResponse> deleteGame(final @PathVariable("id") Long id) {

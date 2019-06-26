@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Convert for goalie game details resources
+ * Convert for goalie game details resources. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -31,6 +31,8 @@ public class GoalieGameDetailsConverter implements HdmConverter<GoalieGameDetail
     }
 
 
+    //  METHODS
+
     @Override
     public GoalieGameDetailsResource convert(GoalieGameDetails entity) {
 
@@ -41,7 +43,7 @@ public class GoalieGameDetailsConverter implements HdmConverter<GoalieGameDetail
             resource.setGameTime(entity.getGameTime());
             resource.setGoalie(this.goalieConverter.convert(entity.getParticipant()));
             resource.setTeam(this.teamConverter.convert(entity.getTeam()));
-            resource.setStarter(entity.getIsStarter());
+            resource.setIsStarter(entity.getIsStarter());
             resource.setGameResult(entity.getGameResult());
             resource.setShotsAgainst(entity.getShotsAgainst());
             resource.setSaves(entity.getSaves());

@@ -24,6 +24,9 @@ public class SeasonStringDataLoader implements CommandLineRunner {
         this.seasonStringRepository = seasonStringRepository;
     }
 
+
+    //  METHODS
+
     @Override
     public void run(String... args) {
         this.seasonStringRepository.save(new SeasonString("2016-2017"));

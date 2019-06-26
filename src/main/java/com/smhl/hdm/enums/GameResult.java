@@ -1,7 +1,7 @@
 package com.smhl.hdm.enums;
 
 /**
- * A result of a game at time end
+ * The result of a game at time end
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0

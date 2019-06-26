@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Facade for teams
+ * Facade for teams. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">www.saprizio.com</a>
  * @version 1.0
@@ -30,6 +30,8 @@ public class TeamFacade implements ParticipantFacade<TeamResource> {
         this.teamService = teamService;
     }
 
+
+    //  METHODS
 
     @Override
     public List<TeamResource> findAllParticipantsForSeason(String seasonString, String field, String order) {

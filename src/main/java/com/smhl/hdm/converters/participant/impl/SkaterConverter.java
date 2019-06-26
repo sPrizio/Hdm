@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Converter for skater entities
+ * Converter for skater entities. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">www.saprizio.com</a>
  * @version 1.0
@@ -27,6 +27,9 @@ public class SkaterConverter implements ParticipantConverter<Skater, SkaterResou
     public SkaterConverter(SkaterSeasonConverter skaterSeasonConverter) {
         this.skaterSeasonConverter = skaterSeasonConverter;
     }
+
+
+    //  METHODS
 
     @Override
     public SkaterResource convert(Skater entity) {
@@ -69,7 +72,7 @@ public class SkaterConverter implements ParticipantConverter<Skater, SkaterResou
     //  HELPERS
 
     /**
-     * Reduces duplicate code
+     * Reduces duplicate code by extrapolating common conversions to a single method
      *
      * @param entity entity that we're converting
      * @return resource

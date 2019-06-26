@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 /**
- * Implementation of the milestone facade for skaters
+ * Implementation of the milestone facade for skaters. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -28,6 +28,8 @@ public class SkaterMilestoneFacade implements MilestoneFacade {
         this.skaterMilestoneService = skaterMilestoneService;
     }
 
+
+    //  METHODS
 
     @Override
     public Milestone obtainMilestone(String stat, Long id) {

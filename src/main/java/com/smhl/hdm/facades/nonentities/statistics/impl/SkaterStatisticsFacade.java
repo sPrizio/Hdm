@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 /**
- * Obtains statistics for skaters for use in controllers
+ * Obtains statistics for skaters for use in controllers. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -27,6 +27,9 @@ public class SkaterStatisticsFacade implements StatisticsFacade {
         this.skaterService = skaterService;
         this.skaterStatisticsService = skaterStatisticsService;
     }
+
+
+    //  METHODS
 
     @Override
     public Statistic obtainStatistics(Long id) {
