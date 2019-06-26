@@ -58,6 +58,11 @@ public class GameService implements HdmService<Game> {
         return this.gameRepository.findBySeasonStringOrderByGameTimeDesc(seasonString);
     }
 
+    public Game complete(Game game, Map<String, Object> values) {
+        //  TODO: implement this algorithm
+        return game;
+    }
+
     @Override
     public void refresh(Game entity) {
         this.gameRepository.refresh(entity);

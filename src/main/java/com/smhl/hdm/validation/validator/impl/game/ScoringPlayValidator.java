@@ -1,4 +1,4 @@
-package com.smhl.hdm.validation.validator.impl.details.game;
+package com.smhl.hdm.validation.validator.impl.game;
 
 import com.smhl.hdm.enums.ValidationResponseResult;
 import com.smhl.hdm.models.entities.participant.impl.Skater;

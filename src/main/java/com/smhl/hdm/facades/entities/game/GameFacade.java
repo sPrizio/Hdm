@@ -71,6 +71,22 @@ public class GameFacade implements HdmFacade<GameResource> {
         return this.gameConverter.convertAll(this.gameService.findBySeasonString(seasonString));
     }
 
+    public GameResource complete(Long id, Map<String, Object> params) {
+
+        Optional<Game> game = this.gameService.find(id);
+
+        if (game.isPresent()) {
+
+            Game completed = this.gameService.complete(game.get(), params);
+
+            if (completed != null) {
+                return this.gameConverter.convert(completed);
+            }
+        }
+
+        return null;
+    }
+
     @Override
     public GameResource find(Long id) {
 

@@ -7,6 +7,7 @@ import com.smhl.hdm.enums.HdmApiResponseResult;
 import com.smhl.hdm.facades.entities.game.GameFacade;
 import com.smhl.hdm.resources.game.GameResource;
 import com.smhl.hdm.validation.result.ValidationResult;
+import com.smhl.hdm.validation.validator.impl.details.game.GameDetailsValidator;
 import com.smhl.hdm.validation.validator.impl.game.GameValidator;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,13 @@ public class GameApiController extends AbstractHdmController<GameResource> {
 
     private GameFacade gameFacade;
     private GameValidator gameValidator;
+    private GameDetailsValidator gameDetailsValidator;
 
     @Autowired
-    public GameApiController(GameFacade gameFacade, GameValidator gameValidator) {
+    public GameApiController(GameFacade gameFacade, GameValidator gameValidator, GameDetailsValidator gameDetailsValidator) {
         this.gameFacade = gameFacade;
         this.gameValidator = gameValidator;
+        this.gameDetailsValidator = gameDetailsValidator;
     }
 
 
@@ -149,6 +152,33 @@ public class GameApiController extends AbstractHdmController<GameResource> {
             }
 
             return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "Game could not be created"), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, result), HttpStatus.OK);
+    }
+
+    /**
+     * Completes a game. In this case we refer to completing a game as obtaining all of its statistics and computing their
+     * values for use with participant and game stats
+     *
+     * @param id game id
+     * @param params stats
+     * @return game with updated stats
+     */
+    @PostMapping(value = "/{id}/complete")
+    public ResponseEntity<HdmApiResponse> completeGame(final @PathVariable("id") Long id, final @RequestBody Map<String, Object> params) {
+
+        ValidationResult result = this.gameDetailsValidator.validate(params);
+
+        if (result.isValid()) {
+
+            GameResource resource = this.gameFacade.complete(id, params);
+
+            if (resource != null) {
+                return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, resource), HttpStatus.OK);
+            }
+
+            return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "Game could not be completed"), HttpStatus.OK);
         }
 
         return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, result), HttpStatus.OK);

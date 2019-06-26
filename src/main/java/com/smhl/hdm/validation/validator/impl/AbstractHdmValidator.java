@@ -31,7 +31,7 @@ public abstract class AbstractHdmValidator {
      * @param s string to test
      * @return true if any symbol is detected, false otherwise
      */
-    public boolean hasUnacceptableSymbol(String s) {
+    protected boolean hasUnacceptableSymbol(String s) {
 
         List<String> tokens = convertStringToTokens(s);
 
@@ -52,7 +52,7 @@ public abstract class AbstractHdmValidator {
      * @param s string to test
      * @return true if any critical word is detected, false otherwise
      */
-    public boolean hasCriticalWord(String s) {
+    protected boolean hasCriticalWord(String s) {
 
         List<String> tokens = convertStringToTokens(s);
 
@@ -67,33 +67,13 @@ public abstract class AbstractHdmValidator {
     }
 
     /**
-     * Checks for digits in a given string
-     *
-     * @param s - search string
-     * @return true if any digits are detected, false otherwise
-     */
-    public boolean hasDigits(String s) {
-        return !StringUtils.isAlpha(s);
-    }
-
-    /**
      * Checks if a string is a digit
      *
      * @param s - given string
      * @return true if string is a number, false otherwise
      */
-    public boolean isNumber(String s) {
-
-        boolean result;
-
-        try {
-            Integer.parseInt(s);
-            result = true;
-        } catch (NumberFormatException e) {
-            result = false;
-        }
-
-        return result;
+    protected boolean isNumber(String s) {
+        return StringUtils.isNumeric(s);
     }
 
     /**
@@ -102,7 +82,7 @@ public abstract class AbstractHdmValidator {
      * @param integer - passed integer
      * @return true if integer is less than 0
      */
-    public boolean isNegative(Integer integer) {
+    protected boolean isNegative(Integer integer) {
         return integer < 0;
     }
 
@@ -112,7 +92,7 @@ public abstract class AbstractHdmValidator {
      * @param s - passed string
      * @return true if string is of length 1001 or greater
      */
-    public boolean isTooLarge(String s) {
+    protected boolean isTooLarge(String s) {
         return s.length() > 1000;
     }
 
@@ -122,7 +102,7 @@ public abstract class AbstractHdmValidator {
      * @param integer - passed string
      * @return true if the integer is greater than 1000
      */
-    public boolean isTooLarge(Integer integer) {
+    protected boolean isTooLarge(Integer integer) {
         return integer > 1000;
     }
 
@@ -132,7 +112,7 @@ public abstract class AbstractHdmValidator {
      * @param num - passed string
      * @return true if Long is overflowing
      */
-    public boolean isOverflow(Long num) {
+    protected boolean isOverflow(Long num) {
         return num > 1000000000;
     }
 
@@ -142,7 +122,7 @@ public abstract class AbstractHdmValidator {
      * @param num - passed integer
      * @return true if integer is less than 0
      */
-    public boolean isNegative(Long num) {
+    protected boolean isNegative(Long num) {
         return num < 0;
     }
 
@@ -153,7 +133,7 @@ public abstract class AbstractHdmValidator {
      * @param format desired date format (ex: YYYY-DD-MM)
      * @return true if the value matches the given format
      */
-    public boolean isInvalidDateForFormat(String s, String format) {
+    protected boolean isInvalidDateForFormat(String s, String format) {
 
         if (isTooLarge(s) || hasCriticalWord(s)) {
             return false;
@@ -184,7 +164,7 @@ public abstract class AbstractHdmValidator {
      * @param desiredParams parameters required for this request
      * @return a string containing the missing params or null if none are missing
      */
-    public String isMissingParam(Map<String, Object> params, List<String> desiredParams) {
+    protected String isMissingParam(Map<String, Object> params, List<String> desiredParams) {
 
         List<String> nonNullParams = desiredParams
                 .stream()
@@ -198,7 +178,6 @@ public abstract class AbstractHdmValidator {
 
         return StringUtils.EMPTY;
     }
-
 
     //  HELPERS
 

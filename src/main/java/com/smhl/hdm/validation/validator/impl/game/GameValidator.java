@@ -31,6 +31,7 @@ import java.util.stream.Collectors;
  * @version 1.0
  */
 @Component
+@SuppressWarnings("Duplicates")
 public class GameValidator extends AbstractHdmValidator implements HdmValidator {
 
     private GameService gameService;
