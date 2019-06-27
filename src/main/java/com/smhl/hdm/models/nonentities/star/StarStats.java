@@ -28,7 +28,7 @@ public class StarStats<D extends Details> implements Comparable<StarStats> {
     @Getter
     private Double score;
 
-    StarStats(D details, Map<String, DoubleSummaryStatistics> statistics) {
+    public StarStats(D details, Map<String, DoubleSummaryStatistics> statistics) {
         this.details = details;
         this.statistics = statistics;
         this.score =  calculateScore();
