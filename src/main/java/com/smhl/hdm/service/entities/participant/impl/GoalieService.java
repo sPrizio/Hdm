@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Implements the participant service for goalies
+ * Implements the participant service for goalies. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -33,16 +33,8 @@ public class GoalieService implements ParticipantService<Goalie, GoalieGameDetai
         this.goalieSeasonService = goalieSeasonService;
     }
 
-    /**
-     * Returns the top goalies for a given stat and limited by a number of results
-     *
-     * @param stat  field to base goalies on
-     * @param limit integer limit of results
-     * @return limited list
-     */
-    public List<Goalie> getTopGoaliesForStatAndLimit(String stat, Integer limit) {
-        return this.goalieRepository.findTopGoaliesForStatAndLimit(stat, limit);
-    }
+
+    //  METHODS
 
     @Override
     public void updateStats(GoalieGameDetails details) {
@@ -117,5 +109,16 @@ public class GoalieService implements ParticipantService<Goalie, GoalieGameDetai
     @Override
     public Goalie create(Map<String, Object> params) {
         return null;
+    }
+
+    /**
+     * Returns the top goalies for a given stat and limited by a number of results
+     *
+     * @param stat  field to base goalies on
+     * @param limit integer limit of results
+     * @return limited list
+     */
+    public List<Goalie> getTopGoaliesForStatAndLimit(String stat, Integer limit) {
+        return this.goalieRepository.findTopGoaliesForStatAndLimit(stat, limit);
     }
 }

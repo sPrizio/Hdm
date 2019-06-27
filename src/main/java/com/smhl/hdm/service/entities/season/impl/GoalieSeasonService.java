@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Implements the season service for goalies
+ * Implements the season service for goalies. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -26,6 +26,9 @@ public class GoalieSeasonService implements SeasonService<GoalieSeason> {
     public GoalieSeasonService(GoalieSeasonRepository goalieSeasonRepository) {
         this.goalieSeasonRepository = goalieSeasonRepository;
     }
+
+
+    //  METHODS
 
     @Override
     public void refresh(GoalieSeason entity) {

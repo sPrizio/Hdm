@@ -20,7 +20,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Validation for team game details
+ * Validation for team game details. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -37,6 +37,8 @@ public class TeamGameDetailsValidator extends AbstractHdmValidator implements Hd
         this.teamService = teamService;
     }
 
+
+    //  METHODS
 
     @Override
     public ValidationResult validate(Map<String, Object> values) {

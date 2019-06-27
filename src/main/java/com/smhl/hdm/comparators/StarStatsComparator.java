@@ -1,7 +1,7 @@
 package com.smhl.hdm.comparators;
 
 import com.smhl.hdm.constants.CoreConstants;
-import com.smhl.hdm.service.nonentities.star.StarStats;
+import com.smhl.hdm.models.nonentities.star.StarStats;
 
 import java.util.Comparator;
 

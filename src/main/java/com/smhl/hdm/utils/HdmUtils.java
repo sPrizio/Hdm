@@ -16,6 +16,9 @@ public class HdmUtils {
         throw new UnsupportedOperationException(CoreConstants.NO_INSTANTIATION);
     }
 
+
+    //  METHODS
+
     /**
      * Returns the string representing the current season. Basically returns 2018-2019 if the current date is during that season
      *

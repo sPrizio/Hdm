@@ -27,6 +27,9 @@ public class GoalieRepositoryImpl implements GoalieRepositoryCustom {
     @PersistenceContext
     private EntityManager entityManager;
 
+
+    //  METHODS
+
     @Override
     public List<Goalie> findBySeasonString(String seasonString) {
 

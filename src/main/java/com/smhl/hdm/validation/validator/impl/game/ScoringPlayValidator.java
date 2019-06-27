@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Validation for scoring plays
+ * Validation for scoring plays. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -36,6 +36,9 @@ public class ScoringPlayValidator extends AbstractHdmValidator implements HdmVal
         this.skaterService = skaterService;
         this.teamService = teamService;
     }
+
+
+    //  METHODS
 
     @Override
     public ValidationResult validate(Map<String, Object> values) {

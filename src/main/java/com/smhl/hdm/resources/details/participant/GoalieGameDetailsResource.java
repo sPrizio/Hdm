@@ -56,6 +56,8 @@ public class GoalieGameDetailsResource implements HdmResource {
     private Integer goalsAgainst;
 
 
+    //  METHODS
+
     @Override
     public boolean isPresent() {
         return

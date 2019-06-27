@@ -50,6 +50,8 @@ public class SkaterSeasonResource implements HdmResource, Comparable<SkaterSeaso
     private Integer blockedShots;
 
 
+    //  METHODS
+
     @Override
     public boolean isPresent() {
         return StringUtils.isNotEmpty(this.seasonString);

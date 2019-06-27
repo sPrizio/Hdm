@@ -10,5 +10,10 @@ import com.smhl.hdm.models.entities.HdmEntity;
  */
 public interface HdmRepository {
 
+    /**
+     * Refreshes an entity, meaning to update all of its information and relations
+     *
+     * @param hdmEntity entity that we want to have its data refreshed
+     */
     void refresh(HdmEntity hdmEntity);
 }

@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Service-layer for games
+ * Service-layer for games. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -38,30 +38,8 @@ public class GameService implements HdmService<Game> {
         this.gameRepository = gameRepository;
     }
 
-    public Game findByGameTime(LocalDateTime gameTime) {
-        return this.gameRepository.findByGameTime(gameTime);
-    }
 
-    public Game findLatestCompletedGame() {
-        return this.gameRepository.findFirstBySeasonStringAndGameStatusOrderByGameTimeDesc(HdmUtils.getCurrentSeasonString(), GameStatus.COMPLETE.toString());
-    }
-
-    public List<SkaterGameDetails> findSkaterGameDetails(String seasonString, Long id, Integer limit) {
-        return this.gameRepository.findSkaterGameDetails(seasonString, id, limit);
-    }
-
-    public List<GoalieGameDetails> findGoalieGameDetails(String seasonString, Long id, Integer limit) {
-        return this.gameRepository.findGoalieGameDetails(seasonString, id, limit);
-    }
-
-    public List<Game> findBySeasonString(String seasonString) {
-        return this.gameRepository.findBySeasonStringOrderByGameTimeDesc(seasonString);
-    }
-
-    public Game complete(Game game, Map<String, Object> values) {
-        //  TODO: implement this algorithm
-        return game;
-    }
+    //  METHODS
 
     @Override
     public void refresh(Game entity) {
@@ -111,5 +89,70 @@ public class GameService implements HdmService<Game> {
         }
 
         return null;
+    }
+
+    /**
+     * Finds a game by it's date & time
+     *
+     * @param gameTime date & time we wish to identify the game by
+     * @return game if found, null otherwise
+     */
+    public Game findByGameTime(LocalDateTime gameTime) {
+        return this.gameRepository.findByGameTime(gameTime);
+    }
+
+    /**
+     * Finds the most recent game who's status is 'COMPLETE'
+     *
+     * @return game with the status of complete and that is the most recent
+     */
+    public Game findLatestCompletedGame() {
+        return this.gameRepository.findFirstBySeasonStringAndGameStatusOrderByGameTimeDesc(HdmUtils.getCurrentSeasonString(), GameStatus.COMPLETE.toString());
+    }
+
+    /**
+     * Finds all skater game details for the given game
+     *
+     * @param seasonString season that we're looking at
+     * @param id game id
+     * @param limit number of results that we want
+     * @return list of skater game details for the given game
+     */
+    public List<SkaterGameDetails> findSkaterGameDetails(String seasonString, Long id, Integer limit) {
+        return this.gameRepository.findSkaterGameDetails(seasonString, id, limit);
+    }
+
+    /**
+     * Finds all goalie game details for the given game
+     *
+     * @param seasonString season that we're looking at
+     * @param id game id
+     * @param limit number of results that we want
+     * @return list of goalie game details for the given game
+     */
+    public List<GoalieGameDetails> findGoalieGameDetails(String seasonString, Long id, Integer limit) {
+        return this.gameRepository.findGoalieGameDetails(seasonString, id, limit);
+    }
+
+    /**
+     * Finds a list of games by their season string
+     *
+     * @param seasonString season that we're looking at
+     * @return a list of games with a season string matching that of the given season string
+     */
+    public List<Game> findBySeasonString(String seasonString) {
+        return this.gameRepository.findBySeasonStringOrderByGameTimeDesc(seasonString);
+    }
+
+    /**
+     * Completes a game, i.e. associates the given information with the various participants' and game's stats
+     *
+     * @param game game that we're completing
+     * @param values statistical information being given to the game
+     * @return newly updated game
+     */
+    public Game complete(Game game, Map<String, Object> values) {
+        //  TODO: implement this algorithm
+        return game;
     }
 }

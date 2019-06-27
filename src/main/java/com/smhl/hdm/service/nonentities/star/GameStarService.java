@@ -4,6 +4,7 @@ import com.smhl.hdm.comparators.StarStatsComparator;
 import com.smhl.hdm.constants.CoreConstants;
 import com.smhl.hdm.models.entities.details.participant.impl.SkaterGameDetails;
 import com.smhl.hdm.models.entities.game.Game;
+import com.smhl.hdm.models.nonentities.star.StarStats;
 import com.smhl.hdm.models.nonentities.star.impl.GameStar;
 import com.smhl.hdm.utils.StatisticsUtils;
 import org.springframework.stereotype.Service;
@@ -68,6 +69,9 @@ public class GameStarService {
 
         return stars;
     }
+
+
+    //  HELPERS
 
     /**
      * Calculates the stats for each skater attr category

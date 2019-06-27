@@ -12,5 +12,11 @@ import java.util.Map;
  */
 public interface HdmValidator {
 
+    /**
+     * Validates a map of parameters used for entity operations. We return a validation result as a consequence of computation
+     *
+     * @param values insertion params
+     * @return a validation result based on the state of the insertion params
+     */
     ValidationResult validate(Map<String, Object> values);
 }

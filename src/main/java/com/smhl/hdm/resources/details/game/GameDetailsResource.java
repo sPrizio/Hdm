@@ -54,6 +54,8 @@ public class GameDetailsResource implements HdmResource {
     private Set<ScoringPlayResource> scoringPlays;
 
 
+    //  METHODS
+
     @Override
     public boolean isPresent() {
         return

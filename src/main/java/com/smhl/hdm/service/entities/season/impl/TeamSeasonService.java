@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Implementation of the season service for teams
+ * Implementation of the season service for teams. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -26,6 +26,9 @@ public class TeamSeasonService implements SeasonService<TeamSeason> {
     public TeamSeasonService(TeamSeasonRepository teamSeasonRepository) {
         this.teamSeasonRepository = teamSeasonRepository;
     }
+
+
+    //  METHODS
 
     @Override
     public void refresh(TeamSeason entity) {

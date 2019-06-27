@@ -27,6 +27,11 @@ public class ValidationResult {
 
     //  METHODS
 
+    /**
+     * Determines whether the validation result is valid. We define validity as having non null parameters and the result as being successful
+     *
+     * @return true if the result is 'SUCCESSFUL'
+     */
     public boolean isValid() {
         return (this.result != null && StringUtils.isNotEmpty(message)) && this.result.equals(ValidationResponseResult.SUCCESSFUL);
     }

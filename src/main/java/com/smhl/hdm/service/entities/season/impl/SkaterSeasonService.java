@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Implementation of the season service for skaters
+ * Implementation of the season service for skaters. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -26,6 +26,9 @@ public class SkaterSeasonService implements SeasonService<SkaterSeason> {
     public SkaterSeasonService(SkaterSeasonRepository skaterSeasonRepository) {
         this.skaterSeasonRepository = skaterSeasonRepository;
     }
+
+
+    //  METHODS
 
     @Override
     public void refresh(SkaterSeason skaterSeason) {

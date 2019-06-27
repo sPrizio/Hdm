@@ -47,6 +47,9 @@ public class GameResource implements HdmResource {
     @Setter
     private GameDetailsResource gameDetails;
 
+
+    //  METHODS
+
     @Override
     public boolean isPresent() {
         return

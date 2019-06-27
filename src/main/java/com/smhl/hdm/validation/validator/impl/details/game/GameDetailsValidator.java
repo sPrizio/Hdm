@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Implementation of validation for game details
+ * Implementation of validation for game details. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -47,6 +47,8 @@ public class GameDetailsValidator extends AbstractHdmValidator implements HdmVal
         this.scoringPlayValidator = scoringPlayValidator;
     }
 
+
+    //  METHODS
 
     @Override
     public ValidationResult validate(Map<String, Object> values) {

@@ -53,6 +53,9 @@ public class TeamSeasonResource implements HdmResource, Comparable<TeamSeasonRes
     @Setter
     private Integer differential;
 
+
+    //  METHODS
+
     @Override
     public boolean isPresent() {
         return StringUtils.isNotEmpty(this.seasonString);

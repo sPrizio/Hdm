@@ -25,6 +25,9 @@ public abstract class AbstractHdmValidator {
     private static final String[] CRITICAL_WORDS = {"CREATE", "DROP", "INSERT", "TABLE", "ALTER", "DELETE", "FROM", "UPDATE"};
     private static final String[] UNACCEPTABLE_SYMBOLS = {"=", "+", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "/", "\\", "|", "[", "]", "{", "}", "~", ".", ",", ":", ";"};
 
+
+    //  METHODS
+
     /**
      * Checks for rejected symbols
      *
@@ -178,6 +181,7 @@ public abstract class AbstractHdmValidator {
 
         return StringUtils.EMPTY;
     }
+
 
     //  HELPERS
 

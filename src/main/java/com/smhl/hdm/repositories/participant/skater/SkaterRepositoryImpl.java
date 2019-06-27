@@ -27,6 +27,9 @@ public class SkaterRepositoryImpl implements SkaterRepositoryCustom {
     @PersistenceContext
     private EntityManager entityManager;
 
+
+    //  METHODS
+
     @Override
     public List<Skater> findBySeasonString(String seasonString) {
 

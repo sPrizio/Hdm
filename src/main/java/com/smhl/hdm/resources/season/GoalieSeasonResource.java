@@ -65,6 +65,9 @@ public class GoalieSeasonResource implements HdmResource, Comparable<GoalieSeaso
     @Setter
     private Double goalsAgainstAverage;
 
+
+    //  METHODS
+
     @Override
     public boolean isPresent() {
         return StringUtils.isNotEmpty(this.seasonString);

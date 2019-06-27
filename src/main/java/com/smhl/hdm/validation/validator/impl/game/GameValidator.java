@@ -25,7 +25,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Implementation of a validator for games
+ * Implementation of a validator for games. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -47,6 +47,8 @@ public class GameValidator extends AbstractHdmValidator implements HdmValidator 
         this.teamService = teamService;
     }
 
+
+    //  METHODS
 
     @Override
     public ValidationResult validate(Map<String, Object> values) {

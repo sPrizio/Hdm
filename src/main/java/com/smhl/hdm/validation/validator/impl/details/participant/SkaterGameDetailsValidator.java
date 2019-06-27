@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Implementation of a validator for skater game details
+ * Implementation of a validator for skater game details. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -38,6 +38,8 @@ public class SkaterGameDetailsValidator extends AbstractHdmValidator implements 
         this.teamService = teamService;
     }
 
+
+    //  METHODS
 
     @Override
     public ValidationResult validate(Map<String, Object> values) {

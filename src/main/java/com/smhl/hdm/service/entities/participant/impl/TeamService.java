@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Implementation for the team service class
+ * Implementation for the team service class. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -32,6 +32,9 @@ public class TeamService implements ParticipantService<Team, TeamGameDetails> {
         this.teamRepository = teamRepository;
         this.teamSeasonService = teamSeasonService;
     }
+
+
+    //  METHODS
 
     @Override
     public void updateStats(TeamGameDetails details) {

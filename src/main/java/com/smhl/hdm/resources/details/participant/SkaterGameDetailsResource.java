@@ -55,6 +55,8 @@ public class SkaterGameDetailsResource implements HdmResource {
     private Integer blockedShots;
 
 
+    //  METHODS
+
     @Override
     public boolean isPresent() {
         return

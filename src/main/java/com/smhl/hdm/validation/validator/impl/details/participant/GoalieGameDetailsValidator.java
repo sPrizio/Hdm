@@ -22,7 +22,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Implementation of goalie game details validation
+ * Implementation of goalie game details validation. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -40,6 +40,9 @@ public class GoalieGameDetailsValidator extends AbstractHdmValidator implements 
         this.goalieService = goalieService;
         this.teamService = teamService;
     }
+
+
+    //  METHODS
 
     @Override
     public ValidationResult validate(Map<String, Object> values) {
