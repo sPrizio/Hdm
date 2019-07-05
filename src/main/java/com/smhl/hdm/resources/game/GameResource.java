@@ -57,7 +57,6 @@ public class GameResource implements HdmResource {
                 StringUtils.isNotEmpty(this.seasonString) &&
                 StringUtils.isNotEmpty(this.gameStatus) &&
                 this.homeTeam.isPresent() &&
-                this.awayTeam.isPresent() &&
-                this.gameDetails.isPresent();
+                this.awayTeam.isPresent();
     }
 }

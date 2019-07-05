@@ -85,6 +85,7 @@ public class GameDataLoader implements CommandLineRunner {
         Game game3 = new Game(dateTime.plusWeeks(2), HdmUtils.getCurrentSeasonString(), GameStatus.COMPLETE.toString(), team4, team3);
         Game game4 = new Game(dateTime.plusWeeks(3), HdmUtils.getCurrentSeasonString(), GameStatus.COMPLETE.toString(), team2, team5);
         Game game5 = new Game(dateTime.plusWeeks(4), HdmUtils.getCurrentSeasonString(), GameStatus.COMPLETE.toString(), team5, team4);
+        Game game6 = new Game(dateTime.plusWeeks(5), HdmUtils.getCurrentSeasonString(), GameStatus.NOT_YET_STARTED.toString(), team1, team2);
 
         //  GAME 1
 
@@ -296,5 +297,6 @@ public class GameDataLoader implements CommandLineRunner {
         this.gameRepository.save(game3);
         this.gameRepository.save(game4);
         this.gameRepository.save(game5);
+        this.gameRepository.save(game6);
     }
 }
