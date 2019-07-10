@@ -19,6 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of validation for game details. Documentation for the overridden methods can be located in the interface
@@ -61,18 +62,18 @@ public class GameDetailsValidator extends AbstractHdmValidator implements HdmVal
         String date = values.get("gameTime").toString();
         String home = values.get("homeTeamScore").toString();
         String away = values.get("awayTeamScore").toString();
-        Map<String, Object> skaters = (Map<String, Object>) values.get("skaterGameDetails");
-        Map<String, Object> goalies = (Map<String, Object>) values.get("goalieGameDetails");
-        Map<String, Object> teams = (Map<String, Object>) values.get("teamGameDetails");
-        Map<String, Object> scoringPlays = (Map<String, Object>) values.get("scoringPlays");
+        List<Map<String, Object>> skaters = (List<Map<String, Object>>) values.get("skaterGameDetails");
+        List<Map<String, Object>> goalies = (List<Map<String, Object>>) values.get("goalieGameDetails");
+        List<Map<String, Object>> teams = (List<Map<String, Object>>) values.get("teamGameDetails");
+        List<Map<String, Object>> scoringPlays = (List<Map<String, Object>>) values.get("scoringPlays");
 
         //  game time
         if (super.isInvalidDateForFormat(date, CoreConstants.DATE_FORMAT_LONG)) {
             return new ValidationResult(ValidationResponseResult.FAILED, "Invalid date format. Date must be of the format 'yyyy-MM-dd HH:mm:ss'");
         }
 
-        if (this.gameService.findByGameTime(LocalDateTime.parse(date, DateTimeFormatter.ofPattern(CoreConstants.DATE_FORMAT_LONG, CoreConstants.HDM_LOCALE))) != null) {
-            return new ValidationResult(ValidationResponseResult.FAILED, "A game with that game time already exists");
+        if (this.gameService.findByGameTime(LocalDateTime.parse(date, DateTimeFormatter.ofPattern(CoreConstants.DATE_FORMAT_LONG, CoreConstants.HDM_LOCALE))) == null) {
+            return new ValidationResult(ValidationResponseResult.FAILED, "No game could be found for the given time");
         }
 
         //  home team & away team
@@ -91,10 +92,10 @@ public class GameDetailsValidator extends AbstractHdmValidator implements HdmVal
             return new ValidationResult(ValidationResponseResult.FAILED, "Either or both of the given scores was negative");
         }
 
-        ValidationResult resSkater = this.skaterGameDetailsValidator.validate(skaters);
-        ValidationResult resGoalie = this.goalieGameDetailsValidator.validate(goalies);
-        ValidationResult resTeam = this.teamGameDetailsValidator.validate(teams);
-        ValidationResult resScoringPlay = this.scoringPlayValidator.validate(scoringPlays);
+        ValidationResult resSkater = validateListOfDetails(skaters, this.skaterGameDetailsValidator);
+        ValidationResult resGoalie = validateListOfDetails(goalies, this.goalieGameDetailsValidator);
+        ValidationResult resTeam = validateListOfDetails(teams, this.teamGameDetailsValidator);
+        ValidationResult resScoringPlay = validateListOfDetails(scoringPlays, this.scoringPlayValidator);
 
         if (!resSkater.isValid()) {
             return resSkater;
@@ -113,5 +114,37 @@ public class GameDetailsValidator extends AbstractHdmValidator implements HdmVal
         }
 
         return new ValidationResult(ValidationResponseResult.SUCCESSFUL, "Validation was successful");
+    }
+
+
+    //  HELPERS
+
+    /**
+     * Validates a list of entity params using the given validator. Returns a validation result representing the status of validation
+     * for the entire list
+     *
+     * @param listOfDetails list of game details that we need to validate
+     * @param validator validator to be used when validating
+     * @return validation result object
+     */
+    private ValidationResult validateListOfDetails(List<Map<String, Object>> listOfDetails, HdmValidator validator) {
+
+        List<ValidationResult> failedValidations =
+                listOfDetails
+                        .stream()
+                        .map(validator::validate)
+                        .filter(validationResult -> !validationResult.isValid())
+                        .collect(Collectors.toList());
+
+        if (failedValidations.isEmpty()) {
+            return new ValidationResult(ValidationResponseResult.SUCCESSFUL, "Validation was successful");
+        }
+
+        StringBuilder errorMessage = new StringBuilder();
+
+        failedValidations
+                .forEach(validationResult -> errorMessage.append(validationResult.getMessage()).append("\n"));
+
+        return new ValidationResult(ValidationResponseResult.FAILED, errorMessage.toString());
     }
 }
