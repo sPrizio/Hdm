@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Converter for scoring play resources
+ * Converter for scoring play resources. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -30,6 +30,8 @@ public class ScoringPlayConverter implements HdmConverter<ScoringPlay, ScoringPl
         this.teamConverter = teamConverter;
     }
 
+
+    //  METHODS
 
     @Override
     public ScoringPlayResource convert(ScoringPlay entity) {

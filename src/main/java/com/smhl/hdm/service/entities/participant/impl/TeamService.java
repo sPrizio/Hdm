@@ -12,15 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
- * Implementation for the team service class
+ * Implementation for the team service class. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
  */
 @Service
+@SuppressWarnings("Duplicates")
 public class TeamService implements ParticipantService<Team, TeamGameDetails> {
 
     private TeamRepository teamRepository;
@@ -31,6 +33,9 @@ public class TeamService implements ParticipantService<Team, TeamGameDetails> {
         this.teamRepository = teamRepository;
         this.teamSeasonService = teamSeasonService;
     }
+
+
+    //  METHODS
 
     @Override
     public void updateStats(TeamGameDetails details) {
@@ -91,5 +96,10 @@ public class TeamService implements ParticipantService<Team, TeamGameDetails> {
         if (find(id).isPresent()) {
             this.teamRepository.deleteById(id);
         }
+    }
+
+    @Override
+    public Team create(Map<String, Object> params) {
+        return null;
     }
 }

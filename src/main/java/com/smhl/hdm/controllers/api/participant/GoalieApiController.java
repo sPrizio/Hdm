@@ -45,6 +45,8 @@ public class GoalieApiController extends AbstractHdmController<GoalieResource> {
 
     //  METHODS
 
+    //  *************** GET ***************
+
     /**
      * Finds a goalie for the given id
      *
@@ -84,7 +86,7 @@ public class GoalieApiController extends AbstractHdmController<GoalieResource> {
      * @return limited list of goalies for a given stat
      */
     @GetMapping("/top-active")
-    public ResponseEntity<HdmApiResponse> getTopGoaliesForStatAndLimit(final @RequestParam String stat, final @RequestParam int limit) {
+    public ResponseEntity<HdmApiResponse> getTopGoaliesForStatAndLimit(final @RequestParam String stat, final @RequestParam Integer limit) {
         return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.goalieFacade.findTopGoaliesForStatAndLimit(stat, limit)), HttpStatus.OK);
     }
 
@@ -132,7 +134,7 @@ public class GoalieApiController extends AbstractHdmController<GoalieResource> {
      * @return a collection of recent games this participant was involved in
      */
     @GetMapping("/recent-games/{id}")
-    public ResponseEntity<HdmApiResponse> getRecentGamesForGoalie(final @PathVariable("id") Long id, final @RequestParam int limit) {
+    public ResponseEntity<HdmApiResponse> getRecentGamesForGoalie(final @PathVariable("id") Long id, final @RequestParam Integer limit) {
 
         List<GoalieGameDetailsResource> games = this.gameFacade.findRecentGameDetailsForGoalie(id, limit);
 

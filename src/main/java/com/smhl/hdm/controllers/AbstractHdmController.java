@@ -19,6 +19,9 @@ public abstract class AbstractHdmController<R extends HdmResource> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractHdmController.class);
 
+
+    //  METHODS
+
     /**
      * A generic find method that will determine whether the entity could be found
      *

@@ -10,5 +10,10 @@ import com.smhl.hdm.models.entities.HdmEntity;
  */
 public interface Season extends HdmEntity {
 
+    /**
+     * Get the season string that this season belongs to
+     *
+     * @return season string ex: 2018-2019
+     */
     String getSeasonString();
 }

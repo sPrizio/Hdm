@@ -31,11 +31,11 @@ public class GameDetailsResource implements HdmResource {
 
     @Getter
     @Setter
-    private int homeTeamScore;
+    private Integer homeTeamScore;
 
     @Getter
     @Setter
-    private int awayTeamScore;
+    private Integer awayTeamScore;
 
     @Getter
     @Setter
@@ -53,6 +53,8 @@ public class GameDetailsResource implements HdmResource {
     @Setter
     private Set<ScoringPlayResource> scoringPlays;
 
+
+    //  METHODS
 
     @Override
     public boolean isPresent() {

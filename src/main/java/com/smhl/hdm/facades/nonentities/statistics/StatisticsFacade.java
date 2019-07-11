@@ -10,7 +10,19 @@ import com.smhl.hdm.models.nonentities.Statistic;
  */
 public interface StatisticsFacade {
 
+    /**
+     * Calculates an entity's statistics
+     *
+     * @param id entity id
+     * @return a statistical object that houses typical statistics for each entity stat attribute category
+     */
     Statistic obtainStatistics(Long id);
 
+    /**
+     * Calculates statistics for the various stat categories for the league for the given season
+     *
+     * @param seasonString season that we're looking at
+     * @return a statistical object that houses typical statistics for each entity stat attribute category for the season and league
+     */
     Statistic obtainActiveStatistics(String seasonString);
 }

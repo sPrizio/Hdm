@@ -9,10 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
- * Facade for skaters
+ * Facade for skaters. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">www.saprizio.com</a>
  * @version 1.0
@@ -29,16 +30,8 @@ public class SkaterFacade implements ParticipantFacade<SkaterResource> {
         this.skaterService = skaterService;
     }
 
-    /**
-     * Returns the top skaters for a given stat category and limits the number of results
-     *
-     * @param stat  field on which we want to judge skaters
-     * @param limit number of results to return
-     * @return sorted limited list based on a stat
-     */
-    public List<SkaterResource> findTopSkatersForStatAndLimit(String stat, int limit) {
-        return this.skaterConverter.convertAll(this.skaterService.getTopSkatersForStatAndLimit(stat, limit));
-    }
+
+    //  METHODS
 
     @Override
     public List<SkaterResource> findAllParticipantsForSeason(String seasonString, String field, String order) {
@@ -60,5 +53,26 @@ public class SkaterFacade implements ParticipantFacade<SkaterResource> {
     @Override
     public List<SkaterResource> findAll() {
         return this.skaterConverter.convertAll(this.skaterService.findAll());
+    }
+
+    @Override
+    public SkaterResource create(Map<String, Object> params) {
+        return null;
+    }
+
+    @Override
+    public void delete(Long id) {
+        this.skaterService.delete(id);
+    }
+
+    /**
+     * Returns the top skaters for a given stat category and limit the results based on the given limit
+     *
+     * @param stat  field on which we want to judge skaters
+     * @param limit number of results to return
+     * @return sorted limited list based on a stat
+     */
+    public List<SkaterResource> findTopSkatersForStatAndLimit(String stat, Integer limit) {
+        return this.skaterConverter.convertAll(this.skaterService.getTopSkatersForStatAndLimit(stat, limit));
     }
 }

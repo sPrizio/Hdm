@@ -46,13 +46,13 @@ public class TeamGameDetails implements ParticipantDetails<Team> {
     @Setter
     @Column
     @NonNull
-    private int goalsFor;
+    private Integer goalsFor;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private int goalsAgainst;
+    private Integer goalsAgainst;
 
 
     //  METHODS

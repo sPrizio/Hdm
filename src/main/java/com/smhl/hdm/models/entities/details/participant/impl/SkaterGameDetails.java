@@ -48,25 +48,25 @@ public class SkaterGameDetails implements ParticipantDetails<Skater> {
     @Setter
     @Column
     @NonNull
-    private int goals;
+    private Integer goals;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private int assists;
+    private Integer assists;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private int shots;
+    private Integer shots;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private int blockedShots;
+    private Integer blockedShots;
 
 
     //  METHODS

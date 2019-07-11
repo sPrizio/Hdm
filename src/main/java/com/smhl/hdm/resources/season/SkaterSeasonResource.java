@@ -23,32 +23,34 @@ public class SkaterSeasonResource implements HdmResource, Comparable<SkaterSeaso
 
     @Getter
     @Setter
-    private int gamesPlayed;
+    private Integer gamesPlayed;
 
     @Getter
     @Setter
-    private int goals;
+    private Integer goals;
 
     @Getter
     @Setter
-    private int assists;
+    private Integer assists;
 
     @Getter
     @Setter
-    private int points;
+    private Integer points;
 
     @Getter
     @Setter
-    private double pointsPerGame;
+    private Double pointsPerGame;
 
     @Getter
     @Setter
-    private int shots;
+    private Integer shots;
 
     @Getter
     @Setter
-    private int blockedShots;
+    private Integer blockedShots;
 
+
+    //  METHODS
 
     @Override
     public boolean isPresent() {
@@ -64,13 +66,13 @@ public class SkaterSeasonResource implements HdmResource, Comparable<SkaterSeaso
 
         SkaterSeasonResource that = (SkaterSeasonResource) o;
         return
-                this.gamesPlayed == that.gamesPlayed &&
-                this.goals == that.goals &&
-                this.assists == that.assists &&
-                this.points == that.points &&
+                this.gamesPlayed.equals(that.gamesPlayed) &&
+                this.goals.equals(that.goals) &&
+                this.assists.equals(that.assists) &&
+                this.points.equals(that.points) &&
                 Double.compare(that.pointsPerGame, this.pointsPerGame) == 0 &&
-                this.shots == that.shots &&
-                this.blockedShots == that.blockedShots &&
+                this.shots.equals(that.shots) &&
+                this.blockedShots.equals(that.blockedShots) &&
                 this.seasonString.equals(that.seasonString);
     }
 

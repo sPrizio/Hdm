@@ -26,6 +26,8 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom {
     private EntityManager entityManager;
 
 
+    //  METHODS
+
     @Override
     public List<Team> findBySeasonString(String seasonString) {
 

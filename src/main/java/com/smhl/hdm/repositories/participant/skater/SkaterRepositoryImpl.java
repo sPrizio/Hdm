@@ -27,6 +27,9 @@ public class SkaterRepositoryImpl implements SkaterRepositoryCustom {
     @PersistenceContext
     private EntityManager entityManager;
 
+
+    //  METHODS
+
     @Override
     public List<Skater> findBySeasonString(String seasonString) {
 
@@ -79,7 +82,7 @@ public class SkaterRepositoryImpl implements SkaterRepositoryCustom {
     }
 
     @Override
-    public List<Skater> findTopSkatersForStatAndLimit(String stat, int limit) {
+    public List<Skater> findTopSkatersForStatAndLimit(String stat, Integer limit) {
 
         if (limit > 0) {
             return

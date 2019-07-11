@@ -35,6 +35,9 @@ public class TeamResource implements ParticipantResource {
     @Setter
     private Set<TeamSeasonResource> seasons;
 
+
+    //  METHODS
+
     @Override
     public boolean isPresent() {
         return

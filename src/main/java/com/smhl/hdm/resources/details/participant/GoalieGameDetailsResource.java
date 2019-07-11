@@ -37,7 +37,7 @@ public class GoalieGameDetailsResource implements HdmResource {
 
     @Getter
     @Setter
-    private boolean isStarter;
+    private Boolean isStarter;
 
     @Getter
     @Setter
@@ -45,16 +45,18 @@ public class GoalieGameDetailsResource implements HdmResource {
 
     @Getter
     @Setter
-    private int shotsAgainst;
+    private Integer shotsAgainst;
 
     @Getter
     @Setter
-    private int saves;
+    private Integer saves;
 
     @Getter
     @Setter
-    private int goalsAgainst;
+    private Integer goalsAgainst;
 
+
+    //  METHODS
 
     @Override
     public boolean isPresent() {

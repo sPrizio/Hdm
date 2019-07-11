@@ -9,10 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
- * Facade for goalies
+ * Facade for goalies. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">www.saprizio.com</a>
  * @version 1.0
@@ -29,16 +30,8 @@ public class GoalieFacade implements ParticipantFacade<GoalieResource> {
         this.goalieService = goalieService;
     }
 
-    /**
-     * Returns the top goalies for a given stat and limited by a number of results
-     *
-     * @param stat  field to base goalies on
-     * @param limit integer limit of results
-     * @return limited list
-     */
-    public List<GoalieResource> findTopGoaliesForStatAndLimit(String stat, int limit) {
-        return this.goalieConverter.convertAll(this.goalieService.getTopGoaliesForStatAndLimit(stat, limit));
-    }
+
+    //  METHODS
 
     @Override
     public List<GoalieResource> findAllParticipantsForSeason(String seasonString, String field, String order) {
@@ -60,5 +53,26 @@ public class GoalieFacade implements ParticipantFacade<GoalieResource> {
     @Override
     public List<GoalieResource> findAll() {
         return this.goalieConverter.convertAll(this.goalieService.findAll());
+    }
+
+    @Override
+    public GoalieResource create(Map<String, Object> params) {
+        return null;
+    }
+
+    @Override
+    public void delete(Long id) {
+        this.goalieService.delete(id);
+    }
+
+    /**
+     * Returns the top goalies for a given stat and limits the results by the given limit
+     *
+     * @param stat  field to base goalies on
+     * @param limit integer limit of results
+     * @return limited list
+     */
+    public List<GoalieResource> findTopGoaliesForStatAndLimit(String stat, Integer limit) {
+        return this.goalieConverter.convertAll(this.goalieService.getTopGoaliesForStatAndLimit(stat, limit));
     }
 }

@@ -48,7 +48,7 @@ public class GoalieGameDetails implements ParticipantDetails<Goalie> {
     @Setter
     @Column
     @NonNull
-    private boolean isStarter;
+    private Boolean isStarter;
 
     @Getter
     @Setter
@@ -60,19 +60,19 @@ public class GoalieGameDetails implements ParticipantDetails<Goalie> {
     @Setter
     @Column
     @NonNull
-    private int shotsAgainst;
+    private Integer shotsAgainst;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private int saves;
+    private Integer saves;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private int goalsAgainst;
+    private Integer goalsAgainst;
 
 
     //  METHODS

@@ -11,10 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
- * Implementation for the skater service class
+ * Implementation for the skater service class. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -31,16 +32,8 @@ public class SkaterService implements ParticipantService<Skater, SkaterGameDetai
         this.skaterSeasonService = skaterSeasonService;
     }
 
-    /**
-     * Returns the top skaters for a given stat category and limits the number of results
-     *
-     * @param stat  field on which we want to judge skaters
-     * @param limit number of results to return
-     * @return sorted limited list based on a stat
-     */
-    public List<Skater> getTopSkatersForStatAndLimit(String stat, int limit) {
-        return this.skaterRepository.findTopSkatersForStatAndLimit(stat, limit);
-    }
+
+    //  METHODS
 
     @Override
     public void updateStats(SkaterGameDetails details) {
@@ -89,5 +82,21 @@ public class SkaterService implements ParticipantService<Skater, SkaterGameDetai
         if (find(id).isPresent()) {
             this.skaterRepository.deleteById(id);
         }
+    }
+
+    @Override
+    public Skater create(Map<String, Object> params) {
+        return null;
+    }
+
+    /**
+     * Returns the top skaters for a given stat category and limits the number of results
+     *
+     * @param stat  field on which we want to judge skaters
+     * @param limit number of results to return
+     * @return sorted limited list based on a stat
+     */
+    public List<Skater> getTopSkatersForStatAndLimit(String stat, Integer limit) {
+        return this.skaterRepository.findTopSkatersForStatAndLimit(stat, limit);
     }
 }

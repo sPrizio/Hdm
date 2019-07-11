@@ -39,6 +39,9 @@ public class SkaterResource implements ParticipantResource {
     @Setter
     private Set<SkaterSeasonResource> seasons;
 
+
+    //  METHODS
+
     @Override
     public boolean isPresent() {
         return

@@ -11,5 +11,13 @@ import com.smhl.hdm.models.nonentities.Milestone;
  */
 public interface MilestoneService<P extends Participant> {
 
+    /**
+     * Given the stat and entity, calculate the milestone (plateau) for the stat and entity. We use this method
+     * to obtain a milestone object that contains the entity's stat value and the next target that they're going to reach
+     *
+     * @param stat category on which we're calculating the milestone
+     * @param entity entity that we're looking at
+     * @return a milestone object
+     */
     Milestone calculateMilestone(String stat, P entity);
 }

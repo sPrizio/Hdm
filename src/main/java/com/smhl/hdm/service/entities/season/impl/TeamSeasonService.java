@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
- * Implementation of the season service for teams
+ * Implementation of the season service for teams. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -25,6 +26,9 @@ public class TeamSeasonService implements SeasonService<TeamSeason> {
     public TeamSeasonService(TeamSeasonRepository teamSeasonRepository) {
         this.teamSeasonRepository = teamSeasonRepository;
     }
+
+
+    //  METHODS
 
     @Override
     public void refresh(TeamSeason entity) {
@@ -52,5 +56,10 @@ public class TeamSeasonService implements SeasonService<TeamSeason> {
         if (find(id).isPresent()) {
             this.teamSeasonRepository.deleteById(id);
         }
+    }
+
+    @Override
+    public TeamSeason create(Map<String, Object> params) {
+        return null;
     }
 }

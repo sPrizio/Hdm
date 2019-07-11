@@ -1,4 +1,4 @@
-package com.smhl.hdm.service.nonentities.star;
+package com.smhl.hdm.models.nonentities.star;
 
 import com.smhl.hdm.constants.CoreConstants;
 import com.smhl.hdm.models.entities.details.Details;
@@ -28,11 +28,14 @@ public class StarStats<D extends Details> implements Comparable<StarStats> {
     @Getter
     private Double score;
 
-    StarStats(D details, Map<String, DoubleSummaryStatistics> statistics) {
+    public StarStats(D details, Map<String, DoubleSummaryStatistics> statistics) {
         this.details = details;
         this.statistics = statistics;
         this.score =  calculateScore();
     }
+
+
+    //  METHODS
 
     @Override
     public boolean equals(Object o) {
@@ -57,6 +60,14 @@ public class StarStats<D extends Details> implements Comparable<StarStats> {
         return this.score.compareTo(o.score);
     }
 
+
+    //  HELPERS
+
+    /**
+     * Calculates the star's score, which refers an internal ranking that we use to assign the participant's statistical reference in a game
+     *
+     * @return numerical relevance of a participant in a game
+     */
     private Double calculateScore() {
 
         this.score = 0.0;

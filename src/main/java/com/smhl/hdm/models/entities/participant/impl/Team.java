@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * A team in this context refers to a collection of players representing a unified group sharing a common goal
+ * A team in this context refers to a collection of skaters and goalies representing a unified group
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -53,6 +53,7 @@ public class Team implements Participant<TeamSeason> {
      *
      * @return most recent skater season
      */
+    @Override
     public TeamSeason getCurrentSeason() {
         if (CollectionUtils.isNotEmpty(this.seasons)) {
             Optional<TeamSeason> season = this.seasons
@@ -73,6 +74,7 @@ public class Team implements Participant<TeamSeason> {
      * @param seasonString season string that we're looking for
      * @return returns season if found, null otherwise
      */
+    @Override
     public TeamSeason getSeasonForSeasonString(String seasonString) {
         if (CollectionUtils.isNotEmpty(this.seasons) && StringUtils.isNotEmpty(seasonString)) {
             Optional<TeamSeason> season = this.seasons

@@ -7,7 +7,7 @@ import com.smhl.hdm.utils.MilestoneUtils;
 import org.springframework.stereotype.Service;
 
 /**
- * Implementation of the milestone service for goalies
+ * Implementation of the milestone service for goalies. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0

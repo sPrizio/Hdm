@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Converter for skater season resources
+ * Converter for skater season resources. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">www.saprizio.com</a>
  * @version 1.0

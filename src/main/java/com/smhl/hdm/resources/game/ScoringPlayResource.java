@@ -37,6 +37,8 @@ public class ScoringPlayResource implements HdmResource {
     private SkaterResource secondaryAssistingSkater;
 
 
+    //  METHODS
+
     @Override
     public boolean isPresent() {
         return

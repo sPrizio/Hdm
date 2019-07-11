@@ -9,10 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
- * Facade for teams
+ * Facade for teams. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">www.saprizio.com</a>
  * @version 1.0
@@ -29,6 +30,8 @@ public class TeamFacade implements ParticipantFacade<TeamResource> {
         this.teamService = teamService;
     }
 
+
+    //  METHODS
 
     @Override
     public List<TeamResource> findAllParticipantsForSeason(String seasonString, String field, String order) {
@@ -50,5 +53,15 @@ public class TeamFacade implements ParticipantFacade<TeamResource> {
     @Override
     public List<TeamResource> findAll() {
         return this.teamConverter.convertAll(this.teamService.findAll());
+    }
+
+    @Override
+    public TeamResource create(Map<String, Object> params) {
+        return null;
+    }
+
+    @Override
+    public void delete(Long id) {
+        this.teamService.delete(id);
     }
 }

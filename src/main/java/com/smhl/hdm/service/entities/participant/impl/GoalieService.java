@@ -12,15 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
- * Implements the participant service for goalies
+ * Implements the participant service for goalies. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
  */
 @Service
+@SuppressWarnings("Duplicates")
 public class GoalieService implements ParticipantService<Goalie, GoalieGameDetails> {
 
     private GoalieRepository goalieRepository;
@@ -32,16 +34,8 @@ public class GoalieService implements ParticipantService<Goalie, GoalieGameDetai
         this.goalieSeasonService = goalieSeasonService;
     }
 
-    /**
-     * Returns the top goalies for a given stat and limited by a number of results
-     *
-     * @param stat  field to base goalies on
-     * @param limit integer limit of results
-     * @return limited list
-     */
-    public List<Goalie> getTopGoaliesForStatAndLimit(String stat, int limit) {
-        return this.goalieRepository.findTopGoaliesForStatAndLimit(stat, limit);
-    }
+
+    //  METHODS
 
     @Override
     public void updateStats(GoalieGameDetails details) {
@@ -52,7 +46,7 @@ public class GoalieService implements ParticipantService<Goalie, GoalieGameDetai
 
             season.incrementGamesPlayed();
 
-            if (details.isStarter()) {
+            if (details.getIsStarter()) {
                 season.incrementGamesStarted();
             }
 
@@ -111,5 +105,21 @@ public class GoalieService implements ParticipantService<Goalie, GoalieGameDetai
         if (find(id).isPresent()) {
             this.goalieRepository.deleteById(id);
         }
+    }
+
+    @Override
+    public Goalie create(Map<String, Object> params) {
+        return null;
+    }
+
+    /**
+     * Returns the top goalies for a given stat and limited by a number of results
+     *
+     * @param stat  field to base goalies on
+     * @param limit integer limit of results
+     * @return limited list
+     */
+    public List<Goalie> getTopGoaliesForStatAndLimit(String stat, Integer limit) {
+        return this.goalieRepository.findTopGoaliesForStatAndLimit(stat, limit);
     }
 }

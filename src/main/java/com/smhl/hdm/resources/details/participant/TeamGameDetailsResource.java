@@ -36,12 +36,14 @@ public class TeamGameDetailsResource implements HdmResource {
 
     @Getter
     @Setter
-    private int goalsFor;
+    private Integer goalsFor;
 
     @Getter
     @Setter
-    private int goalsAgainst;
+    private Integer goalsAgainst;
 
+
+    //  METHODS
 
     @Override
     public boolean isPresent() {

@@ -29,6 +29,13 @@ public class Milestone {
     private Integer plateau;
 
 
+    //  METHODS
+
+    /**
+     * Determines if the milestone exists or is valid, used in a similar vein to null checks
+     *
+     * @return true if the milestone has its attributes instantiated
+     */
     public boolean isPresent() {
         return StringUtils.isNotEmpty(this.name) && this.value != null && this.plateau != null;
     }

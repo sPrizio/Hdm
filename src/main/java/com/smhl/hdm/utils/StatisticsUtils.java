@@ -1,6 +1,5 @@
 package com.smhl.hdm.utils;
 
-import com.smhl.hdm.models.entities.details.Details;
 import lombok.NoArgsConstructor;
 
 import java.util.Collection;

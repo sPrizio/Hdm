@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
- * Implements the season service for goalies
+ * Implements the season service for goalies. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -25,6 +26,9 @@ public class GoalieSeasonService implements SeasonService<GoalieSeason> {
     public GoalieSeasonService(GoalieSeasonRepository goalieSeasonRepository) {
         this.goalieSeasonRepository = goalieSeasonRepository;
     }
+
+
+    //  METHODS
 
     @Override
     public void refresh(GoalieSeason entity) {
@@ -52,5 +56,10 @@ public class GoalieSeasonService implements SeasonService<GoalieSeason> {
         if (find(id).isPresent()) {
             this.goalieSeasonRepository.deleteById(id);
         }
+    }
+
+    @Override
+    public GoalieSeason create(Map<String, Object> params) {
+        return null;
     }
 }

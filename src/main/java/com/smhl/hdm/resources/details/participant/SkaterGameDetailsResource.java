@@ -36,24 +36,26 @@ public class SkaterGameDetailsResource implements HdmResource {
 
     @Getter
     @Setter
-    private int goals;
+    private Integer goals;
 
     @Getter
     @Setter
-    private int assists;
+    private Integer assists;
 
     @Getter
     @Setter
-    private int points;
+    private Integer points;
 
     @Getter
     @Setter
-    private int shots;
+    private Integer shots;
 
     @Getter
     @Setter
-    private int blockedShots;
+    private Integer blockedShots;
 
+
+    //  METHODS
 
     @Override
     public boolean isPresent() {

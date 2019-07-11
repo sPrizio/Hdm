@@ -20,6 +20,9 @@ public class HdmRepositoryImpl implements HdmRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
+
+    //  METHODS
+
     /**
      * Refreshes an hdmEntity
      *
@@ -29,6 +32,4 @@ public class HdmRepositoryImpl implements HdmRepository {
     public void refresh(HdmEntity hdmEntity) {
         this.entityManager.refresh(this.entityManager.merge(hdmEntity));
     }
-
-
 }

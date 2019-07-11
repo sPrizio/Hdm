@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Converter for team game details resources
+ * Converter for team game details resources. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -26,6 +26,9 @@ public class TeamGameDetailsConverter implements HdmConverter<TeamGameDetails, T
     public TeamGameDetailsConverter(TeamConverter teamConverter) {
         this.teamConverter = teamConverter;
     }
+
+
+    //  METHODS
 
     @Override
     public TeamGameDetailsResource convert(TeamGameDetails entity) {

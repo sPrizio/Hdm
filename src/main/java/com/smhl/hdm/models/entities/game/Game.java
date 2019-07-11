@@ -58,7 +58,7 @@ public class Game implements HdmEntity {
 
     @Getter
     @Setter
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "game_details_id")
     private GameDetails gameDetails;
 }

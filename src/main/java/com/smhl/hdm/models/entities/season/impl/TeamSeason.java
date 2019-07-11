@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 /**
- * A class representation of a season, for a team
+ * Class implementation for a delineation of time representing a Skater's performance over a period of time known as a season
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -32,40 +32,69 @@ public class TeamSeason implements Season, Comparable<TeamSeason> {
     @Setter
     @Column
     @NonNull
-    private int gamesPlayed;
+    private Integer gamesPlayed;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private int wins;
+    private Integer wins;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private int losses;
+    private Integer losses;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private int ties;
+    private Integer ties;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private int goalsFor;
+    private Integer goalsFor;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private int goalsAgainst;
+    private Integer goalsAgainst;
 
 
     //  METHODS
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        TeamSeason that = (TeamSeason) o;
+        return
+                this.gamesPlayed.equals(that.gamesPlayed) &&
+                        this.wins.equals(that.wins) &&
+                        this.losses.equals(that.losses) &&
+                        this.ties.equals(that.ties) &&
+                        this.goalsFor.equals(that.goalsFor) &&
+                        this.goalsAgainst.equals(that.goalsAgainst) &&
+                        this.id.equals(that.id) &&
+                        this.seasonString.equals(that.seasonString);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.id, this.seasonString, this.gamesPlayed, this.wins, this.losses, this.ties, this.goalsFor, this.goalsAgainst);
+    }
+
+    @Override
+    public int compareTo(TeamSeason season) {
+        return this.seasonString.compareTo(season.getSeasonString());
+    }
 
     /**
      * Increments games played by 1
@@ -100,7 +129,7 @@ public class TeamSeason implements Season, Comparable<TeamSeason> {
      *
      * @param increment amount to increment by
      */
-    public void incrementGoalsFor(int increment) {
+    public void incrementGoalsFor(Integer increment) {
         this.goalsFor += increment;
     }
 
@@ -109,36 +138,7 @@ public class TeamSeason implements Season, Comparable<TeamSeason> {
      *
      * @param increment amount to increment by
      */
-    public void incrementGoalsAgainst(int increment) {
+    public void incrementGoalsAgainst(Integer increment) {
         this.goalsAgainst += increment;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-
-        TeamSeason that = (TeamSeason) o;
-        return
-                gamesPlayed == that.gamesPlayed &&
-                        wins == that.wins &&
-                        losses == that.losses &&
-                        ties == that.ties &&
-                        goalsFor == that.goalsFor &&
-                        goalsAgainst == that.goalsAgainst &&
-                        id.equals(that.id) &&
-                        seasonString.equals(that.seasonString);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, seasonString, gamesPlayed, wins, losses, ties, goalsFor, goalsAgainst);
-    }
-
-    @Override
-    public int compareTo(TeamSeason season) {
-        return this.seasonString.compareTo(season.getSeasonString());
     }
 }

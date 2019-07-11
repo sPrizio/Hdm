@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 /**
- * Obtains statistics for goalies for use in controllers
+ * Obtains statistics for goalies for use in controllers. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -28,6 +28,8 @@ public class GoalieStatisticsFacade implements StatisticsFacade {
         this.goalieStatisticsService = goalieStatisticsService;
     }
 
+
+    //  METHODS
 
     @Override
     public Statistic obtainStatistics(Long id) {

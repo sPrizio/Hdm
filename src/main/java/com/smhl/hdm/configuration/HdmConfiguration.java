@@ -18,13 +18,32 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 import java.util.Locale;
 
 /**
- * Configuration for this system
+ * Configuration for the hdm system
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">www.saprizio.com</a>
  * @version 1.0
  */
 @Configuration
 public class HdmConfiguration implements WebMvcConfigurer {
+
+    @Autowired
+    public void configureDispatcher(DispatcherServlet dispatcherServlet) {
+        dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+        interceptor.setParamName("lang");
+        registry.addInterceptor(interceptor);
+    }
+
+
+    //  this is temporary for testing with the associated Vue.js app
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**").allowedOrigins("http://localhost:8081");
+    }
 
     @Bean
     public FreeMarkerViewResolver freeMarkerViewResolver() {
@@ -35,11 +54,6 @@ public class HdmConfiguration implements WebMvcConfigurer {
         resolver.setRequestContextAttribute("context");
         resolver.setContentType("text/html;charset=UTF-8");
         return resolver;
-    }
-
-    @Autowired
-    public void configureDispatcher(DispatcherServlet dispatcherServlet) {
-        dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
     }
 
     @Bean
@@ -56,17 +70,5 @@ public class HdmConfiguration implements WebMvcConfigurer {
         SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
         sessionLocaleResolver.setDefaultLocale(new Locale("en"));
         return sessionLocaleResolver;
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
-        interceptor.setParamName("lang");
-        registry.addInterceptor(interceptor);
-    }
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("http://localhost:8081");
     }
 }

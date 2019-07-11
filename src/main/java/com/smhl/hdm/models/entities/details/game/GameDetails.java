@@ -37,13 +37,13 @@ public class GameDetails implements Details {
     @Setter
     @Column
     @NonNull
-    private int homeTeamScore;
+    private Integer homeTeamScore;
 
     @Getter
     @Setter
     @Column
     @NonNull
-    private int awayTeamScore;
+    private Integer awayTeamScore;
 
     @Getter
     @Setter

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 /**
- * Implementation of the milestone facade for goalies
+ * Implementation of the milestone facade for goalies. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -28,6 +28,8 @@ public class GoalieMilestoneFacade implements MilestoneFacade {
         this.goalieMilestoneService = goalieMilestoneService;
     }
 
+
+    //  METHODS
 
     @Override
     public Milestone obtainMilestone(String stat, Long id) {

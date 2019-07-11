@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Implementation of a converter for Games
+ * Implementation of a converter for Games. Documentation for the overridden methods can be located in the interface
  *
  * @author Stephen Prizio <a href="http://www.saprizio.com">http://www.saprizio.com</a>
  * @version 1.0
@@ -30,6 +30,8 @@ public class GameConverter implements HdmConverter<Game, GameResource> {
         this.gameDetailsConverter = gameDetailsConverter;
     }
 
+
+    //  METHODS
 
     @Override
     public GameResource convert(Game entity) {

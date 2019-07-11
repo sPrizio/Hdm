@@ -23,35 +23,38 @@ public class TeamSeasonResource implements HdmResource, Comparable<TeamSeasonRes
 
     @Getter
     @Setter
-    private int gamesPlayed;
+    private Integer gamesPlayed;
 
     @Getter
     @Setter
-    private int wins;
+    private Integer wins;
 
     @Getter
     @Setter
-    private int losses;
+    private Integer losses;
 
     @Getter
     @Setter
-    private int ties;
+    private Integer ties;
 
     @Getter
     @Setter
-    private int points;
+    private Integer points;
 
     @Getter
     @Setter
-    private int goalsFor;
+    private Integer goalsFor;
 
     @Getter
     @Setter
-    private int goalsAgainst;
+    private Integer goalsAgainst;
 
     @Getter
     @Setter
-    private int differential;
+    private Integer differential;
+
+
+    //  METHODS
 
     @Override
     public boolean isPresent() {
@@ -67,14 +70,14 @@ public class TeamSeasonResource implements HdmResource, Comparable<TeamSeasonRes
 
         TeamSeasonResource that = (TeamSeasonResource) o;
         return
-                this.gamesPlayed == that.gamesPlayed &&
-                this.wins == that.wins &&
-                this.losses == that.losses &&
-                this.ties == that.ties &&
-                this.points == that.points &&
-                this.goalsFor == that.goalsFor &&
-                this.goalsAgainst == that.goalsAgainst &&
-                this.differential == that.differential &&
+                this.gamesPlayed.equals(that.gamesPlayed) &&
+                this.wins.equals(that.wins) &&
+                this.losses.equals(that.losses) &&
+                this.ties.equals(that.ties) &&
+                this.points.equals(that.points) &&
+                this.goalsFor.equals(that.goalsFor) &&
+                this.goalsAgainst.equals(that.goalsAgainst) &&
+                this.differential.equals(that.differential) &&
                 this.seasonString.equals(that.seasonString);
     }
 

@@ -14,6 +14,9 @@ public class MilestoneUtils {
         throw new UnsupportedOperationException(CoreConstants.NO_INSTANTIATION);
     }
 
+
+    //  METHODS
+
     /**
      * Calculates the next milestone plateau for a given value
      *
