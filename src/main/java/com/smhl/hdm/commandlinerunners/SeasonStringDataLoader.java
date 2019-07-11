@@ -29,9 +29,6 @@ public class SeasonStringDataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-
-        this.seasonStringRepository.deleteAll();
-
         this.seasonStringRepository.save(new SeasonString("2016-2017"));
         this.seasonStringRepository.save(new SeasonString("2017-2018"));
         this.seasonStringRepository.save(new SeasonString("2018-2019"));
