@@ -62,6 +62,9 @@ public class GameDataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+
+        this.gameRepository.deleteAll();
+
         loadGameData();
     }
 

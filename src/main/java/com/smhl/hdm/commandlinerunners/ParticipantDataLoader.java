@@ -47,6 +47,11 @@ public class ParticipantDataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+
+        this.skaterRepository.deleteAll();
+        this.goalieRepository.deleteAll();
+        this.teamRepository.deleteAll();
+
         loadSkaterData();
         loadGoalieData();
         loadTeamData();
