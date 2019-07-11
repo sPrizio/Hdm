@@ -55,7 +55,6 @@ public class GoalieGameDetailsValidator extends AbstractHdmValidator implements 
         String date = values.get("gameTime").toString();
         String participant = values.get("participant").toString();
         String team = values.get("team").toString();
-        String starter = values.get("isStarter").toString();
         String result = values.get("gameResult").toString();
         String shotsAgainst = values.get("shotsAgainst").toString();
         String saves = values.get("saves").toString();
@@ -82,10 +81,6 @@ public class GoalieGameDetailsValidator extends AbstractHdmValidator implements 
 
         if (g.isEmpty() || tt.isEmpty()) {
             return new ValidationResult(ValidationResponseResult.FAILED, "The given goalie/team does not exist in the system");
-        }
-
-        if (!starter.equals("yes") && !starter.equals("no")) {
-            return new ValidationResult(ValidationResponseResult.FAILED, "Starter param only accepts yes/no values");
         }
 
         if (!EnumUtils.isValidEnum(GameResult.class, result)) {

@@ -58,15 +58,15 @@ public class ScoringPlayValidator extends AbstractHdmValidator implements HdmVal
         }
 
         Long team = Long.parseLong(teamId);
-        Long scoring = Long.parseLong(teamId);
-        Long primary = Long.parseLong(teamId);
-        Long secondary = Long.parseLong(teamId);
+        Long scoring = Long.parseLong(scoringId);
+        Long primary = Long.parseLong(primaryId);
+        Long secondary = Long.parseLong(secondaryId);
 
         if (super.isOverflow(team) || super.isOverflow(scoring) || super.isOverflow(primary) || super.isOverflow(secondary)) {
             return new ValidationResult(ValidationResponseResult.FAILED, "The given id was too long");
         }
 
-        if (scoring.equals(primary) || scoring.equals(secondary) || primary.equals(secondary)) {
+        if (scoring.equals(primary) || scoring.equals(secondary) || (!primary.equals(-1L) || !secondary.equals(-1L)) && primary.equals(secondary)) {
             return new ValidationResult(ValidationResponseResult.FAILED, "A participant cannot be involved more than once on a scoring play");
         }
 
@@ -80,7 +80,7 @@ public class ScoringPlayValidator extends AbstractHdmValidator implements HdmVal
         Optional<Skater> p = this.skaterService.find(primary);
         Optional<Skater> sd = this.skaterService.find(secondary);
 
-        if (s.isEmpty() || p.isEmpty() || sd.isEmpty()) {
+        if (s.isEmpty() || (!primary.equals(-1L) && p.isEmpty()) || (!secondary.equals(-1L) && sd.isEmpty())) {
             return new ValidationResult(ValidationResponseResult.FAILED, "One or more of the given skaters do not exist in the system");
         }
 

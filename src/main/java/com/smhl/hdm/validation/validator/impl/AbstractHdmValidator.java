@@ -3,6 +3,7 @@ package com.smhl.hdm.validation.validator.impl;
 import com.smhl.hdm.constants.CoreConstants;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -76,7 +77,7 @@ public abstract class AbstractHdmValidator {
      * @return true if string is a number, false otherwise
      */
     protected boolean isNumber(String s) {
-        return StringUtils.isNumeric(s);
+        return NumberUtils.isNumber(s);
     }
 
     /**
