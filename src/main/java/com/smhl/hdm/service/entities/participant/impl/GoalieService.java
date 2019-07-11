@@ -22,6 +22,7 @@ import java.util.Optional;
  * @version 1.0
  */
 @Service
+@SuppressWarnings("Duplicates")
 public class GoalieService implements ParticipantService<Goalie, GoalieGameDetails> {
 
     private GoalieRepository goalieRepository;

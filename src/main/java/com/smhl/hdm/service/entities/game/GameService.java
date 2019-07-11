@@ -8,6 +8,9 @@ import com.smhl.hdm.models.entities.details.participant.impl.SkaterGameDetails;
 import com.smhl.hdm.models.entities.game.Game;
 import com.smhl.hdm.repositories.game.GameRepository;
 import com.smhl.hdm.service.entities.HdmService;
+import com.smhl.hdm.service.entities.participant.impl.GoalieService;
+import com.smhl.hdm.service.entities.participant.impl.SkaterService;
+import com.smhl.hdm.service.entities.participant.impl.TeamService;
 import com.smhl.hdm.translators.details.game.GameDetailsTranslator;
 import com.smhl.hdm.translators.game.GameTranslator;
 import com.smhl.hdm.utils.HdmUtils;
@@ -28,12 +31,18 @@ import java.util.Optional;
 @Service
 public class GameService implements HdmService<Game> {
 
+    private SkaterService skaterService;
+    private GoalieService goalieService;
+    private TeamService teamService;
     private GameRepository gameRepository;
     private GameTranslator gameTranslator;
     private GameDetailsTranslator gameDetailsTranslator;
 
     @Autowired
-    public GameService(GameRepository gameRepository, GameTranslator gameTranslator, GameDetailsTranslator gameDetailsTranslator) {
+    public GameService(SkaterService skaterService, GoalieService goalieService, TeamService teamService, GameRepository gameRepository, GameTranslator gameTranslator, GameDetailsTranslator gameDetailsTranslator) {
+        this.skaterService = skaterService;
+        this.goalieService = goalieService;
+        this.teamService = teamService;
         this.gameRepository = gameRepository;
         this.gameTranslator = gameTranslator;
         this.gameDetailsTranslator = gameDetailsTranslator;
@@ -143,11 +152,26 @@ public class GameService implements HdmService<Game> {
      * @return newly updated game
      */
     public Game complete(Game game, Map<String, Object> values) {
-        //  TODO: implement this algorithm
-        System.out.println("Ready to complete the game in the service layer");
 
         GameDetails gameDetails = this.gameDetailsTranslator.translate(values);
-        game.setGameDetails(gameDetails);
+
+        if (gameDetails != null) {
+
+            //  update the stats for each participant
+            gameDetails.getSkaterGameDetails()
+                    .forEach(details -> this.skaterService.updateStats(details));
+
+            gameDetails.getGoalieGameDetails()
+                    .forEach(details -> this.goalieService.updateStats(details));
+
+            gameDetails.getTeamGameDetails()
+                    .forEach(details -> this.teamService.updateStats(details));
+
+            game.setGameDetails(gameDetails);
+            game.setGameStatus(GameStatus.COMPLETE.toString());
+
+            return save(game);
+        }
 
         return game;
     }
