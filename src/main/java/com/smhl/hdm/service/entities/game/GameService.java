@@ -1,21 +1,20 @@
 package com.smhl.hdm.service.entities.game;
 
 import com.google.common.collect.Lists;
-import com.smhl.hdm.constants.CoreConstants;
 import com.smhl.hdm.enums.GameStatus;
+import com.smhl.hdm.models.entities.details.game.GameDetails;
 import com.smhl.hdm.models.entities.details.participant.impl.GoalieGameDetails;
 import com.smhl.hdm.models.entities.details.participant.impl.SkaterGameDetails;
 import com.smhl.hdm.models.entities.game.Game;
-import com.smhl.hdm.models.entities.participant.impl.Team;
 import com.smhl.hdm.repositories.game.GameRepository;
 import com.smhl.hdm.service.entities.HdmService;
-import com.smhl.hdm.service.entities.participant.impl.TeamService;
+import com.smhl.hdm.translators.details.game.GameDetailsTranslator;
+import com.smhl.hdm.translators.game.GameTranslator;
 import com.smhl.hdm.utils.HdmUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -29,13 +28,15 @@ import java.util.Optional;
 @Service
 public class GameService implements HdmService<Game> {
 
-    private TeamService teamService;
     private GameRepository gameRepository;
+    private GameTranslator gameTranslator;
+    private GameDetailsTranslator gameDetailsTranslator;
 
     @Autowired
-    public GameService(TeamService teamService, GameRepository gameRepository) {
-        this.teamService = teamService;
+    public GameService(GameRepository gameRepository, GameTranslator gameTranslator, GameDetailsTranslator gameDetailsTranslator) {
         this.gameRepository = gameRepository;
+        this.gameTranslator = gameTranslator;
+        this.gameDetailsTranslator = gameDetailsTranslator;
     }
 
 
@@ -72,19 +73,9 @@ public class GameService implements HdmService<Game> {
     @Override
     public Game create(Map<String, Object> params) {
 
-        String date = params.get("gameTime").toString();
-        String season = params.get("seasonString").toString();
-        String status = params.get("gameStatus").toString();
-        String home = params.get("homeTeam").toString();
-        String away = params.get("awayTeam").toString();
+        Game game = this.gameTranslator.translate(params);
 
-        LocalDateTime dateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern(CoreConstants.DATE_FORMAT_LONG, CoreConstants.HDM_LOCALE));
-
-        Optional<Team> homeTeam = this.teamService.find(Long.parseLong(home));
-        Optional<Team> awayTeam = this.teamService.find(Long.parseLong(away));
-
-        if (homeTeam.isPresent() && awayTeam.isPresent()) {
-            Game game = new Game(dateTime, season, status, homeTeam.get(), awayTeam.get());
+        if (game != null) {
             return this.gameRepository.save(game);
         }
 
@@ -153,6 +144,11 @@ public class GameService implements HdmService<Game> {
      */
     public Game complete(Game game, Map<String, Object> values) {
         //  TODO: implement this algorithm
+        System.out.println("Ready to complete the game in the service layer");
+
+        GameDetails gameDetails = this.gameDetailsTranslator.translate(values);
+        game.setGameDetails(gameDetails);
+
         return game;
     }
 }

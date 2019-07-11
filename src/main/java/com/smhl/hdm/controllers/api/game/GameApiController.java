@@ -168,6 +168,10 @@ public class GameApiController extends AbstractHdmController<GameResource> {
     @PostMapping(value = "/{id}/complete")
     public ResponseEntity<HdmApiResponse> completeGame(final @PathVariable("id") Long id, final @RequestBody Map<String, Object> params) {
 
+        if (this.gameFacade.find(id).getGameStatus().equals(GameStatus.COMPLETE.toString())) {
+            return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, "This game is already complete"), HttpStatus.OK);
+        }
+
         ValidationResult result = this.gameDetailsValidator.validate(params);
 
         if (result.isValid()) {

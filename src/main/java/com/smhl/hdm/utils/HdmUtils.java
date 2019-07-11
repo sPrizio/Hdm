@@ -3,6 +3,8 @@ package com.smhl.hdm.utils;
 import com.smhl.hdm.constants.CoreConstants;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * A class containing utility methods for the entire system
@@ -52,5 +54,15 @@ public class HdmUtils {
         } else {
             return today.getYear() + "-" + (today.getYear() + 1);
         }
+    }
+
+    /**
+     * Parses a date time for the given format
+     * @param date date we're looking at
+     * @param format date format
+     * @return local date time of format
+     */
+    public static LocalDateTime parse(String date, String format) {
+        return LocalDateTime.parse(date, DateTimeFormatter.ofPattern(format, CoreConstants.HDM_LOCALE));
     }
 }
