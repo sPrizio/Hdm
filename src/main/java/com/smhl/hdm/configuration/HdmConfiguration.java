@@ -42,7 +42,10 @@ public class HdmConfiguration implements WebMvcConfigurer {
     //  this is temporary for testing with the associated Vue.js app
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("http://localhost:8081").allowedOrigins("https://hdm-api.herokuapp.com/");
+        registry
+                .addMapping("/**")
+                .allowedOrigins("http://localhost:8081")
+                .allowedOrigins("https://smhl.herokuapp.com/");
     }
 
     @Bean
