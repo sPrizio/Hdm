@@ -44,8 +44,7 @@ public class HdmConfiguration implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry
                 .addMapping("/**")
-                .allowedOrigins("http://localhost:8081")
-                .allowedOrigins("https://smhl.herokuapp.com/");
+                .allowedOrigins("*");
     }
 
     @Bean
