@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * A DTO for SkaterGameDetails
@@ -58,6 +59,22 @@ public class SkaterGameDetailsResource implements HdmResource {
     //  METHODS
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        SkaterGameDetailsResource resource = (SkaterGameDetailsResource) o;
+        return this.code.equals(resource.code);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.code);
+    }
+
+    @Override
     public boolean isPresent() {
         return
                 this.code != null &&
@@ -65,4 +82,6 @@ public class SkaterGameDetailsResource implements HdmResource {
                 this.skater.isPresent() &&
                 this.team.isPresent();
     }
+
+
 }

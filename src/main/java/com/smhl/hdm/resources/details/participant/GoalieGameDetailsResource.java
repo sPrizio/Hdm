@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * A DTO for GoalieGameDetails
@@ -66,5 +67,21 @@ public class GoalieGameDetailsResource implements HdmResource {
                 this.goalie.isPresent() &&
                 this.team.isPresent() &&
                 StringUtils.isNotEmpty(gameResult);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        GoalieGameDetailsResource resource = (GoalieGameDetailsResource) o;
+        return this.code.equals(resource.code);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.code);
     }
 }
