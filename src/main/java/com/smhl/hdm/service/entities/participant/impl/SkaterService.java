@@ -7,6 +7,7 @@ import com.smhl.hdm.models.entities.season.impl.SkaterSeason;
 import com.smhl.hdm.repositories.participant.skater.SkaterRepository;
 import com.smhl.hdm.service.entities.participant.ParticipantService;
 import com.smhl.hdm.service.entities.season.impl.SkaterSeasonService;
+import com.smhl.hdm.utils.HdmUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,17 +39,26 @@ public class SkaterService implements ParticipantService<Skater, SkaterGameDetai
     @Override
     public void updateStats(SkaterGameDetails details) {
 
-        SkaterSeason season = details.getParticipant().getCurrentSeason();
+        String seasonString = HdmUtils.getSeasonStringForLocalDateTime(details.getGameTime());
+        SkaterSeason season = details.getParticipant().getSeasonForSeasonString(seasonString);
 
-        if (season != null) {
-            season.incrementGamesPlayed();
-            season.incrementGoals(details.getGoals());
-            season.incrementAssists(details.getAssists());
-            season.incrementShots(details.getShots());
-            season.incrementBlockedShots(details.getBlockedShots());
+        if (season == null) {
+            season = new SkaterSeason();
+            season.setSeasonString(seasonString);
 
-            this.skaterSeasonService.save(season);
+            Skater skater = details.getParticipant();
+            skater.addSeason(season);
+
+            this.skaterRepository.save(skater);
         }
+
+        season.incrementGamesPlayed();
+        season.incrementGoals(details.getGoals());
+        season.incrementAssists(details.getAssists());
+        season.incrementShots(details.getShots());
+        season.incrementBlockedShots(details.getBlockedShots());
+
+        this.skaterSeasonService.save(season);
     }
 
     @Override

@@ -8,6 +8,7 @@ import com.smhl.hdm.models.entities.season.impl.GoalieSeason;
 import com.smhl.hdm.repositories.participant.goalie.GoalieRepository;
 import com.smhl.hdm.service.entities.participant.ParticipantService;
 import com.smhl.hdm.service.entities.season.impl.GoalieSeasonService;
+import com.smhl.hdm.utils.HdmUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,38 +41,46 @@ public class GoalieService implements ParticipantService<Goalie, GoalieGameDetai
     @Override
     public void updateStats(GoalieGameDetails details) {
 
-        GoalieSeason season = details.getParticipant().getCurrentSeason();
+        String seasonString = HdmUtils.getSeasonStringForLocalDateTime(details.getGameTime());
+        GoalieSeason season = details.getParticipant().getSeasonForSeasonString(seasonString);
 
-        if (season != null) {
+        if (season == null) {
+            season = new GoalieSeason();
+            season.setSeasonString(seasonString);
 
-            season.incrementGamesPlayed();
+            Goalie goalie = details.getParticipant();
+            goalie.addSeason(season);
 
-            if (details.getIsStarter()) {
-                season.incrementGamesStarted();
-            }
-
-            switch (GameResult.valueOf(details.getGameResult())) {
-                case WIN:
-                    season.incrementWins();
-                    break;
-                case LOSS:
-                    season.incrementLosses();
-                    break;
-                case TIE:
-                    season.incrementTies();
-                    break;
-            }
-
-            season.incrementShotsAgainst(details.getShotsAgainst());
-            season.incrementSaves(details.getSaves());
-            season.incrementGoalsAgainst(details.getGoalsAgainst());
-
-            if (details.getGoalsAgainst() == 0) {
-                season.incrementShutouts();
-            }
-
-            this.goalieSeasonService.save(season);
+            this.goalieRepository.save(goalie);
         }
+
+        season.incrementGamesPlayed();
+
+        if (details.getIsStarter()) {
+            season.incrementGamesStarted();
+        }
+
+        switch (GameResult.valueOf(details.getGameResult())) {
+            case WIN:
+                season.incrementWins();
+                break;
+            case LOSS:
+                season.incrementLosses();
+                break;
+            case TIE:
+                season.incrementTies();
+                break;
+        }
+
+        season.incrementShotsAgainst(details.getShotsAgainst());
+        season.incrementSaves(details.getSaves());
+        season.incrementGoalsAgainst(details.getGoalsAgainst());
+
+        if (details.getGoalsAgainst() == 0) {
+            season.incrementShutouts();
+        }
+
+        this.goalieSeasonService.save(season);
     }
 
     @Override

@@ -41,4 +41,11 @@ public interface Participant<S extends Season> extends HdmEntity {
      * @return name of the participant
      */
     String getName();
+
+    /**
+     * Adds a season to this participants list of seasons
+     *
+     * @param season season to be added
+     */
+    void addSeason(S season);
 }
