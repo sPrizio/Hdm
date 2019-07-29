@@ -86,12 +86,14 @@ public class GoalieRepositoryImpl implements GoalieRepositoryCustom {
 
         if (limit > 0) {
             String order = stat.equals("goals_against_average") ? "asc" : "desc";
-            return
+
+            List<Goalie> top =
                     findBySeasonStringSorted(HdmUtils.getCurrentSeasonString(), stat, order)
                             .stream()
                             .filter(goalie -> goalie.getCurrentSeason().getGamesPlayed() > 1)
-                            .collect(Collectors.toList())
-                            .subList(0, limit);
+                            .collect(Collectors.toList());
+
+            return top.isEmpty() ? new ArrayList<>() : top.subList(0, limit);
         } else {
             return new ArrayList<>();
         }
