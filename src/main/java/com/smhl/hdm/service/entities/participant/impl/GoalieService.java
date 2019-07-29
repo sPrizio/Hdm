@@ -8,6 +8,7 @@ import com.smhl.hdm.models.entities.season.impl.GoalieSeason;
 import com.smhl.hdm.repositories.participant.goalie.GoalieRepository;
 import com.smhl.hdm.service.entities.participant.ParticipantService;
 import com.smhl.hdm.service.entities.season.impl.GoalieSeasonService;
+import com.smhl.hdm.translators.participant.GoalieTranslator;
 import com.smhl.hdm.utils.HdmUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,11 +29,13 @@ public class GoalieService implements ParticipantService<Goalie, GoalieGameDetai
 
     private GoalieRepository goalieRepository;
     private GoalieSeasonService goalieSeasonService;
+    private GoalieTranslator goalieTranslator;
 
     @Autowired
-    public GoalieService(GoalieRepository goalieRepository, GoalieSeasonService goalieSeasonService) {
+    public GoalieService(GoalieRepository goalieRepository, GoalieSeasonService goalieSeasonService, GoalieTranslator goalieTranslator) {
         this.goalieRepository = goalieRepository;
         this.goalieSeasonService = goalieSeasonService;
+        this.goalieTranslator = goalieTranslator;
     }
 
 
@@ -118,6 +121,13 @@ public class GoalieService implements ParticipantService<Goalie, GoalieGameDetai
 
     @Override
     public Goalie create(Map<String, Object> params) {
+
+        Goalie goalie = this.goalieTranslator.translate(params);
+
+        if (goalie != null) {
+            return this.goalieRepository.save(goalie);
+        }
+
         return null;
     }
 

@@ -57,6 +57,13 @@ public class GoalieFacade implements ParticipantFacade<GoalieResource> {
 
     @Override
     public GoalieResource create(Map<String, Object> params) {
+
+        Goalie goalie = this.goalieService.create(params);
+
+        if (goalie != null) {
+            return this.goalieConverter.convert(goalie);
+        }
+
         return null;
     }
 

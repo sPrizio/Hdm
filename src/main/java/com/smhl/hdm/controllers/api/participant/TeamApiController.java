@@ -5,10 +5,14 @@ import com.smhl.hdm.controllers.response.HdmApiResponse;
 import com.smhl.hdm.enums.HdmApiResponseResult;
 import com.smhl.hdm.facades.entities.participant.impl.TeamFacade;
 import com.smhl.hdm.resources.participant.impl.TeamResource;
+import com.smhl.hdm.validation.result.ValidationResult;
+import com.smhl.hdm.validation.validator.impl.participant.TeamValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * Controller that exposes various endpoints for information about teams
@@ -21,10 +25,12 @@ import org.springframework.web.bind.annotation.*;
 public class TeamApiController extends AbstractHdmController<TeamResource> {
 
     private TeamFacade teamFacade;
+    private TeamValidator teamValidator;
 
     @Autowired
-    public TeamApiController(TeamFacade teamFacade) {
+    public TeamApiController(TeamFacade teamFacade, TeamValidator teamValidator) {
         this.teamFacade = teamFacade;
+        this.teamValidator = teamValidator;
     }
 
 
@@ -61,5 +67,33 @@ public class TeamApiController extends AbstractHdmController<TeamResource> {
     @GetMapping("/all-active")
     public ResponseEntity<HdmApiResponse> getAllActiveSkaters(final @RequestParam String seasonString, final @RequestParam String field, final @RequestParam String order) {
         return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, this.teamFacade.findAllParticipantsForSeason(seasonString, field, order)), HttpStatus.OK);
+    }
+
+
+    //  *************** POST ***************
+
+    /**
+     * Creates a new team in the system
+     *
+     * @param params request params containing information for a new team
+     * @return newly created team
+     */
+    @PostMapping("/create")
+    public ResponseEntity<HdmApiResponse> createSkater(final @RequestBody Map<String, Object> params) {
+
+        ValidationResult result = this.teamValidator.validate(params);
+
+        if (result.isValid()) {
+
+            TeamResource resource = this.teamFacade.create(params);
+
+            if (resource != null) {
+                return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, resource), HttpStatus.OK);
+            }
+
+            return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "Team could not be created"), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, result), HttpStatus.OK);
     }
 }

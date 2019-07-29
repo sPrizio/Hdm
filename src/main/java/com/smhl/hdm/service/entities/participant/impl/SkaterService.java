@@ -7,6 +7,7 @@ import com.smhl.hdm.models.entities.season.impl.SkaterSeason;
 import com.smhl.hdm.repositories.participant.skater.SkaterRepository;
 import com.smhl.hdm.service.entities.participant.ParticipantService;
 import com.smhl.hdm.service.entities.season.impl.SkaterSeasonService;
+import com.smhl.hdm.translators.participant.SkaterTranslator;
 import com.smhl.hdm.utils.HdmUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,11 +27,13 @@ public class SkaterService implements ParticipantService<Skater, SkaterGameDetai
 
     private SkaterRepository skaterRepository;
     private SkaterSeasonService skaterSeasonService;
+    private SkaterTranslator skaterTranslator;
 
     @Autowired
-    public SkaterService(SkaterRepository skaterRepository, SkaterSeasonService skaterSeasonService) {
+    public SkaterService(SkaterRepository skaterRepository, SkaterSeasonService skaterSeasonService, SkaterTranslator skaterTranslator) {
         this.skaterRepository = skaterRepository;
         this.skaterSeasonService = skaterSeasonService;
+        this.skaterTranslator = skaterTranslator;
     }
 
 
@@ -96,6 +99,13 @@ public class SkaterService implements ParticipantService<Skater, SkaterGameDetai
 
     @Override
     public Skater create(Map<String, Object> params) {
+
+        Skater skater = this.skaterTranslator.translate(params);
+
+        if (skater != null) {
+            return this.skaterRepository.save(skater);
+        }
+
         return null;
     }
 

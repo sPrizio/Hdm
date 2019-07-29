@@ -1,7 +1,11 @@
 package com.smhl.hdm.validation.validator.impl;
 
 import com.smhl.hdm.constants.CoreConstants;
+import com.smhl.hdm.enums.ParticipantPosition;
+import com.smhl.hdm.enums.ValidationResponseResult;
+import com.smhl.hdm.validation.result.ValidationResult;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
@@ -9,10 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.StringTokenizer;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -181,6 +182,49 @@ public abstract class AbstractHdmValidator {
         }
 
         return StringUtils.EMPTY;
+    }
+
+    /**
+     * Validation logic for skaters and goalies since they're the same
+     *
+     * @param values request parameters
+     * @return a validation result as a result of verifying the request params
+     */
+    protected ValidationResult validateSkaterOrGoalie(Map<String, Object> values) {
+
+        List<String> expectedParams = Arrays.asList("firstName", "lastName", "position", "active");
+
+        //  check for missing params
+        if (StringUtils.isNotEmpty(isMissingParam(values, expectedParams))) {
+            return new ValidationResult(ValidationResponseResult.FAILED, isMissingParam(values, expectedParams));
+        }
+
+        String firstName = values.get("firstName").toString();
+        String lastName = values.get("lastName").toString();
+        String position = values.get("position").toString();
+        String active = values.get("active").toString();
+
+        if (isTooLarge(firstName) || isTooLarge(lastName) || isTooLarge(position) || isTooLarge(active)) {
+            return new ValidationResult(ValidationResponseResult.FAILED, "One of the given string values had a length greater than 1000");
+        }
+
+        if (hasUnacceptableSymbol(firstName) || hasUnacceptableSymbol(lastName) || hasUnacceptableSymbol(position) || hasUnacceptableSymbol(active)) {
+            return new ValidationResult(ValidationResponseResult.FAILED, "One of the given string values had an unacceptable symbol");
+        }
+
+        if (hasCriticalWord(firstName) || hasCriticalWord(lastName) || hasCriticalWord(position) || hasCriticalWord(active)) {
+            return new ValidationResult(ValidationResponseResult.FAILED, "Possible SQL injection detected, failing request immediately!");
+        }
+
+        if (!StringUtils.isAlpha(firstName) || !StringUtils.isAlpha(lastName)) {
+            return new ValidationResult(ValidationResponseResult.FAILED, "Name fields cannot contain numbers");
+        }
+
+        if (!EnumUtils.isValidEnum(ParticipantPosition.class, position)) {
+            return new ValidationResult(ValidationResponseResult.FAILED, "The given position was not a valid option. Valid options are: " + Arrays.stream(ParticipantPosition.values()).collect(Collectors.toList()));
+        }
+
+        return new ValidationResult(ValidationResponseResult.SUCCESSFUL, "Validation was successful");
     }
 
 

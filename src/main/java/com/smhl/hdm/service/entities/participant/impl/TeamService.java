@@ -8,6 +8,7 @@ import com.smhl.hdm.models.entities.season.impl.TeamSeason;
 import com.smhl.hdm.repositories.participant.team.TeamRepository;
 import com.smhl.hdm.service.entities.participant.ParticipantService;
 import com.smhl.hdm.service.entities.season.impl.TeamSeasonService;
+import com.smhl.hdm.translators.participant.TeamTranslator;
 import com.smhl.hdm.utils.HdmUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,11 +29,13 @@ public class TeamService implements ParticipantService<Team, TeamGameDetails> {
 
     private TeamRepository teamRepository;
     private TeamSeasonService teamSeasonService;
+    private TeamTranslator teamTranslator;
 
     @Autowired
-    public TeamService(TeamRepository teamRepository, TeamSeasonService teamSeasonService) {
+    public TeamService(TeamRepository teamRepository, TeamSeasonService teamSeasonService, TeamTranslator teamTranslator) {
         this.teamRepository = teamRepository;
         this.teamSeasonService = teamSeasonService;
+        this.teamTranslator = teamTranslator;
     }
 
 
@@ -109,6 +112,13 @@ public class TeamService implements ParticipantService<Team, TeamGameDetails> {
 
     @Override
     public Team create(Map<String, Object> params) {
+
+        Team team = this.teamTranslator.translate(params);
+
+        if (team != null) {
+            return this.teamRepository.save(team);
+        }
+
         return null;
     }
 }
