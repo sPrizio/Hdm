@@ -48,11 +48,6 @@ public class Team implements Participant<TeamSeason> {
 
     //  METHODS
 
-    /**
-     * Returns the current season
-     *
-     * @return most recent skater season
-     */
     @Override
     public TeamSeason getCurrentSeason() {
         if (CollectionUtils.isNotEmpty(this.seasons)) {
@@ -68,12 +63,6 @@ public class Team implements Participant<TeamSeason> {
         return null;
     }
 
-    /**
-     * Returns the season matching the provided season string
-     *
-     * @param seasonString season string that we're looking for
-     * @return returns season if found, null otherwise
-     */
     @Override
     public TeamSeason getSeasonForSeasonString(String seasonString) {
         if (CollectionUtils.isNotEmpty(this.seasons) && StringUtils.isNotEmpty(seasonString)) {
@@ -88,5 +77,13 @@ public class Team implements Participant<TeamSeason> {
         }
 
         return null;
+    }
+
+    @Override
+    public void addSeason(TeamSeason season) {
+
+        if (season != null) {
+            this.seasons.add(season);
+        }
     }
 }

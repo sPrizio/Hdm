@@ -57,6 +57,13 @@ public class TeamFacade implements ParticipantFacade<TeamResource> {
 
     @Override
     public TeamResource create(Map<String, Object> params) {
+
+        Team team = this.teamService.create(params);
+
+        if (team != null) {
+            return this.teamConverter.convert(team);
+        }
+
         return null;
     }
 

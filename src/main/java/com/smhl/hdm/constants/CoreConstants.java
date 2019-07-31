@@ -33,6 +33,7 @@ public class CoreConstants {
     public static final LocalDate NOW_AS_LOCALDATE = LocalDate.now(MONTREAL);
     public static final LocalDateTime NOW_AS_LOCALDATETIME = LocalDateTime.now(MONTREAL);
     public static final Locale HDM_LOCALE = Locale.CANADA;
+    public static final String MONTREAL_GMT = "";
 
     public static final String DATE_FORMAT_LONG = "yyyy-MM-dd HH:mm:ss";
     public static final String DATE_FORMAT_MEDIUM = "yyyy-MM-dd";

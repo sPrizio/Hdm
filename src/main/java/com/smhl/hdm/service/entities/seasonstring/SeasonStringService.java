@@ -35,4 +35,14 @@ public class SeasonStringService {
     public List<SeasonString> getAllSeasonStrings() {
         return Lists.newArrayList(this.seasonStringRepository.findAll());
     }
+
+    /**
+     * Saves a season string to the db
+     *
+     * @param seasonString season string that we're creating or modifying
+     * @return newly saved season string
+     */
+    public SeasonString save(SeasonString seasonString) {
+        return this.seasonStringRepository.save(seasonString);
+    }
 }

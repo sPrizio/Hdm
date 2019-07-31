@@ -3,6 +3,7 @@ package com.smhl.hdm.controllers.api.participant;
 import com.smhl.hdm.controllers.AbstractHdmController;
 import com.smhl.hdm.controllers.response.HdmApiResponse;
 import com.smhl.hdm.enums.HdmApiResponseResult;
+import com.smhl.hdm.enums.ParticipantPosition;
 import com.smhl.hdm.facades.entities.game.GameFacade;
 import com.smhl.hdm.facades.entities.participant.impl.SkaterFacade;
 import com.smhl.hdm.facades.nonentities.milestone.impl.SkaterMilestoneFacade;
@@ -11,13 +12,18 @@ import com.smhl.hdm.models.nonentities.Milestone;
 import com.smhl.hdm.models.nonentities.Statistic;
 import com.smhl.hdm.resources.details.participant.SkaterGameDetailsResource;
 import com.smhl.hdm.resources.participant.impl.SkaterResource;
+import com.smhl.hdm.validation.result.ValidationResult;
+import com.smhl.hdm.validation.validator.impl.participant.SkaterValidator;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Controller that exposes various endpoints for information about Skaters
@@ -31,13 +37,15 @@ public class SkaterApiController extends AbstractHdmController<SkaterResource> {
 
     private SkaterFacade skaterFacade;
     private SkaterStatisticsFacade skaterStatisticsFacade;
+    private SkaterValidator skaterValidator;
     private GameFacade gameFacade;
     private SkaterMilestoneFacade skaterMilestoneFacade;
 
     @Autowired
-    public SkaterApiController(SkaterFacade skaterFacade, SkaterStatisticsFacade skaterStatisticsFacade, GameFacade gameFacade, SkaterMilestoneFacade skaterMilestoneFacade) {
+    public SkaterApiController(SkaterFacade skaterFacade, SkaterStatisticsFacade skaterStatisticsFacade, SkaterValidator skaterValidator, GameFacade gameFacade, SkaterMilestoneFacade skaterMilestoneFacade) {
         this.skaterFacade = skaterFacade;
         this.skaterStatisticsFacade = skaterStatisticsFacade;
+        this.skaterValidator = skaterValidator;
         this.gameFacade = gameFacade;
         this.skaterMilestoneFacade = skaterMilestoneFacade;
     }
@@ -165,5 +173,43 @@ public class SkaterApiController extends AbstractHdmController<SkaterResource> {
         }
 
         return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "No milestone could be obtained for the given skater id"), HttpStatus.OK);
+    }
+
+    /**
+     * Returns a list of positions that a skater can be
+     *
+     * @return list of particiapnt positions
+     */
+    @GetMapping("/positions")
+    public ResponseEntity<HdmApiResponse> getSkaterPositions() {
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, Arrays.stream(ParticipantPosition.values()).map(Enum::name).collect(Collectors.toList())), HttpStatus.OK);
+    }
+
+
+    //  *************** POST ***************
+
+    /**
+     * Creates a new skater in the system
+     *
+     * @param params request params containing information for a new skater
+     * @return newly created skater
+     */
+    @PostMapping("/create")
+    public ResponseEntity<HdmApiResponse> createSkater(final @RequestBody Map<String, Object> params) {
+
+        ValidationResult result = this.skaterValidator.validate(params);
+
+        if (result.isValid()) {
+
+            SkaterResource resource = this.skaterFacade.create(params);
+
+            if (resource != null) {
+                return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, resource), HttpStatus.OK);
+            }
+
+            return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "Skater could not be created"), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, result), HttpStatus.OK);
     }
 }

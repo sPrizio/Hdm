@@ -104,7 +104,7 @@ public class GameApiController extends AbstractHdmController<GameResource> {
     /**
      * Finds the 3 stars for a game
      *
-     * @param id if od the game that we're looking at
+     * @param id id of the game that we're looking at
      * @return list of 3 top players for a game
      */
     @GetMapping("/{id}/three-stars")

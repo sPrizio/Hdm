@@ -57,6 +57,13 @@ public class SkaterFacade implements ParticipantFacade<SkaterResource> {
 
     @Override
     public SkaterResource create(Map<String, Object> params) {
+
+        Skater skater = this.skaterService.create(params);
+
+        if (skater != null) {
+            return this.skaterConverter.convert(skater);
+        }
+
         return null;
     }
 

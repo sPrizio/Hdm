@@ -11,6 +11,8 @@ import com.smhl.hdm.models.nonentities.Milestone;
 import com.smhl.hdm.models.nonentities.Statistic;
 import com.smhl.hdm.resources.details.participant.GoalieGameDetailsResource;
 import com.smhl.hdm.resources.participant.impl.GoalieResource;
+import com.smhl.hdm.validation.result.ValidationResult;
+import com.smhl.hdm.validation.validator.impl.participant.GoalieValidator;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Controller that exposes various endpoints for information about goalies
@@ -31,13 +34,15 @@ public class GoalieApiController extends AbstractHdmController<GoalieResource> {
 
     private GoalieFacade goalieFacade;
     private GoalieStatisticsFacade goalieStatisticsFacade;
+    private GoalieValidator goalieValidator;
     private GameFacade gameFacade;
     private GoalieMilestoneFacade goalieMilestoneFacade;
 
     @Autowired
-    public GoalieApiController(GoalieFacade goalieFacade, GoalieStatisticsFacade goalieStatisticsFacade, GameFacade gameFacade, GoalieMilestoneFacade goalieMilestoneFacade) {
+    public GoalieApiController(GoalieFacade goalieFacade, GoalieStatisticsFacade goalieStatisticsFacade, GoalieValidator goalieValidator, GameFacade gameFacade, GoalieMilestoneFacade goalieMilestoneFacade) {
         this.goalieFacade = goalieFacade;
         this.goalieStatisticsFacade = goalieStatisticsFacade;
+        this.goalieValidator = goalieValidator;
         this.gameFacade = gameFacade;
         this.goalieMilestoneFacade = goalieMilestoneFacade;
     }
@@ -162,5 +167,33 @@ public class GoalieApiController extends AbstractHdmController<GoalieResource> {
         }
 
         return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "No milestone could be obtained for the given goalie id"), HttpStatus.OK);
+    }
+
+
+    //  *************** POST ***************
+
+    /**
+     * Creates a new goalie in the system
+     *
+     * @param params request params containing information for a new goalie
+     * @return newly created goalie
+     */
+    @PostMapping("/create")
+    public ResponseEntity<HdmApiResponse> createSkater(final @RequestBody Map<String, Object> params) {
+
+        ValidationResult result = this.goalieValidator.validate(params);
+
+        if (result.isValid()) {
+
+            GoalieResource resource = this.goalieFacade.create(params);
+
+            if (resource != null) {
+                return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.SUCCESS, resource), HttpStatus.OK);
+            }
+
+            return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, "Goalie could not be created"), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(new HdmApiResponse(HdmApiResponseResult.FAILURE, result), HttpStatus.OK);
     }
 }

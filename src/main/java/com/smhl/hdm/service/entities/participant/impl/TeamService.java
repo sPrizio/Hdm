@@ -8,6 +8,8 @@ import com.smhl.hdm.models.entities.season.impl.TeamSeason;
 import com.smhl.hdm.repositories.participant.team.TeamRepository;
 import com.smhl.hdm.service.entities.participant.ParticipantService;
 import com.smhl.hdm.service.entities.season.impl.TeamSeasonService;
+import com.smhl.hdm.translators.participant.TeamTranslator;
+import com.smhl.hdm.utils.HdmUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,11 +29,13 @@ public class TeamService implements ParticipantService<Team, TeamGameDetails> {
 
     private TeamRepository teamRepository;
     private TeamSeasonService teamSeasonService;
+    private TeamTranslator teamTranslator;
 
     @Autowired
-    public TeamService(TeamRepository teamRepository, TeamSeasonService teamSeasonService) {
+    public TeamService(TeamRepository teamRepository, TeamSeasonService teamSeasonService, TeamTranslator teamTranslator) {
         this.teamRepository = teamRepository;
         this.teamSeasonService = teamSeasonService;
+        this.teamTranslator = teamTranslator;
     }
 
 
@@ -40,29 +44,37 @@ public class TeamService implements ParticipantService<Team, TeamGameDetails> {
     @Override
     public void updateStats(TeamGameDetails details) {
 
-        TeamSeason season = details.getParticipant().getCurrentSeason();
+        String seasonString = HdmUtils.getSeasonStringForLocalDateTime(details.getGameTime());
+        TeamSeason season = details.getParticipant().getSeasonForSeasonString(seasonString);
 
-        if (season != null) {
+        if (season == null) {
+            season = new TeamSeason();
+            season.setSeasonString(seasonString);
 
-            season.incrementGamesPlayed();
+            Team team = details.getParticipant();
+            team.addSeason(season);
 
-            switch (GameResult.valueOf(details.getGameResult())) {
-                case WIN:
-                    season.incrementWins();
-                    break;
-                case LOSS:
-                    season.incrementLosses();
-                    break;
-                case TIE:
-                    season.incrementTies();
-                    break;
-            }
-
-            season.incrementGoalsFor(details.getGoalsFor());
-            season.incrementGoalsAgainst(details.getGoalsAgainst());
-
-            this.teamSeasonService.save(season);
+            this.teamRepository.save(team);
         }
+
+        season.incrementGamesPlayed();
+
+        switch (GameResult.valueOf(details.getGameResult())) {
+            case WIN:
+                season.incrementWins();
+                break;
+            case LOSS:
+                season.incrementLosses();
+                break;
+            case TIE:
+                season.incrementTies();
+                break;
+        }
+
+        season.incrementGoalsFor(details.getGoalsFor());
+        season.incrementGoalsAgainst(details.getGoalsAgainst());
+
+        this.teamSeasonService.save(season);
     }
 
     @Override
@@ -100,6 +112,13 @@ public class TeamService implements ParticipantService<Team, TeamGameDetails> {
 
     @Override
     public Team create(Map<String, Object> params) {
+
+        Team team = this.teamTranslator.translate(params);
+
+        if (team != null) {
+            return this.teamRepository.save(team);
+        }
+
         return null;
     }
 }

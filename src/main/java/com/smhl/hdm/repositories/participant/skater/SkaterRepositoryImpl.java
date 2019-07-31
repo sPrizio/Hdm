@@ -85,12 +85,14 @@ public class SkaterRepositoryImpl implements SkaterRepositoryCustom {
     public List<Skater> findTopSkatersForStatAndLimit(String stat, Integer limit) {
 
         if (limit > 0) {
-            return
+
+            List<Skater> top =
                     findBySeasonStringSorted(HdmUtils.getCurrentSeasonString(), stat, "desc")
                             .stream()
                             .filter(skater -> skater.getCurrentSeason().getGamesPlayed() > 1)
-                            .collect(Collectors.toList())
-                            .subList(0, limit);
+                            .collect(Collectors.toList());
+
+            return top.isEmpty() ? new ArrayList<>() : top.subList(0, limit);
         } else {
             return new ArrayList<>();
         }

@@ -60,11 +60,6 @@ public class Goalie implements Participant<GoalieSeason> {
 
     //  METHODS
 
-    /**
-     * Returns the current season
-     *
-     * @return most recent goalie season
-     */
     @Override
     public GoalieSeason getCurrentSeason() {
         if (CollectionUtils.isNotEmpty(this.seasons)) {
@@ -80,12 +75,6 @@ public class Goalie implements Participant<GoalieSeason> {
         return null;
     }
 
-    /**
-     * Returns the season matching the provided season string
-     *
-     * @param seasonString season string that we're looking for
-     * @return returns season if found, null otherwise
-     */
     @Override
     public GoalieSeason getSeasonForSeasonString(String seasonString) {
         if (CollectionUtils.isNotEmpty(this.seasons) && StringUtils.isNotEmpty(seasonString)) {
@@ -102,13 +91,16 @@ public class Goalie implements Participant<GoalieSeason> {
         return null;
     }
 
-    /**
-     * Returns a concatenation of a goalie's first and last name
-     *
-     * @return first name + " " + last name
-     */
     @Override
     public String getName() {
         return this.firstName.trim() + " " + this.lastName.trim();
+    }
+
+    @Override
+    public void addSeason(GoalieSeason season) {
+
+        if (season != null) {
+            this.seasons.add(season);
+        }
     }
 }

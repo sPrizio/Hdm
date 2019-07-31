@@ -2,6 +2,7 @@ package com.smhl.hdm.converters.details.game;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.smhl.hdm.comparators.details.SkaterGameDetailsResourceComparator;
 import com.smhl.hdm.converters.HdmConverter;
 import com.smhl.hdm.converters.details.participant.GoalieGameDetailsConverter;
 import com.smhl.hdm.converters.details.participant.SkaterGameDetailsConverter;
@@ -9,12 +10,11 @@ import com.smhl.hdm.converters.details.participant.TeamGameDetailsConverter;
 import com.smhl.hdm.converters.game.ScoringPlayConverter;
 import com.smhl.hdm.models.entities.details.game.GameDetails;
 import com.smhl.hdm.resources.details.game.GameDetailsResource;
+import com.smhl.hdm.resources.details.participant.SkaterGameDetailsResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Converter for game details resources. Documentation for the overridden methods can be located in the interface
@@ -51,7 +51,11 @@ public class GameDetailsConverter implements HdmConverter<GameDetails, GameDetai
             resource.setGameTime(entity.getGameTime());
             resource.setHomeTeamScore(entity.getHomeTeamScore());
             resource.setAwayTeamScore(entity.getAwayTeamScore());
-            resource.setSkaterGameDetails(Sets.newHashSet(this.skaterGameDetailsConverter.convertAll(Lists.newArrayList(entity.getSkaterGameDetails()))));
+
+            //  we sort the skater game details using a custom comparator
+            Set<SkaterGameDetailsResource> resources = new TreeSet<>(SkaterGameDetailsResourceComparator.sort());
+            resources.addAll(this.skaterGameDetailsConverter.convertAll(Lists.newArrayList(entity.getSkaterGameDetails())));
+            resource.setSkaterGameDetails(resources);
             resource.setGoalieGameDetails(Sets.newHashSet(this.goalieGameDetailsConverter.convertAll(Lists.newArrayList(entity.getGoalieGameDetails()))));
             resource.setTeamGameDetails(Sets.newHashSet(this.teamGameDetailsConverter.convertAll(Lists.newArrayList(entity.getTeamGameDetails()))));
             resource.setScoringPlays(Sets.newHashSet(this.scoringPlayConverter.convertAll(Lists.newArrayList(entity.getScoringPlays()))));

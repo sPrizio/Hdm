@@ -22,6 +22,21 @@ public class HdmUtils {
     //  METHODS
 
     /**
+     * Returns the season string for the given date time
+     *
+     * @param dateTime date & time that we want to identify the season string
+     * @return season string for the given date
+     */
+    public static String getSeasonStringForLocalDateTime(LocalDateTime dateTime) {
+
+        if (dateTime.getMonthValue() < 9) {
+            return (dateTime.getYear() - 1) + "-" + dateTime.getYear();
+        } else {
+            return dateTime.getYear() + "-" + (dateTime.getYear() + 1);
+        }
+    }
+
+    /**
      * Returns the string representing the current season. Basically returns 2018-2019 if the current date is during that season
      *
      * @return season string for current date
