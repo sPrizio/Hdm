@@ -4,6 +4,7 @@ import com.smhl.hdm.constants.CoreConstants;
 import com.smhl.hdm.enums.ParticipantPosition;
 import com.smhl.hdm.enums.ValidationResponseResult;
 import com.smhl.hdm.validation.result.ValidationResult;
+import com.smhl.hdm.validation.validator.impl.participant.SkaterValidator;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -190,7 +191,7 @@ public abstract class AbstractHdmValidator {
      * @param values request parameters
      * @return a validation result as a result of verifying the request params
      */
-    protected ValidationResult validateSkaterOrGoalie(Map<String, Object> values) {
+    protected ValidationResult validateSkaterOrGoalie(Map<String, Object> values, Class clazz) {
 
         List<String> expectedParams = Arrays.asList("firstName", "lastName", "position", "active");
 
@@ -222,6 +223,11 @@ public abstract class AbstractHdmValidator {
 
         if (!EnumUtils.isValidEnum(ParticipantPosition.class, position)) {
             return new ValidationResult(ValidationResponseResult.FAILED, "The given position was not a valid option. Valid options are: " + Arrays.stream(ParticipantPosition.values()).collect(Collectors.toList()));
+        }
+
+        //  check for a goalie position for a skater
+        if (clazz.equals(SkaterValidator.class) && ParticipantPosition.valueOf(position).equals(ParticipantPosition.GOALIE)) {
+            return new ValidationResult(ValidationResponseResult.FAILED, "A skater cannot be a goalie");
         }
 
         return new ValidationResult(ValidationResponseResult.SUCCESSFUL, "Validation was successful");

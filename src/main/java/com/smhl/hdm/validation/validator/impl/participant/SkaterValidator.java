@@ -18,6 +18,6 @@ public class SkaterValidator extends AbstractHdmValidator implements HdmValidato
 
     @Override
     public ValidationResult validate(Map<String, Object> values) {
-        return super.validateSkaterOrGoalie(values);
+        return super.validateSkaterOrGoalie(values, SkaterValidator.class);
     }
 }

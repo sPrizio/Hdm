@@ -18,6 +18,6 @@ public class GoalieValidator extends AbstractHdmValidator implements HdmValidato
 
     @Override
     public ValidationResult validate(Map<String, Object> values) {
-        return super.validateSkaterOrGoalie(values);
+        return super.validateSkaterOrGoalie(values, GoalieValidator.class);
     }
 }
